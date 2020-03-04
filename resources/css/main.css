@@ -1,0 +1,9 @@
+html , body {
+    height: 100%;
+    background-color: #141414;
+    font-family: 'Lato' , 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    overflow-x: hidden;
+}
+
+
+

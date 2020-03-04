@@ -1,0 +1,46 @@
+/* direction Home */
+.bg {
+    /* The image used */
+    background-image: url(../img/background.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: 50% 60%;
+    /* Full height */
+    height: 100%;
+  }
+
+/* The container containing the direction Input */
+#direction_container{
+    height: 500px;
+}
+
+#direction_header{
+    text-align: center;
+    color : #C7493A;
+    width: auto;
+    font-weight: bolder;
+    font-size: 3em;
+    /*To make the H1 Centered*/
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.tag-line {
+    font-size: medium;
+}
+
+
+
+/* Media Query */
+@media only screen and (max-width: 600px) {
+    #direction_container{
+        height: 450px;
+    }
+
+    .direction_text {
+        font-size: 40%;
+    }
+
+    
+  }
