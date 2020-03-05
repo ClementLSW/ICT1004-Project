@@ -1,7 +1,7 @@
 /* direction Home */
 .bg {
     /* The image used */
-    background-image: url(../img/background.jpg);
+    background-image: url(../img/background4.jpg);
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -12,28 +12,65 @@
 
 /* The container containing the direction Input */
 #direction_container{
-    height: 500px;
+    height: 300px;
 }
 
 #direction_header{
     text-align: center;
-    color : #C7493A;
+    color : #DEDEDE;
     width: auto;
     font-weight: bolder;
     font-size: 3em;
     /*To make the H1 Centered*/
     margin-top: auto;
-    margin-bottom: auto;
-}
-
-.tag-line {
-    font-size: medium;
+    margin-bottom: 0px;
 }
 
 
+
+/* For the user input */
+.form-group{
+    width: auto;
+    text-align: center;
+}
+
+.form-control {
+    margin-left: 5px; 
+    margin-right: 5px;
+    justify-content: center;
+}
+
+.user_input{
+    text-align: center;
+    width: 100%;
+}
+
+.empty_div {
+    min-width: 10px;
+}
+
+/* For select2 input */
+.select2-selection__rendered {
+    line-height: 47px !important;
+}
+.select2-container .select2-selection--single {
+    height: 50px !important;
+}
+.select2-selection__arrow {
+    height: 50px !important;
+}
+
+.select2-results {
+    color: black !important;
+}
 
 /* Media Query */
-@media only screen and (max-width: 600px) {
+@media screen and (max-width: 1366px) {
+    .select2 {
+        width: 100% !important;
+    }
+}
+/* @media only screen and (max-width: 600px) {
     #direction_container{
         height: 450px;
     }
@@ -43,4 +80,4 @@
     }
 
     
-  }
+  } */
