@@ -10,57 +10,47 @@
     height: 100%;
   }
 
-/* The container containing the direction Input */
-#direction_container{
-    height: 400px;
-}
-
-#direction_header{
-    text-align: center;
-    color : #DEDEDE;
-    width: auto;
-    font-weight: bolder;
-    font-size: 3em;
-    /*To make the H1 Centered*/
-    margin-top: auto;
-    margin-bottom: 0px;
-}
-
-
-
-/* For the user input */
-.form-group{
-    width: auto;
+/* The user input container */
+.my_container{
+    padding: 13% 20px 0% 20px;
     text-align: center;
 }
 
-.form-control {
-    margin-left: 5px; 
-    margin-right: 5px;
-    justify-content: center;
+#user_form {
+    margin-top: 1%;
+    margin-left: auto; 
+    margin-right: auto;
+    max-width: 60%;
 }
-
 .user_input{
     text-align: center;
     width: 100%;
 }
 
-.empty_div {
-    min-width: 10px;
+.highlight{
+    color: #FA4331;
 }
 
-/* For the user input navigation */
-#user_input_navigation { 
-    text-align: center;
-
-}
-.dot{ 
-    height: 10px; 
-    width: 10px;
-    background-color: #bbb;
-    border-radius: 50%;
+.next_button{
     display: inline-block;
+    padding: 1% 10% 1% 10%;
+
 }
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:visited,
+.btn-primary:focus {
+    background-color: #FA4331 !important;
+    border-color: #FA4331 !important;
+}
+
+.btn-primary:active{
+    background-color: #FA5A4A !important;
+    border-color: #FA5A4A !important;
+}
+
+
+
 
 /* For select2 input */
 .select2-selection__rendered {
@@ -78,7 +68,7 @@
 }
 
 .select2-selection__rendered {
-    font-size: 2em;
+    font-size: 1.3em;
   }
 
 /* Media Query */
@@ -86,7 +76,32 @@
     .select2 {
         width: 100% !important;
     }
+
+    .my_container{
+        padding: 20% 20px 0% 20px;
+        text-align: center;
+    }
+
+    
+ 
 }
+
+@media screen and (max-width: 600px){
+    .my_container{
+        padding: 35% 20px 0% 20px;
+        text-align: center;
+    }
+    
+}
+
+
+
+
+
+
+
+
+
 /* @media only screen and (max-width: 600px) {
     #direction_container{
         height: 450px;
