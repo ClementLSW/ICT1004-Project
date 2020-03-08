@@ -12,7 +12,7 @@
 
 /* The container containing the direction Input */
 #direction_container{
-    height: 300px;
+    height: 400px;
 }
 
 #direction_header{
@@ -49,20 +49,37 @@
     min-width: 10px;
 }
 
+/* For the user input navigation */
+#user_input_navigation { 
+    text-align: center;
+
+}
+.dot{ 
+    height: 10px; 
+    width: 10px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+}
+
 /* For select2 input */
 .select2-selection__rendered {
-    line-height: 47px !important;
+    line-height: 67px !important;
 }
 .select2-container .select2-selection--single {
-    height: 50px !important;
+    height: 70px !important;
 }
 .select2-selection__arrow {
-    height: 50px !important;
+    height: 70px !important;
 }
 
 .select2-results {
     color: black !important;
 }
+
+.select2-selection__rendered {
+    font-size: 2em;
+  }
 
 /* Media Query */
 @media screen and (max-width: 1366px) {

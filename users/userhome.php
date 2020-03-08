@@ -7,8 +7,8 @@
         </article>
     </section>
     <section id="user_input_container" class="row">
-        <div class="col-sm-2 empty_div"></div>
-        <form id="user_form" class="col-sm-8">
+        <div class="col-sm-4 empty_div"></div>
+        <form id="user_form" class="col-sm-4">
             <div class="form-group ">
                 <select class="user_input js-example-basic-single" id="destinationInput">
                     <option value="1">Singapore Expo</option>
@@ -16,6 +16,10 @@
                 </select>
             </div>
         </form>
-        <div class="col-sm-2 empty_div"></div>
+        <div class="col-sm-4 empty_div"></div>
     </section>
+    <nav id="user_input_navigation" >
+        <span class="dot"></span>
+    </nav>
+</section>
 
