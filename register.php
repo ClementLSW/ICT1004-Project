@@ -33,6 +33,9 @@
                 <div class="form-group">
                     <label for="email">Email:</label><input class="form-control" type="email" id="email"name="email"required placeholder="Enter email" pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$">
                 </div>
+                <div class="form-group">
+                    <label for="Contact">Contact:</label><input class="form-control" type="tel" id="contact"name="contact"required placeholder="Enter contact number" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}">
+                </div>
                 <div class="form-group"><label for="pwd">Password:</label><input class="form-control" type="password" name="pwd" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$" required placeholder="Enter password">
                 </div>
                 <div class="form-group"><label for="pwd_confirm">Confirm Password:</label><input class="form-control" type="password" pwd_confirm" name="pwd_confirm" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$" required placeholder="Confirm password">
