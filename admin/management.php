@@ -60,6 +60,10 @@ and open the template in the editor.
 
             <?php
         }
+        else{
+            echo "0 Results";            
+        }
+        $conn -> close();
         ?>
 
     </body>
