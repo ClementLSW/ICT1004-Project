@@ -14,8 +14,8 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-        include "../navigation.php";
-        include "../connections.php";
+        include "navigation.php";
+        include "connections.php";
         
         $conn = establish_connection();
 
