@@ -26,7 +26,7 @@
             <p>For New members, please go to the<a href="register.php"> Sign Up page</a>.</p>
             <form action="process_login.php" method="post">
                 <div class="form-group">
-                    <label for="email">Email:</label><input class="form-control" type="text" id="email"name="email" maxlength="50"  pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" placeholder="Enter Email">
+                    <label for="username">Username:</label><input class="form-control" type="username" id="email"name="username" maxlength="50"  placeholder="Enter Username">
                 </div>
                 <div class="form-group">
                     <label for="pwd">Password:</label><input class="form-control" type="password" name="pwd" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$" required placeholder="Enter password">
