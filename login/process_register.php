@@ -106,7 +106,7 @@
                         $errorMsg = "Connection failed: " . $conn->connect_error;
                         $success = false;
                     } else {
-                        $sql = "INSERT INTO new_table(username, fname, lname, email, password, contact)";
+                        $sql = "INSERT INTO users(username, fname, lname, email, password, contact)";
                         $sql .= " VALUES ('$username','$firstname', '$lastname', '$email', '$password', '$contact')";
 
                         //Execute the query

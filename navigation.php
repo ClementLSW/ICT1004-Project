@@ -18,3 +18,11 @@
         </ul>
     </div>
 </nav>
+<?php
+        session_start();
+        if(isset($_SESSION['username'])){
+        echo $_SESSION['username'];
+        echo "<br/><a href='logout.php'>logout</a>";
+        echo "<button class='btn btn-success'>Logout</button></form> ";
+}
+        ?>
