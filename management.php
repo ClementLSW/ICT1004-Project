@@ -12,44 +12,38 @@ and open the template in the editor.
         include "header.inc.php";
         ?>
     </head>
-    <body>
+    <body style="background-color:#ffffff;">
         <?php
         include "navigation.php";
         include "connections.php";
-        
-        $conn = establish_connection();
-
-        $sql = "SELECT * FROM carpark.users";
-        $result = $conn->query($sql);
-
-        if ($result->num_rows > 0) {
-            ?>
-            <table id="myTable" class="display" style="width:100%;">
-                <thead>
-                    <tr>
-                        <th>Username</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Password</th>
-                        <th>Email</th>
-                        <th>Contact</th>
-                        <th>Permissions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    while ($row = $result->fetch_assoc()) {
-                        echo "<tr style='color:black;'>"
-                        . "<td>" . $row['username'] . "</td>"
-                        . "<td>" . $row['fname'] . "</td>"
-                        . "<td>" . $row['lname'] . "</td>"
-                        . "<td>" . $row['password'] . "</td>"
-                        . "<td>" . $row['email'] . "</td>"
-                        . "<td>" . $row['contact'] . "</td>"
-                        . "<td>" . $row['permissions'] . "</td>"
-                        . "</tr>";
-                    }
-                    ?>
+        ?>
+        <table id="myTable" class="display" style="width:100%;">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Password</th>
+                    <th>Email</th>
+                    <th>Contact</th>
+                    <th>Permissions</th>
+                </tr>
+            </thead>
+            <tbody>
+<?php
+if (sizeof($users) > 0) {
+    for ($i = 0; $i < sizeof($users); $i++) {
+        echo "<tr>"
+        . "<td>" . $users[$i]['username'] . "</td>"
+        . "<td>" . $users[$i]['fname'] . "</td>"
+        . "<td>" . $users[$i]['lname'] . "</td>"
+        . "<td>" . $users[$i]['password'] . "</td>"
+        . "<td>" . $users[$i]['email'] . "</td>"
+        . "<td>" . $users[$i]['contact'] . "</td>"
+        . "<td>" . $users[$i]['permissions'] . "</td>"
+        . "</tr>";
+    }
+    ?>
                 </tbody>
             </table>     
             <script>
@@ -58,13 +52,12 @@ and open the template in the editor.
                 });
             </script>
 
-            <?php
-        }
-        else{
-            echo "0 Results";            
-        }
-        $conn -> close();
-        ?>
+    <?php
+} else {
+    echo "0 Results";
+}
+unset($users);
+?>
 
     </body>
 </html>
