@@ -15,15 +15,9 @@ and open the template in the editor.
     <body>
         <?php
         include "../navigation.php";
-        $dbservername = "localhost";
-        $dbusername = "root";
-        $dbpassword = "";
-
-        $conn = new mysqli($dbservername, $dbusername, $dbpassword);
-
-        if ($conn->connect_error) {
-            die("Connection error: " . $conn->connect_error);
-        }
+        include "../connections.php";
+        
+        $conn = establish_connection();
 
         $sql = "SELECT * FROM carpark.users";
         $result = $conn->query($sql);
