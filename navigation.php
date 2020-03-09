@@ -16,7 +16,7 @@
                 <a class="nav-link" href="register.php">Register</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="Manage.php">Manage</a>
+                <a class="nav-link" href="management.php">Manage</a>
             </li>
         </ul>
     </div>
