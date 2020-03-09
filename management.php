@@ -9,7 +9,7 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <title></title>
         <?php
-        include "../header.inc.php";
+        include "header.inc.php";
         ?>
     </head>
     <body>
