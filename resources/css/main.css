@@ -4,6 +4,20 @@ html , body {
     font-family: 'Lato' , 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     overflow-x: hidden;
 }
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:visited,
+.btn-primary:focus {
+    background-color: #3d6ba0 !important;
+    border-color: #3d6ba0 !important;
+    color: white !important;
+}
+.btn-primary:active{
+    background-color: #4477b2 !important;
+    border-color: #4477b2 !important;
+    color: white !important;
+}
+
 
 
 

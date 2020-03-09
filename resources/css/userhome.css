@@ -12,15 +12,19 @@
 
 /* The user input container */
 .my_container{
-    padding: 13% 20px 0% 20px;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding-left: 10px; 
+    padding-right: 10px;
+    display: block;
     text-align: center;
+    align-content: center;
 }
 
 #user_form {
-    margin-top: 1%;
-    margin-left: auto; 
-    margin-right: auto;
-    max-width: 60%;
+    margin-top: 2%;
+    margin-bottom: 1%;
+    width: 80%;
 }
 .user_input{
     text-align: center;
@@ -28,29 +32,39 @@
 }
 
 .highlight{
-    color: #FA4331;
+    color: #90d4ed;
 }
 
 .next_button{
     display: inline-block;
-    padding: 1% 10% 1% 10%;
-
-}
-.btn-primary,
-.btn-primary:hover,
-.btn-primary:visited,
-.btn-primary:focus {
-    background-color: #FA4331 !important;
-    border-color: #FA4331 !important;
+    font-size: 1.2em;
+    width: 80%;
+    box-sizing: border-box;
 }
 
-.btn-primary:active{
-    background-color: #FA5A4A !important;
-    border-color: #FA5A4A !important;
+.one_btn {
+    display: inline-block;
+    font-size: 1.2em;
+    width: 39%;
+    margin-right: 1%;
+    box-sizing: border-box;
 }
 
+.two_btn {
+    display: inline-block;
+    font-size: 1.2em;
+    width: 39%;
+    margin-left: 1%;
+    box-sizing: border-box;
+}
 
+#destination_selection{
+    display: block;
+}
 
+#shop_selection{
+    display: None;
+}
 
 /* For select2 input */
 .select2-selection__rendered {
@@ -71,45 +85,7 @@
     font-size: 1.3em;
   }
 
-/* Media Query */
-@media screen and (max-width: 1366px) {
-    .select2 {
-        width: 100% !important;
-    }
-
-    .my_container{
-        padding: 20% 20px 0% 20px;
-        text-align: center;
-    }
-
-    
- 
+.select2-container {
+    width: 100% !important;
 }
 
-@media screen and (max-width: 600px){
-    .my_container{
-        padding: 35% 20px 0% 20px;
-        text-align: center;
-    }
-    
-}
-
-
-
-
-
-
-
-
-
-/* @media only screen and (max-width: 600px) {
-    #direction_container{
-        height: 450px;
-    }
-
-    .direction_text {
-        font-size: 40%;
-    }
-
-    
-  } */
