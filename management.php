@@ -12,7 +12,7 @@ and open the template in the editor.
         include "header.inc.php";
         ?>
     </head>
-    <body style="background-color:#ffffff;">
+    <body>
         <?php
         include "navigation.php";
         include "connections.php";
@@ -30,20 +30,20 @@ and open the template in the editor.
                 </tr>
             </thead>
             <tbody>
-<?php
-if (sizeof($users) > 0) {
-    for ($i = 0; $i < sizeof($users); $i++) {
-        echo "<tr>"
-        . "<td>" . $users[$i]['username'] . "</td>"
-        . "<td>" . $users[$i]['fname'] . "</td>"
-        . "<td>" . $users[$i]['lname'] . "</td>"
-        . "<td>" . $users[$i]['password'] . "</td>"
-        . "<td>" . $users[$i]['email'] . "</td>"
-        . "<td>" . $users[$i]['contact'] . "</td>"
-        . "<td>" . $users[$i]['permissions'] . "</td>"
-        . "</tr>";
-    }
-    ?>
+                <?php
+                if (sizeof($users) > 0) {
+                    for ($i = 0; $i < sizeof($users); $i++) {
+                        echo "<tr>"
+                        . "<td>" . $users[$i]['username'] . "</td>"
+                        . "<td>" . $users[$i]['fname'] . "</td>"
+                        . "<td>" . $users[$i]['lname'] . "</td>"
+                        . "<td>" . $users[$i]['password'] . "</td>"
+                        . "<td>" . $users[$i]['email'] . "</td>"
+                        . "<td>" . $users[$i]['contact'] . "</td>"
+                        . "<td>" . $users[$i]['permissions'] . "</td>"
+                        . "</tr>";
+                    }
+                    ?>
                 </tbody>
             </table>     
             <script>
@@ -52,12 +52,12 @@ if (sizeof($users) > 0) {
                 });
             </script>
 
-    <?php
-} else {
-    echo "0 Results";
-}
-unset($users);
-?>
+            <?php
+        } else {
+            echo "0 Results";
+        }
+        unset($users);
+        ?>
 
     </body>
 </html>
