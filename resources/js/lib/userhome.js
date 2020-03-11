@@ -31,17 +31,32 @@ $(document).ready(function() {
         currentDestination = $('#destinationInput').val();
         if(currentDestination != 0){
             currentlyChoosen = 1;
+            if(currentDestination == 1){
+                //Expo City
+                $('.overlay').css('background-color', 'rgba(0,0,0,0.4');
+                $('#section_container').css('background-image','url(../resources/img/backgroundexpo.jpg)');
+            }
+            if(currentDestination == 2){
+                //Suntec City
+                $('.overlay').css('background-color', 'rgba(0,0,0,0.4');
+                $('#section_container').css('background-image','url(../resources/img/backgroundsuntec.jpg)');
+            }
             toggleView(currentlyChoosen)
+
+          
         }
     })
 
     $('#shop_submit').click(function() {
         currentShop = $('#shopInput').val();
         processInput(currentDestination , currentShop);
+        console.log(currentDestination);
     })
 
     $('#shop_back').click(function() {
         currentlyChoosen = 0;
+        $('.overlay').css('background-color', 'rgba(0,0,0,0.1');
+        $('#section_container').css('background-image','url(../resources/img/background4.jpg)');
         toggleView(currentlyChoosen);
     })
 

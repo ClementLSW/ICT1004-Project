@@ -3,7 +3,8 @@
     <head>
         <?php
             include "header.inc.php";
-        ?>      
+            include 'connections.php';?>
+    
     </head>
     <body>
         <?php include 'navigation.php';?>

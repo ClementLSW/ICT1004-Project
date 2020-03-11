@@ -6,9 +6,10 @@
         <div id="user_form" class="form-group ">
             <select class="user_input js-example-basic-single" id="destinationInput">
                 <?php
-                $products = array("Singapore Expo", "Suntec");
+                $connection = new connections();
+                $products = $connection -> retrieve_all_users("location");
                 foreach ($products as $item) {
-                ?><option value="<?php echo strtolower($item); ?>"><?php echo $item; ?></option>
+                ?><option value="<?php echo strtolower($item['location_id']); ?>"><?php echo $item['location_name']; ?></option>
                 <?php
                 }
                 ?>
