@@ -11,6 +11,6 @@
     </head>
     <body>
         <?php include 'navigation.php'; ?>
-<?php include 'users/userhome.php'; ?>
+        <?php include 'users/userhome.php'; ?>
     </body>
 </html>
