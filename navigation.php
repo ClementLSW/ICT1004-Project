@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <nav role="navigation" class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">LOGO</a>
+    <a class="navbar-brand" href="index.php">LOGO</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -10,10 +10,10 @@
                 <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="login.php">Login<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="login/login.php">Login<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="register.php">Register</a>
+                <a class="nav-link" href="login/register.php">Register</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="management.php">Manage</a>
