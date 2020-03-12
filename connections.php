@@ -1,12 +1,10 @@
 <?php
-class connections{    
-
-    global $dbservername , $dbusername , $dbpassword , $dbname , $data;
-    $dbservername = "localhost";
-    $dbusername = "sqldev";
-    $dbpassword = "P@ssw0rd";
-    $dbname = "carpark";
-    $data = array();
+class connections{       
+    private $dbservername = "localhost";
+    private $dbusername = "sqldev";
+    private $dbpassword = "P@ssw0rd";
+    private $dbname = "carpark";
+    private $data = array();
 function retrieve_data_where(String $tableName , String $colname, String $colval ){
     //INPUT: 1 Argum , Returns Array
     
