@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 11, 2020 at 04:58 PM
+-- Generation Time: Mar 12, 2020 at 02:22 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -25,14 +25,32 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `area`
+-- Table structure for table `AREA`
 --
 
-CREATE TABLE `area` (
-  `area_id` varchar(5) NOT NULL,
+CREATE TABLE `AREA` (
+  `area_id` int(11) NOT NULL,
   `type` varchar(45) NOT NULL,
-  `occupancy` varchar(45) NOT NULL
+  `occupancy` varchar(45) NOT NULL,
+  `location_id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `AREA`
+--
+
+INSERT INTO `AREA` (`area_id`, `type`, `occupancy`, `location_id`, `name`) VALUES
+(1, 'hall', '0', 1, 'Hall 1'),
+(2, 'hall', '0', 1, 'Hall 2'),
+(3, 'hall', '0', 1, 'Hall 3'),
+(4, 'hall', '0', 1, 'Hall 4'),
+(5, 'hall', '0', 1, 'Hall 5'),
+(6, 'hall', '0', 1, 'Hall 6'),
+(7, 'hall', '0', 1, 'Hall 7'),
+(8, 'hall', '0', 1, 'Hall 8'),
+(9, 'hall', '0', 1, 'Hall 9'),
+(10, 'hall', '0', 1, 'Hall 10');
 
 -- --------------------------------------------------------
 
@@ -96,11 +114,12 @@ INSERT INTO `users` (`username`, `fname`, `lname`, `password`, `email`, `contact
 --
 
 --
--- Indexes for table `area`
+-- Indexes for table `AREA`
 --
-ALTER TABLE `area`
+ALTER TABLE `AREA`
   ADD PRIMARY KEY (`area_id`),
-  ADD UNIQUE KEY `area_id_UNIQUE` (`area_id`);
+  ADD UNIQUE KEY `area_id_UNIQUE` (`area_id`),
+  ADD KEY `location_id` (`location_id`);
 
 --
 -- Indexes for table `connection`
@@ -126,10 +145,26 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `AREA`
+--
+ALTER TABLE `AREA`
+  MODIFY `area_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
 -- AUTO_INCREMENT for table `location`
 --
 ALTER TABLE `location`
   MODIFY `location_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `AREA`
+--
+ALTER TABLE `AREA`
+  ADD CONSTRAINT `area_ibfk_1` FOREIGN KEY (`location_id`) REFERENCES `location` (`location_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
