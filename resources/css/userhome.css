@@ -31,7 +31,7 @@
     align-content: center;
 }
 
-#user_form {
+#user_form, #shops_form {
     margin-top: 2%;
     margin-bottom: 1%;
     width: 80%;

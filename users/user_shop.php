@@ -3,15 +3,9 @@
 </section>
 <form action="user_process.php" method="POST">
     <section class="w-100 justify-content-center row">
-        <div id="user_form" class="form-group ">
+        <div id="shops_form" class="form-group ">
         <select class="user_input js-example-basic-single" id="shopInput">
-                <?php
-                $products = array("Shop A", "Shop B");
-                foreach ($products as $item) {
-                ?><option value="<?php echo strtolower($item); ?>"><?php echo $item; ?></option>
-                <?php
-                }
-                ?>
+              
             </select>
         </div>
     </section>
@@ -20,3 +14,4 @@
     <button type="button" id="shop_submit" name="shop_submit" value="next" class=" two_btn btn btn-primary">Search</button>
     </section>
 </form>
+<div id="txtHint"></div>
