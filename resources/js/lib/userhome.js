@@ -4,11 +4,15 @@ function toggleView(currentlyChoosen){
      if(currentlyChoosen == 1){
         $('#destination_selection').hide();
         $('#shop_selection').show();
+        $(".js-example-basic-single").select2({ dropdownParent: "#shops_form" });
+
      }
     //Else show destination div 
     else{
         $('#destination_selection').show();
         $('#shop_selection').hide();
+        $(".js-example-basic-single").select2({ dropdownParent: "#user_form" });
+
     }
 }
 
@@ -22,11 +26,43 @@ function processInput(currentDestination , currentShop){
         }
     });
 }
+
+function showShops(destination) {
+    if (destination=="") {
+        //   document.getElementById("txtHint").innerHTML="";
+      return;
+    }
+    if (window.XMLHttpRequest) {
+      // code for IE7+, Firefox, Chrome, Opera, Safari
+      xmlhttp=new XMLHttpRequest();
+    } else { // code for IE6, IE5
+      xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange=function() {
+      if (this.readyState==4 && this.status==200) {
+        var obj = JSON.parse(this.responseText);
+        if(obj.length != 0){
+          for(var i = 0; i < obj.length; i++){
+            $("#shopInput").append("<option value=" + obj[i].area_id +  ">" + obj[i].name + "</option>");
+          }
+        }else{
+          $("#shopInput").append("<option value=0 selected > No Options available</option>");
+        }
+
+        // document.getElementById("txtHint").innerHTML=this.responseText;
+      }
+    }
+
+    xmlhttp.open("GET" , "../../users/user_input_process.php?destination="+destination,true);
+    xmlhttp.send();
+  }
+
 $(document).ready(function() {
     var currentlyChoosen = 0; // 0 = Destination , 1 = Shops
     var currentDestination = $('#destinationInput').val(); 
     var currentShop = $('#shopInput').val();
-    $('.js-example-basic-single').select2();
+    // $('.js-example-basic-single').select2(); // Shun han look here 
+    $(".js-example-basic-single").select2({ dropdownParent: "#user_form" });
     $('#destination_submit').click(function() {
         currentDestination = $('#destinationInput').val();
         if(currentDestination != 0){
@@ -42,15 +78,15 @@ $(document).ready(function() {
                 $('#section_container').css('background-image','url(../resources/img/backgroundsuntec.jpg)');
             }
             toggleView(currentlyChoosen)
-
-          
+            //Retrieve current Destination data from DB 
+            $("#shopInput").empty();
+            showShops(currentDestination);
         }
     })
 
     $('#shop_submit').click(function() {
         currentShop = $('#shopInput').val();
         processInput(currentDestination , currentShop);
-        console.log(currentDestination);
     })
 
     $('#shop_back').click(function() {

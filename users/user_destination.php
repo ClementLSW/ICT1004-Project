@@ -7,7 +7,7 @@
             <select class="user_input js-example-basic-single" id="destinationInput">
                 <?php
                 $connection = new connections();
-                $products = $connection -> retrieve_all_users("location");
+                $products = $connection -> retrieve_all_data("location");
                 foreach ($products as $item) {
                 ?><option value="<?php echo strtolower($item['location_id']); ?>"><?php echo $item['location_name']; ?></option>
                 <?php
