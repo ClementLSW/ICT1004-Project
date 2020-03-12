@@ -5,11 +5,11 @@ function retrieve_all_users(String $tableName){
     //  INPUT: String , RETURNS: Array 
 
     global $dbservername , $dbusername , $dbpassword , $dbname , $data;
-    $dbservername = "127.0.0.1";
-    $dbusername = "root";
-    $dbpassword = "";
+    $dbservername = "localhost";
+    $dbusername = "sqldev";
+    $dbpassword = "P@ssw0rd";
     $dbname = "carpark";
-    $users = array();
+    $data = array();
 
     
     $conn = new mysqli($dbservername, $dbusername, $dbpassword, $dbname);
