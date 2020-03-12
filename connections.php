@@ -36,7 +36,7 @@ function retrieve_all_data(String $tableName){
     if ($conn->connect_error) {
         die("Connection error: " . $conn->connect_error);
     }
-
+    
     $sql = "SELECT * FROM " . $tableName;
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
@@ -44,6 +44,7 @@ function retrieve_all_data(String $tableName){
         while ($row = $result->fetch_assoc()) {
             $data[] = $row;
         }
+        echo json_encode($data);
     } else {
         echo "0 results";
     }

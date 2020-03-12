@@ -14,7 +14,7 @@
            $connection = new connections();
            $products = $connection -> retrieve_data_where("area" , "location_id" , $_GET['destination']);
        }
-
+       
        return $products;
     }
 
