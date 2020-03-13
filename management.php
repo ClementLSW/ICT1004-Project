@@ -9,6 +9,7 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <title></title>
         <script src="resources/js/lib/data_tables.js"></script>
+        <link type="text/css" href="resources/css/management.css" rel="stylesheet">
         <?php
         include "header.inc.php";        
         ?>
