@@ -1,11 +1,11 @@
 <head>
-        <?php include 'header.inc.php'; ?>
+        <?php include '../header.inc.php'; ?>
     </head>
     <body>
         <?php include 'navigation.php';?>
 <main class="container">
             <h1>Member Registration</h1>
-            <p>For existing members, please go to the<a href="Login.php"> Sign In page</a>.</p>
+            <p>For existing members, please go to the<a href="login.php"> Sign In page</a>.</p>
             <form action="process_register.php" method="post">
                 <div class="form-group">
                     <label for="username">Username:</label><input class="form-control" type="text" id="username"name="username" maxlength="50" placeholder="Enter username">
@@ -20,7 +20,7 @@
                     <label for="email">Email:</label><input class="form-control" type="email" id="email"name="email"required placeholder="Enter email" pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$">
                 </div>
                 <div class="form-group">
-                    <label for="Contact">Contact:</label><input class="form-control" type="tel" id="contact"name="contact"required placeholder="Enter contact number" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}">
+                    <label for="Contact">Contact:</label><input class="form-control" type="tel" id="contact"name="contact"required placeholder="Enter contact number" pattern="[0-9]{3}[0-9]{2}[0-9]{3}">
                 </div>
                 <div class="form-group"><label for="pwd">Password:</label><input class="form-control" type="password" name="pwd" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$" required placeholder="Enter password">
                 </div>
