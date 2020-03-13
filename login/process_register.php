@@ -9,6 +9,7 @@
                 $email = $errorMsg = "";
                 $username = $_POST["username"];
                 $lastname = $_POST["lname"];
+                $username = $_POST["username"];
                 $firstname = $_POST["fname"];
                 $password = $_POST["pwd"];
                 $cmfpassword = $_POST["pwd_confirm"];
