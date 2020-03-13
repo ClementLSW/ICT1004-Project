@@ -1,5 +1,5 @@
-<section class="w-100 container1 justify-content-center row">
-    <h3 class="direction_text extra-bold">Which <span class="highlight">Shop</span> would you like to visit?<br></h3>
+<section class="justify-content-center row text_container">
+    <h3 class="direction_text extra-bold">Which <span class="highlight">Shop</span>, would you like to vist?<br></h3>
 </section>
 <form action="user_process.php" method="POST">
     <section class="w-100 container1 justify-content-center row">

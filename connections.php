@@ -4,7 +4,7 @@ error_reporting(0);
 class connections{       
 function retrieve_data_where(String $tableName , String $colname, String $colval ){
     //INPUT: 1 Argum , Returns Array
-    $config = parse_ini_file('../../private/db-config.ini');
+    $config = parse_ini_file('/var/www/private/db-config.ini'); //Should use absolute path because when method is called from different places, the relative path is different
     $conn = new mysqli($config['servername'], $config['username'], $config['password'], $config['dbname']);
     if ($conn->connect_error) {
         die("Connection error: " . $conn->connect_error);
@@ -18,7 +18,9 @@ function retrieve_data_where(String $tableName , String $colname, String $colval
         while ($row = $result->fetch_assoc()) {
             $data[] = $row;
         }
+        echo json_encode($data); // dont remove pls 
     } else {
+        echo json_encode([]);
     }
     $conn->close();
     return $data;
@@ -27,7 +29,7 @@ function retrieve_data_where(String $tableName , String $colname, String $colval
 
 function retrieve_all_data(String $tableName){    
     //  INPUT: String , RETURNS: Array     
-    $config = parse_ini_file('../../private/db-config.ini');
+    $config = parse_ini_file('/var/www/private/db-config.ini'); //Should use absolute path because when method is called from different places, the relative path is different
     $conn = new mysqli($config['servername'], $config['username'], $config['password'], $config['dbname']);
     if ($conn->connect_error) {
         die("Connection error: " . $conn->connect_error);        
