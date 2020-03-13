@@ -1,14 +1,11 @@
 <?php
+//turn off error reporting
+error_reporting(0);
 class connections{       
-    public  $dbservername = "localhost";
-    public $dbusername = "sqldev";
-    public $dbpassword = "P@ssw0rd";
-    public $dbname = "carpark";
-//    public $data = array();
 function retrieve_data_where(String $tableName , String $colname, String $colval ){
     //INPUT: 1 Argum , Returns Array
-    
-    $conn = new mysqli($this->dbservername, $this->dbusername, $this ->dbpassword, $this ->dbname);
+    $config = parse_ini_file('../../private/db-config.ini');
+    $conn = new mysqli($config['servername'], $config['username'], $config['password'], $config['dbname']);
     if ($conn->connect_error) {
         die("Connection error: " . $conn->connect_error);
     }
@@ -21,9 +18,7 @@ function retrieve_data_where(String $tableName , String $colname, String $colval
         while ($row = $result->fetch_assoc()) {
             $data[] = $row;
         }
-//        echo json_encode($data);
     } else {
-//        echo json_encode([]);
     }
     $conn->close();
     return $data;
@@ -32,7 +27,8 @@ function retrieve_data_where(String $tableName , String $colname, String $colval
 
 function retrieve_all_data(String $tableName){    
     //  INPUT: String , RETURNS: Array     
-    $conn = new mysqli($this->dbservername, $this->dbusername, $this ->dbpassword, $this ->dbname);
+    $config = parse_ini_file('../../private/db-config.ini');
+    $conn = new mysqli($config['servername'], $config['username'], $config['password'], $config['dbname']);
     if ($conn->connect_error) {
         die("Connection error: " . $conn->connect_error);        
     }
@@ -44,7 +40,6 @@ function retrieve_all_data(String $tableName){
         while ($row = $result->fetch_assoc()) {
             $data[] = $row;
         }
-//        echo json_encode($data);
     } else {
         echo "0 results";
     }
@@ -53,8 +48,4 @@ function retrieve_all_data(String $tableName){
     return $data;
     }
 }
-
-
-
-
 ?>
