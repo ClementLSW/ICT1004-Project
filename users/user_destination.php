@@ -1,3 +1,7 @@
+<?php
+//turn off error reporting
+error_reporting(0);
+?>
 <section class="w-100 container1 justify-content-center row">
     <h3 class="direction_text extra-bold">Great to see you <span class="highlight">#User</span>, Where would you like to go? <br></h3>
 </section>
@@ -7,10 +11,10 @@
             <select class="user_input js-example-basic-single" id="destinationInput">
                 <?php
                 $connection = new connections();
-                $products = $connection -> retrieve_all_data("carpark.location");
+                $products = $connection->retrieve_all_data("carpark.location");
                 foreach ($products as $item) {
-                ?><option value="<?php echo strtolower($item['location_id']); ?>"><?php echo $item['location_name']; ?></option>
-                <?php
+                    ?><option value="<?php echo strtolower($item['location_id']); ?>"><?php echo $item['location_name']; ?></option>
+                    <?php
                 }
                 ?>
             </select>
