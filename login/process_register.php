@@ -1,5 +1,5 @@
 <head>
-        <?php include 'header.inc.php'; ?>
+        <?php include '../header.inc.php'; ?>
     </head>
     <body>
         <?php include 'navigation.php';?>
@@ -58,7 +58,7 @@
                     echo "<p>First Name: " . $firstname;
                     echo "<p>Last Name: " . $lastname;
                     echo "<p>Contact:". $contact;
-                    echo "<form action = 'index.php'>";
+                    echo "<form action = '../index.php'>";
                     echo "<button class='btn btn-success'>Home</button></form> ";
                     $permission = 'normaluser';
                 } else {
