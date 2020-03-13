@@ -1,8 +1,8 @@
-<?php
-//turn off error reporting
-error_reporting(0);
 ?>
-<section class="w-100 container1 justify-content-center row">
+error_reporting(0);
+//turn off error reporting
+<?php
+<section class="justify-content-center row text_container">
     <h3 class="direction_text extra-bold">Great to see you <span class="highlight">#User</span>, Where would you like to go? <br></h3>
 </section>
 <form action="user_process.php" method="POST">

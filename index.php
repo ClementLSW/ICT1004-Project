@@ -9,10 +9,12 @@
         ?>        
         <script src="resources/js/select2.min.js"></script>
         <link href="resources/css/select2.min.css" rel="stylesheet" />
-
     </head>
-    <body>
-        <?php include 'navigation.php'; ?>
-        <?php include 'users/userhome.php'; ?>
+    <body id="mainbody" class="bg">
+        <div class="overlay">
+                <?php include 'navigation.php'; ?>
+                <?php include 'users/userhome.php'; ?>
+        </div>
+  
     </body>
 </html>
