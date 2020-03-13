@@ -8,14 +8,15 @@ and open the template in the editor.
     <head>
         <meta charset="UTF-8">
         <title></title>
+        <script src="resources/js/lib/data_tables.js"></script>
         <?php
-        include "header.inc.php";
+        include "header.inc.php";        
         ?>
     </head>
     <body>
         <?php
         include "navigation.php";
-        include "connections.php";
+        include "connections.php";        
         ?>        
         <table id="myTable" class="display" style="width:100%;">
             <thead>
