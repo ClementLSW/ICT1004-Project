@@ -1,9 +1,13 @@
 <html lang="en">
     <head>
-        <?php include '../header.inc.php'; ?>
+        <?php
+        //turn off error reporting
+        error_reporting(0);
+        include '../header.inc.php';
+        ?>
     </head>
     <body>
-        <?php include 'navigation.php';?>
+        <?php include 'navigation.php'; ?>
         <main class="container">
             <h1>Members Login</h1>
             <p>For New members, please go to the<a href="register.php"> Sign Up page</a>.</p>
@@ -16,6 +20,6 @@
                 </div>
                 <div class="form-group"><button class="btn btn-primary" type="submit">Submit</button></div></form>
         </main>
-        
+
     </body>
 </html>
