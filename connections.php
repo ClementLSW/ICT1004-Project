@@ -18,7 +18,9 @@ function retrieve_data_where(String $tableName , String $colname, String $colval
         while ($row = $result->fetch_assoc()) {
             $data[] = $row;
         }
+        echo json_encode($data); // dont remove pls 
     } else {
+        echo json_encode([]);
     }
     $conn->close();
     return $data;

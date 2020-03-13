@@ -1,7 +1,8 @@
-?>
-error_reporting(0);
-//turn off error reporting
 <?php
+
+error_reporting(0);
+//turn off error reporting?>
+
 <section class="justify-content-center row text_container">
     <h3 class="direction_text extra-bold">Great to see you <span class="highlight">#User</span>, Where would you like to go? <br></h3>
 </section>
