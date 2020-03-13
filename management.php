@@ -16,7 +16,7 @@ and open the template in the editor.
         <?php
         include "navigation.php";
         include "connections.php";
-        ?>
+        ?>        
         <table id="myTable" class="display" style="width:100%;">
             <thead>
                 <tr>
@@ -29,18 +29,20 @@ and open the template in the editor.
                     <th>Permissions</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody>                
                 <?php
+                $connection = new connections();
+                $users = $connection->retrieve_all_data("carpark.users");
                 if (sizeof($users) > 0) {
-                    for ($i = 0; $i < sizeof($users); $i++) {
-                        echo "<tr>"
-                        . "<td>" . $users[$i]['username'] . "</td>"
-                        . "<td>" . $users[$i]['fname'] . "</td>"
-                        . "<td>" . $users[$i]['lname'] . "</td>"
-                        . "<td>" . $users[$i]['password'] . "</td>"
-                        . "<td>" . $users[$i]['email'] . "</td>"
-                        . "<td>" . $users[$i]['contact'] . "</td>"
-                        . "<td>" . $users[$i]['permissions'] . "</td>"
+                    foreach ($users as $user) {
+                        echo "<tr style='color:black;'>"
+                        . "<td>" . $user['username'] . "</td>"
+                        . "<td>" . $user['fname'] . "</td>"
+                        . "<td>" . $user['lname'] . "</td>"
+                        . "<td>" . $user['password'] . "</td>"
+                        . "<td>" . $user['email'] . "</td>"
+                        . "<td>" . $user['contact'] . "</td>"
+                        . "<td>" . $user['permissions'] . "</td>"
                         . "</tr>";
                     }
                     ?>
@@ -56,7 +58,6 @@ and open the template in the editor.
         } else {
             echo "0 Results";
         }
-        unset($users);
         ?>
 
     </body>
