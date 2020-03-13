@@ -10,7 +10,7 @@
 <nav class="nav navheight">
         <div class="w-100">
             <div class="logo">
-                <a href="#">Your Logo</a>
+                <a href="index.php">Your Logo</a>
             </div>
             <div id="mainListDiv" class="main_list">
                 <ul class="navlinks">
