@@ -1,6 +1,6 @@
 <html lang="en">
     <head>
-        <?php include 'header.inc.php'; ?>
+        <?php include '../header.inc.php'; ?>
     </head>
     <body>
         <?php include 'navigation.php';?>
