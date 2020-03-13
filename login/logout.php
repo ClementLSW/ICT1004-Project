@@ -1,7 +1,7 @@
 <html lang="en">
 
     <head>
-        <?php include 'header.inc.php'; ?>
+        <?php include '../header.inc.php'; ?>
     </head>
 
 <body>
@@ -17,7 +17,7 @@
                 setcookie("pwd", $password, time()-1);
             }
             echo "You have successfully logged out.";
-            echo "<form action = 'index.php'>";
+            echo "<form action = '../index.php'>";
             echo "<button class='btn btn-success'>Return Home</button></form> "
         
         ?>
