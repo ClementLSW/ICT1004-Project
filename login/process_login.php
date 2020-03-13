@@ -1,6 +1,6 @@
 <html>
 <head>
-        <?php include 'header.inc.php'; ?>
+        <?php include '../header.inc.php'; ?>
     </head>
     <body>
         <?php include 'navigation.php';?>
@@ -35,7 +35,7 @@
             $_SESSION["username"] = $username;
             echo "<h3>Login successful!</h3>";
             echo "<h4>Welcome back, $firstname $lastname. </h4>";
-            echo "<form action = 'index.php'>";
+            echo "<form action = '../index.php'>";
             echo "<button class='btn btn-success'>Return to Home</button></form> ";
             
             }
@@ -58,6 +58,5 @@
             $success = true;
             ?>
         </main>
-    </body>
-    <?php include "footer.inc.php"; ?>
+    </body>    
 </html>
