@@ -1,19 +1,23 @@
 <html>
     <head>
-        <?php include 'header.inc.php'; ?>
+        <?php
+        //turn off error reporting
+        error_reporting(0);
+        include 'header.inc.php';
+        ?>
     </head>
     <body>
-        <?php include 'navigation.php';?>
+        <?php include 'navigation.php'; ?>
         <?php
         include "connections.php";
-        function getAllRoutes(){
+
+        function getAllRoutes() {
             $dest = $_POST["shopInput"];
             $routes = retrieve_data_where("connection", "start_node", $dest);
             return $routes;
-            
         }
         ?>
-        
+
     </body>
     <?php include "footer.inc.php"; ?>
 </html>
