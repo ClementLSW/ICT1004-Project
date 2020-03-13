@@ -40,7 +40,9 @@ function showShops(destination) {
     }
     xmlhttp.onreadystatechange=function() {
       if (this.readyState==4 && this.status==200) {
+        console.log(this.responseText);
         var obj = JSON.parse(this.responseText);
+
         if(obj.length != 0){
           for(var i = 0; i < obj.length; i++){
             $("#shopInput").append("<option value=" + obj[i].area_id +  ">" + obj[i].name + "</option>");
@@ -53,7 +55,7 @@ function showShops(destination) {
       }
     }
 
-    xmlhttp.open("GET" , "../../users/user_input_process.php?destination="+destination,true);
+    xmlhttp.open("GET" , "users/user_input_process.php?destination="+destination,true);
     xmlhttp.send();
   }
 
@@ -69,13 +71,13 @@ $(document).ready(function() {
             currentlyChoosen = 1;
             if(currentDestination == 1){
                 //Expo City
-                $('.overlay').css('background-color', 'rgba(0,0,0,0.4');
-                $('#section_container').css('background-image','url(../resources/img/backgroundexpo.jpg)');
+                $('.overlay').css('background-color', 'rgba(0,0,0,0.6');
+                $('#section_container').css('background-image','url(http://ict-1004-project1.s3-ap-southeast-1.amazonaws.com/backgroundexpo.jpg)');
             }
             if(currentDestination == 2){
                 //Suntec City
-                $('.overlay').css('background-color', 'rgba(0,0,0,0.4');
-                $('#section_container').css('background-image','url(../resources/img/backgroundsuntec.jpg)');
+                $('.overlay').css('background-color', 'rgba(0,0,0,0.6');
+                $('#section_container').css('background-image','url(http://ict-1004-project1.s3-ap-southeast-1.amazonaws.com/backgroundsuntec.jpg)');
             }
             toggleView(currentlyChoosen)
             //Retrieve current Destination data from DB 
@@ -91,8 +93,8 @@ $(document).ready(function() {
 
     $('#shop_back').click(function() {
         currentlyChoosen = 0;
-        $('.overlay').css('background-color', 'rgba(0,0,0,0.1');
-        $('#section_container').css('background-image','url(../resources/img/background4.jpg)');
+        $('.overlay').css('background-color', 'rgba(0,0,0,0.3');
+        $('#section_container').css('background-image','url(http://ict-1004-project1.s3-ap-southeast-1.amazonaws.com/background4.jpg)');
         toggleView(currentlyChoosen);
     })
 

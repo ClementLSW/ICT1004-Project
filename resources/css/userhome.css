@@ -1,7 +1,7 @@
 /* direction Home */
 .bg {
     /* The image used */
-    background-image: url(../img/background4.jpg);
+    background-image: url('http://ict-1004-project1.s3-ap-southeast-1.amazonaws.com/background4.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -11,7 +11,7 @@
   }
 
   .overlay {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.3);
     width: 100%;
     height: 100%;
     z-index: 1;
@@ -43,6 +43,13 @@
 
 .highlight{
     color: #90d4ed;
+}
+.container1 {
+     margin: 0px;
+}
+.direction_text{
+    margin: 0px; 
+    padding: 0px;
 }
 
 .next_button{
