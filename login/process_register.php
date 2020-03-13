@@ -7,12 +7,14 @@
                 <?php
                 $errorMsgpwd = "";
                 $email = $errorMsg = "";
+                $username = $_POST["username"];
                 $lastname = $_POST["lname"];
                 $firstname = $_POST["fname"];
                 $password = $_POST["pwd"];
                 $cmfpassword = $_POST["pwd_confirm"];
                 $contact = $_POST["contact"];
                 $success = true;
+                $permissions = "user";
                 if (empty($_POST["email"])) {
                     $errorMsg .= "Email is required.<br>";
                     $success = false;
@@ -52,22 +54,23 @@
                 sanitize_input($cmfpassword);
                 sanitize_input($contact);
                 if ($success) {
+                    saveMemberToDB();
                     echo "<h4>Registration successful!</h4>";
                     echo "<p>Username:" .$username;
                     echo "<p>Email: " . $email;
                     echo "<p>First Name: " . $firstname;
                     echo "<p>Last Name: " . $lastname;
                     echo "<p>Contact:". $contact;
+                    echo "<p>Permissions:" . $permissions;
                     echo "<form action = '../index.php'>";
-                    echo "<button class='btn btn-success'>Home</button></form> ";
-                    $permission = 'normaluser';
+                    echo "<button class='btn btn-success'>Home</button></form> ";                    
                 } else {
                     echo "<h4>The following input errors were detected:</h4>";
                     echo "<p>" . $errorMsg . "</p>";
                     echo "<p>" . $errorMsgpwd . "</p>";
                     echo "<form action = 'register.php'>";
                     echo "<button class='btn btn-success'>Login</button></form> ";
-                }
+                }                
 
 //Helper function that checks input for malicious or unwanted content.
                 function sanitize_input($data) {
@@ -79,7 +82,7 @@
 
 //Helper function to write the member data to the DB
                 function saveMemberToDB() {
-                    global $username, $firstname, $lastname, $email, $password, $contact,  $errorMsg, $success;
+                    global $username, $firstname, $lastname, $email, $password, $contact,  $errorMsg, $success, $permissions;
 
                     //Creating databse connection.
                     $config = parse_ini_file('/var/www/private/db-config.ini');
@@ -87,24 +90,20 @@
                     // Check connection
                     if ($conn->connect_error) {
                         $errorMsg = "Connection failed: " . $conn->connect_error;
-                        $success = false;
+                        $success = false;                        
                     } else {
-                        $sql = "INSERT INTO users(username, fname, lname, email, password, contact)";
-                        $sql .= " VALUES ('$username','$firstname', '$lastname', '$email', '$password', '$contact')";
-
+                        $sql = "INSERT INTO carpark.users(username, fname, lname, email, password, contact)";
+                        $sql .= " VALUES ('$username','$firstname', '$lastname', '$email', '$password', '$contact')";                        
                         //Execute the query
                         if (!$conn->query($sql)) {
                             $errorMsg = "Database error: " . $conn->error;
-                            $success = false;
+                            $success = false;                            
                         }
                         $result->free_result();
                     }
                     $conn->close();
-                }
-
-                $functionName = "saveMemberToDB();";
-                eval($functionName);
+                }                                
                 ?>
-            </main>
+            </main>        
         </body>
 </html>
