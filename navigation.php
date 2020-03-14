@@ -30,7 +30,7 @@
 </nav>
 <div style="height:80px;"></div>
 
-?>
+
 <!-- 
 <nav role="navigation" class="navbar navbar-expand-lg navbar-dark bg-dark" style="height: 10%">
     
