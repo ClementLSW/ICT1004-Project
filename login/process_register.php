@@ -6,7 +6,7 @@
     ?>
 </head>
 <body>
-    <?php include 'navigation.php'; ?>
+    <?php include '../navigation.php'; ?>
     <main class = "container">
         <?php
         $errorMsgpwd = "";
@@ -57,19 +57,18 @@
         sanitize_input($lastname);
         sanitize_input($password);
         sanitize_input($cmfpassword);
-        sanitize_input($contact);
-        if ($success) {
+        sanitize_input($contact);        
+        saveMemberToDB();        
+        if ($success) {            
             echo "<h4>Registration successful!</h4>";
-            echo "<p>Username:" . $username;
+            echo "<p>Username: " . $username;
             echo "<p>Email: " . $email;
             echo "<p>First Name: " . $firstname;
             echo "<p>Last Name: " . $lastname;
-            echo "<p>Contact:" . $contact;
-            echo "<p>Permissions:" . $permissions;
-            saveMemberToDB();
+            echo "<p>Contact: " . $contact;                        
             echo "<form action = '../index.php'>";
             echo "<button class='btn btn-success'>Home</button></form> ";
-        } else {
+        } else{
             echo "<h4>The following input errors were detected:</h4>";
             echo "<p>" . $errorMsg . "</p>";
             echo "<p>" . $errorMsgpwd . "</p>";
@@ -97,13 +96,14 @@
                 $errorMsg = "Connection failed: " . $conn->connect_error;
                 $success = false;
             } else {
-                $sql = "INSERT INTO carpark.users(username, fname, lname, email, password, contact)";
-                $sql .= " VALUES ('$username','$firstname', '$lastname', '$email', '$password', '$contact')";
+                $sql = "INSERT INTO carpark.users(username, fname, lname, email, password, contact, permissions)";
+                $sql .= " VALUES ('$username','$firstname', '$lastname', '$email', '$password', '$contact', '$permissions')";
                 //Execute the query
                 if (!$conn->query($sql)) {
                     $errorMsg = "Database error: " . $conn->error;
                     $success = false;
-                }
+                }                
+                return $success;
                 $result->free_result();
             }
             $conn->close();
