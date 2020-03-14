@@ -1,37 +1,36 @@
 <!DOCTYPE html>
-<?php
-        session_start();
-        if(isset($_SESSION['username'])){
-        echo $_SESSION['username'];
-        echo "<form action = 'logout.php'>";
-        echo "<button class='btn btn-success'>Logout</button></form> ";
-}
-        ?>
 <nav class="nav navheight">
-        <div class="w-100">
-            <div class="logo">
-                <a href="index.php">Your Logo</a>
-            </div>
-            <div id="mainListDiv" class="main_list">
-                <ul class="navlinks">
-                    <li><a href="index.php">Home</a></li>
-                    <li><a href="login/login.php">Login<span class="sr-only">(current)</span></a></li>
-                    <li><a href="login/register.php">Register</a></li>
-                    <li><a href="management.php">Management</a></li>
-                    <li><a href="#">Log Out</a></li>
-
-                </ul>
-            </div>
-            <span class="navTrigger">
-                <i></i>
-                <i></i>
-                <i></i>
-            </span>
+    <div class="w-100">
+        <div class="logo">
+            <a href="index.php">Your Logo</a>
         </div>
-    </nav>
+        <div id="mainListDiv" class="main_list">
+            <ul class="navlinks">
+                <?php
+                session_start();
+                if (isset($_SESSION['username'])) {
+                    echo  $_SESSION['username'];
+                    echo "<li><a href='login/logout.php'>Logout</a></li>";
+                }
+                ?>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="login/login.php">Login<span class="sr-only">(current)</span></a></li>
+                <li><a href="login/register.php">Register</a></li>
+                <li><a href="management.php">Management</a></li>
+                
+
+            </ul>
+        </div>
+        <span class="navTrigger">
+            <i></i>
+            <i></i>
+            <i></i>
+        </span>
+    </div>
+</nav>
 <div style="height:80px;"></div>
 
-
+?>
 <!-- 
 <nav role="navigation" class="navbar navbar-expand-lg navbar-dark bg-dark" style="height: 10%">
     
