@@ -3,7 +3,7 @@
         session_start();
         if(isset($_SESSION['username'])){
         echo $_SESSION['username'];
-        echo "<br/><a href='logout.php'>logout</a>";
+        echo "<form action = 'logout.php'>";
         echo "<button class='btn btn-success'>Logout</button></form> ";
 }
         ?>
