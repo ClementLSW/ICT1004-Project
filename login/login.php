@@ -16,7 +16,7 @@
                     <label for="username">Username:</label><input class="form-control" type="username" id="email"name="username" maxlength="50"  placeholder="Enter Username">
                 </div>
                 <div class="form-group">
-                    <label for="pwd">Password:</label><input class="form-control" type="password" name="pwd" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$" required placeholder="Enter password">
+                    <label for="pwd">Password:</label><input class="form-control" type="password" name="pwd" required placeholder="Enter password">
                 </div>
                 <div class="form-group"><button class="btn btn-primary" type="submit">Submit</button></div></form>
         </main>
