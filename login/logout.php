@@ -5,7 +5,7 @@
     </head>
 
 <body>
-        <?php include "navigation.php"; ?>
+        <?php include "../navigation.php"; ?>
         <main class="container">
         <?php
         session_start();
