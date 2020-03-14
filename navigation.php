@@ -11,12 +11,15 @@
                 if (isset($_SESSION['username'])) {
                     echo '<li><a>'. $_SESSION['username'] . '</a></li>';
                     echo "<li><a href='login/logout.php'>Logout</a></li>";
+                   if ($_SESSION["permissions"] == 'admin'){
+                       echo "<li><a href='management.php'>Management</a></li>";
+                   }
                 }
                 ?>
                 <li><a href="index.php">Home</a></li>
                 <li><a href="login/login.php">Login<span class="sr-only">(current)</span></a></li>
                 <li><a href="login/register.php">Register</a></li>
-                <li><a href="management.php">Management</a></li>
+                
                 
 
             </ul>
