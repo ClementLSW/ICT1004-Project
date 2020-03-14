@@ -74,7 +74,7 @@
             echo "<p>" . $errorMsg . "</p>";
             echo "<p>" . $errorMsgpwd . "</p>";
             echo "<form action = 'register.php'>";
-            echo "<button class='btn btn-success'>Login</button></form> ";
+            echo "<button class='btn btn-success'>Register</button></form> ";
         }
 
 //Helper function that checks input for malicious or unwanted content.
