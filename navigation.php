@@ -9,7 +9,7 @@
                 <?php
                 session_start();
                 if (isset($_SESSION['username'])) {
-                    echo  $_SESSION['username'];
+                    echo '<li><a>'. $_SESSION['username'] . '</a></li>';
                     echo "<li><a href='login/logout.php'>Logout</a></li>";
                 }
                 ?>
