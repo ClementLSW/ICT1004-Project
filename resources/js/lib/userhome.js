@@ -1,4 +1,3 @@
-
 function toggleView(currentlyChoosen){
     //If currently choosen == 1, show shops div
      if(currentlyChoosen == 1){
@@ -38,10 +37,12 @@ function showShops(destination) {
     } else { // code for IE6, IE5
       xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
     }
-    xmlhttp.onreadystatechange=function() {
-      if (this.readyState==4 && this.status==200) {
-        console.log(this.responseText);
-        var obj = JSON.parse(this.responseText);
+    $.ajax({
+      data: {destination},
+      url: 'users/user_input_process.php',
+      method: 'GET', 
+      success: function(msg){
+        var obj = JSON.parse(msg);
         if(obj.length != 0){
           for(var i = 0; i < obj.length; i++){
             $("#shopInput").append("<option value=" + obj[i].area_id +  ">" + obj[i].name + "</option>");
@@ -49,13 +50,27 @@ function showShops(destination) {
         }else{
           $("#shopInput").append("<option value=0 selected > No Options available</option>");
         }
-
-        // document.getElementById("txtHint").innerHTML=this.responseText;
       }
-    }
+    })
 
-    xmlhttp.open("GET" , "users/user_input_process.php?destination="+destination,true);
-    xmlhttp.send();
+//    xmlhttp.onreadystatechange=function() {
+//      if (this.readyState==4 && this.status==200) {
+//        console.log(this.responseText);
+//        var obj = JSON.parse(this.responseText);
+//        if(obj.length != 0){
+//          for(var i = 0; i < obj.length; i++){
+//            $("#shopInput").append("<option value=" + obj[i].area_id +  ">" + obj[i].name + "</option>");
+//          }
+//        }else{
+//          $("#shopInput").append("<option value=0 selected > No Options available</option>");
+//        }
+//
+//        // document.getElementById("txtHint").innerHTML=this.responseText;
+//      }
+//    }
+//
+//    xmlhttp.open("GET" , "users/user_input_process.php?destination="+destination,true);
+//    xmlhttp.send();
   }
 
 $(document).ready(function() {

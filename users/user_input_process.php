@@ -1,7 +1,7 @@
 <?php
 
 //turn off error reporting
-error_reporting(0);
+error_reporting(1);
 include "../connections.php";
 $currentDestination = null;
 $currentShop = null;
@@ -18,7 +18,7 @@ if (isset($_GET['destination'])) {
         $products = $connection->retrieve_data_where("area", "location_id", $_GET['destination']);
     }
 
-    return $products;
+    return "HELLO";
 }
 
 if (isset($_POST['currentDestination'])) {
