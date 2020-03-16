@@ -6,7 +6,7 @@
     ?>
 </head>
 <body>
-<?php include 'navigation.php'; ?>
+<?php include '../navigation.php'; ?>
     <main class="container">
         <h1>Member Registration</h1>
         <p>For existing members, please go to the<a href="login.php"> Sign In page</a>.</p>

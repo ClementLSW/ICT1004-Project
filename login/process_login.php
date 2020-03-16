@@ -15,7 +15,7 @@
 
             /** Helper function to authenticate the login. */
             function authenticateUser() {
-                global $username, $firstname, $lastname, $email, $password, $errorMsg, $success;
+                global $username, $firstname, $permission, $lastname, $email, $password, $errorMsg, $success;
 
 // Create database connection.
                 $config = parse_ini_file('/var/www/private/db-config.ini');
@@ -38,6 +38,8 @@
                     $firstname = $row["fname"];
                     $lastname = $row["lname"];
                     $_SESSION["username"] = $username;
+                    $permission = $row["permissions"];
+                    $_SESSION["permissions"] = $permission;
                     echo "<h3>Login successful!</h3>";
                     echo "<h4>Welcome back, $firstname $lastname. </h4>";
                     echo "<form action = '../index.php'>";

@@ -27,7 +27,7 @@
         </span>
     </div>
 </nav>
-<div style="height:80px;"></div> <!-- this is to push the contents below >
+<div style="height:80px;"></div>
 
 
 
