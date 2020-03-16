@@ -1,8 +1,9 @@
 <?php
-error_reporting(0);
+error_reporting(1);
 //turn off error reporting
 ?>
 <?php if ($GLOBALS['valid']) : ?>
+    <?php if($GLOBALS['debug']) {print('user_destination.php');} ?>
     <section class="justify-content-center row text_container">
         <h3 class="direction_text extra-bold">Great to see you <span class="highlight">#User</span>, Where would you like to go? <br></h3>
     </section>
@@ -12,6 +13,7 @@ error_reporting(0);
                 <select class="user_input js-example-basic-single" id="destinationInput">
                     <?php
                     include '../connections.php';
+                    if($GLOBALS['debug']) {print('connections is working');}
                     $connection = new connections();
                     $products = $connection->retrieve_all_data("carpark.location");
                     foreach ($products as $item) {
