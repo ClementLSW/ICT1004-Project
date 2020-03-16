@@ -6,14 +6,22 @@
         error_reporting(1);
         // include "header.inc.php";
         // include 'connections.php';
-       
         //URL Routing
         require_once "router.php";
         route('/ICT1004-Project/home', function () {
+            $GLOBALS['root'] = __DIR__;
             $GLOBALS['valid'] = true; // Used to block ppl from direct accessing my pages
             require __DIR__ . '/header.inc.php';
              require __DIR__ . '/connections.php';
              require __DIR__ . '/views/home.php';
+        });
+        
+        route('/ICT1004-Project/login', function () {
+            $GLOBALS['root'] = __DIR__;
+            $GLOBALS['valid'] = true; // Used to block ppl from direct accessing my pages
+            require __DIR__ . '/header.inc.php';
+             require __DIR__ . '/connections.php';
+             require __DIR__ . '/views/login.php';
         });
 
         route('/ICT1004-Project/error', function () {
