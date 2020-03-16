@@ -1,21 +1,14 @@
-<html lang="en">
-
-    <head>
-        <?php include '../header.inc.php'; ?>
-    </head>
-
 <body>
-        <?php include "../navigation.php"; ?>
-        <main class="container">
+        <main class="header">
         <?php
-        session_start();
-        session_destroy();
-            if(isset($_COOKIE["username"])and isset($_COOKIE["pwd"])){
-                $username = $_COOKIE["username"];
-                $password = $_COOKIE["pwd"];
-                setcookie("username", $username, time()-1);
-                setcookie("pwd", $password, time()-1);
-            }   
+            session_destroy();
+
+//            if(isset($_COOKIE["username"])and isset($_COOKIE["pwd"])){
+//                $username = $_COOKIE["username"];
+//                $password = $_COOKIE["pwd"];
+//                setcookie("username", $username, time()-1);
+//                setcookie("pwd", $password, time()-1);
+//            }   
             echo "You have successfully logged out.";
             echo "<a href='/ICT1004-Project/home'><button class='btn btn-success'>Return Home</button></a></form> "
         ?>
@@ -24,10 +17,6 @@
         
     </body>
 
-s
 
 
 
-
-
-</html>

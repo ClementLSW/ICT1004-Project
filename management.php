@@ -32,51 +32,35 @@ and open the template in the editor.
             </thead>
             <tbody>                
                 <?php
-                $config = parse_ini_file('/var/www/private/db-config.ini'); //Should use absolute path because when method is called from different places, the relative path is different    
-                $servername = $config['servername'];
-                $username = $config['username'];
-                $password = $config['password'];
-                $dbname = $config['dbname'];
-                $dsn = "mysql:host=$servername;dbname=$dbname;";
-                try {
-                    $pdo = new PDO($dsn, $username, $password);
-                    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                } catch (Exception $e) {
-                    throw new PDOException($e->getMessage(), (int) $e->getCode());
+                $conn = new connections();
+                $data = $conn->retrieve_all_data('users');
+                
+                if(sizeof($data) > 0){
+                foreach ($data as $user) {
+                    echo "<tr style='color:black;'>"
+                    . "<td>" . $user['username'] . "</td>"
+                    . "<td>" . $user['fname'] . "</td>"
+                    . "<td>" . $user['lname'] . "</td>"
+                    . "<td>" . $user['password'] . "</td>"
+                    . "<td>" . $user['email'] . "</td>"
+                    . "<td>" . $user['contact'] . "</td>"
+                    . "<td>" . $user['permissions'] . "</td>"
+                    . "</tr>";
                 }
-                $stmt = $pdo->prepare("SELECT * FROM :users");
-                $stmt->execute([':users'=>'users']);
-                $data = $stmt->fetchAll();
-                // output data of each row             
-                foreach ($data as $row) {
-                    echo $row['username'] . "<br>";
-                }
-//                if (sizeof($results) > 0) {
-//                    foreach ($results as $user) {
-//                        echo "<tr style='color:black;'>"
-//                        . "<td>" . $user['username'] . "</td>"
-//                        . "<td>" . $user['fname'] . "</td>"
-//                        . "<td>" . $user['lname'] . "</td>"
-//                        . "<td>" . $user['password'] . "</td>"
-//                        . "<td>" . $user['email'] . "</td>"
-//                        . "<td>" . $user['contact'] . "</td>"
-//                        . "<td>" . $user['permissions'] . "</td>"
-//                        . "</tr>";
-//                    }                
-                ?>
-            </tbody>
-        </table>     
-        <script>
-            $(document).ready(function () {
-                $('#myTable').DataTable();
-            });
-        </script>
+                    ?>
+                </tbody>
+            </table>     
+            <script>
+                $(document).ready(function () {
+                    $('#myTable').DataTable();
+                });
+            </script>
 
-        <?php
-//        } else {
-//            echo "0 Results";
-//        }
-        ?>
+            <?php
+        } else {
+            echo "0 Results";
+        }
+            ?>
 
     </body>
 </html>

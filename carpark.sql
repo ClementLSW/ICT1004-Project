@@ -40,17 +40,27 @@ CREATE TABLE `AREA` (
 -- Dumping data for table `AREA`
 --
 
-INSERT INTO `AREA` (`area_id`, `type`, `occupancy`, `location_id`, `name`) VALUES
-(1, 'hall', '0', 1, 'Hall 1'),
-(2, 'hall', '0', 1, 'Hall 2'),
-(3, 'hall', '0', 1, 'Hall 3'),
-(4, 'hall', '0', 1, 'Hall 4'),
-(5, 'hall', '0', 1, 'Hall 5'),
-(6, 'hall', '0', 1, 'Hall 6'),
-(7, 'hall', '0', 1, 'Hall 7'),
-(8, 'hall', '0', 1, 'Hall 8'),
-(9, 'hall', '0', 1, 'Hall 9'),
-(10, 'hall', '0', 1, 'Hall 10');
+INSERT INTO `AREA` (`area_id`, `type`, `occupancy`, `location_id`, `name`, `zone`, `x_weight`, `y_weight`) VALUES
+(1, 'hall', '100', 1, 'Hall 1', '1'),
+(2, 'hall', '100', 1, 'Hall 2', '1'),
+(3, 'hall', '100', 1, 'Hall 3', '1'),
+(4, 'hall', '100', 1, 'Hall 4', '1'),
+(5, 'hall', '100', 1, 'Hall 5', '1'),
+(6, 'hall', '100', 1, 'Hall 6', '2'),
+(7, 'hall', '100', 1, 'Hall 7', '2'),
+(8, 'hall', '100', 1, 'Hall 8', '2'),
+(9, 'hall', '100', 1, 'Hall 9', '2'),
+(10, 'hall', '100', 1, 'Hall 10', '2'),
+(11, 'CP', '0', 1, 'Carpark A', 'A', '1', '0'),
+(12, 'CP', '0', 1, 'Carpark B', 'A', '1', '0'),
+(13, 'CP', '0', 1, 'Carpark C', 'A', '1', '0'),
+(14, 'CP', '0', 1, 'Carpark D', 'A', '1', '0'),
+(15, 'CP', '0', 1, 'Carpark E', 'B', '2', '0'),
+(16, 'CP', '0', 1, 'Carpark F', 'B', '2', '0'),
+(17, 'CP', '0', 1, 'Carpark G', 'B', '2', '0'),
+(18, 'CP', '0', 1, 'Carpark H', 'B', '2', '0'),
+(19, 'CP', '0', 1, 'Carpark J', 'A', '0', '0'),
+(20, 'CP', '0', 1, 'Carpark K', 'B', '0', '0')
 
 -- --------------------------------------------------------
 

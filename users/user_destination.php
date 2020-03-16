@@ -5,7 +5,13 @@ error_reporting(1);
 <?php if ($GLOBALS['valid']) : ?>
     <?php if($GLOBALS['debug']) {print('user_destination.php');} ?>
     <section class="justify-content-center row text_container">
-        <h3 class="direction_text extra-bold">Great to see you <span class="highlight">#User</span>, Where would you like to go? <br></h3>
+        <?php if($_SESSION['username'] != NULL){
+           echo '<h3 class="direction_text extra-bold">Great to see you again <span class="highlight">'. $_SESSION['username'].' </span>, Where would you like to go? <br></h3>';
+        }
+        else{
+            echo '<h3 class="direction_text extra-bold">Hey there <span class="highlight">guest</span>, Where would you like to go? <br></h3>';
+        }
+        ?>
     </section>
     <form action="user_process.php" method="POST">
         <section class="w-100 container1 justify-content-center row">

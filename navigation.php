@@ -7,6 +7,7 @@
             <ul class="navlinks">
                 <li><a href='/ICT1004-Project/home'>Home</a></li>
                 <?php
+
                 
                 if (isset($_SESSION['username'])) {
                     if ($_SESSION["permissions"] == 'admin') {
@@ -21,6 +22,21 @@
                     //ECHO 
                     echo "<li><a href='/ICT1004-Project/userlogin'>Login<span class='sr-only'>(current)</span></a></li>";
                     echo "<li><a href='login/register.php'>Register</a></li>";
+
+                if($GLOBALS['debug']){
+                    print_r($_SESSION);
+                }
+                if (isset($_SESSION['username'])) {
+                    echo '<li><a>'. $_SESSION['username'] . '</a></li>';
+                    echo "<li><a href='/ICT1004-Project/logout'>Logout</a></li>";
+                   if ($_SESSION["permissions"] == 'admin'){
+                       echo "<li><a href='management.php'>Management</a></li>";
+                   }
+                }else{
+                    //ECHO 
+                      echo "<li><a href='/ICT1004-Project/userlogin'>Login<span class='sr-only'>(current)</span></a></li>";
+                      echo "<li><a href='/ICT1004-Project/register'>Register</a></li>";
+
                 }
                 ?>
             </ul>
