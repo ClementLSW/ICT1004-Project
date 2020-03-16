@@ -16,7 +16,7 @@
                 }
                 ?>
                 <li><a href='/ICT1004-Project/home'>Home</a></li>
-                <li><a href="login/login.php">Login<span class="sr-only">(current)</span></a></li>
+                <li><a href="/ICT1004-Project/login1">Login<span class="sr-only">(current)</span></a></li>
                 <li><a href="login/register.php">Register</a></li>
             </ul>
         </div>
