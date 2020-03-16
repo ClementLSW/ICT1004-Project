@@ -37,11 +37,20 @@ class connections {
     }
 
     function retrieve_all_data($tableName) {
-        $config = parse_ini_file('/var/www/private/db-config.ini'); //Should use absolute path because when method is called from different places, the relative path is different    
-        $servername = $config['servername'];
-        $username = $config['username'];
-        $password = $config['password'];
-        $dbname = $config['dbname'];
+        
+        if ($GLOBALS['localtesting']) {
+                $servername = "localhost";
+               $username = "root";
+               $password = "";
+               $dbname = "carpark";
+        } else {
+               $config = parse_ini_file('/var/www/private/db-config.ini'); //Should use absolute path because when method is called from different places, the relative path is different    
+               $servername = $config['servername'];
+               $username = $config['username'];
+               $password = $config['password'];
+               $dbname = $config['dbname'];
+        }
+     
         $dsn = "mysql:host=$servername;dbname=$dbname;";
         try {
             $pdo = new PDO($dsn, $username, $password);

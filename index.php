@@ -8,39 +8,36 @@
         // include 'connections.php';
         //URL Routing
         require_once "router.php";
-        $GLOBALS['debug'] = true;
-        $GLOBALS['localtesting'] = false;
+        include "initialize.php";
+        require __DIR__ . '/header.inc.php';
+        if($GLOBALS['debug']){print("Header is working");};
+        require __DIR__ . '/connections.php';
+        if($GLOBALS['debug']){print("connections is working");};
+        session_start();
+         if($GLOBALS['debug']){print_r($_SESSION);};
         route('/ICT1004-Project/home', function () {
             $GLOBALS['root'] = __DIR__;
             $GLOBALS['valid'] = true; // Used to block ppl from direct accessing my pages
-            require __DIR__ . '/header.inc.php';
-            if($GLOBALS['debug']){print("Header is working");};
-            require __DIR__ . '/connections.php';
-            if($GLOBALS['debug']){print("Connection is working");};
             require __DIR__ . '/views/home.php';
             if($GLOBALS['debug']){print("home is working");};
-
         });
         
         route('/ICT1004-Project/userlogin', function () {
             $GLOBALS['root'] = __DIR__;
             $GLOBALS['valid'] = true; // Used to block ppl from direct accessing my pages
-            require __DIR__ . '/'
-                    . 'header.inc.php';
-            if($GLOBALS['debug']){print("Header is working");};
-            require __DIR__ . '/connections.php';
-            if($GLOBALS['debug']){print("connections is working");};
              require __DIR__ . '/views/login.php';
         });
         
          route('/ICT1004-Project/register', function () {
             $GLOBALS['root'] = __DIR__;
             $GLOBALS['valid'] = true; // Used to block ppl from direct accessing my pages
-            require __DIR__ . '/header.inc.php';
-            if($GLOBALS['debug']){print("Header is working");};
-            require __DIR__ . '/connections.php';
-            if($GLOBALS['debug']){print("connections is working");};
              require __DIR__ . '/views/register.php';
+        });
+        
+         route('/ICT1004-Project/logout', function () {
+            $GLOBALS['root'] = __DIR__;
+            $GLOBALS['valid'] = true; // Used to block ppl from direct accessing my pages
+             require __DIR__ . '/views/logout.php';
         });
         
         

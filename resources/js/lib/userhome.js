@@ -40,9 +40,10 @@ function showShops(destination) {
     $.ajax({
       data: {destination},
       url: 'users/user_input_process.php',
-      method: 'GET', 
+      method: 'POST', 
       success: function(msg){
         var obj = JSON.parse(msg);
+        console.log(obj);
         if(obj.length != 0){
           for(var i = 0; i < obj.length; i++){
             $("#shopInput").append("<option value=" + obj[i].area_id +  ">" + obj[i].name + "</option>");
