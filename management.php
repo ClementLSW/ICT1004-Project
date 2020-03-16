@@ -33,8 +33,7 @@ and open the template in the editor.
             <tbody>                
                 <?php
                 $conn = new connections();
-                $data = $conn->retrieve_all_data('users');
-                
+                $data = $conn->retrieve_all_data('users');               
                 if(sizeof($data) > 0){
                 foreach ($data as $user) {
                     echo "<tr style='color:black;'>"

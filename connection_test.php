@@ -11,12 +11,22 @@ class connections {
             $conn = new mysqli("localhost", "root", "", "carpark");
         } else {
             $config = parse_ini_file('/var/www/private/db-config.ini'); //Should use absolute path because when method is called from different places, the relative path is different
-            $conn = new mysqli($config['servername'], $config['username'], $config['password'], $config['dbname']);
+            $servername = $config['servername'];
+            $username = $config['username'];
+            $password = $config['password'];
+            $dbname = $config['dbname'];
+            $dsn = "mysql:host=$servername;dbname=$dbname";
         }
-        if ($conn->connect_error) {
-            die("Connection error: " . $conn->connect_error);
+        
+        try{
+            $pdo = new PDO($dsn, $username, $password);
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch (Exception $e) {
+            throw new PDOException($e->getMessage(), (int) $e->getCode());
         }
 
+        
+        
         $sql = "SELECT * FROM " . $tableName . " WHERE " . $colname . "=" . $colval;
         $result = $conn->query($sql);
         $data = [];

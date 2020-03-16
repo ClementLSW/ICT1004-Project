@@ -37,34 +37,40 @@ class connections {
     }
 
     function retrieve_all_data($tableName) {
-        
-        if ($GLOBALS['localtesting']) {
-                $servername = "localhost";
-               $username = "root";
-               $password = "";
-               $dbname = "carpark";
-        } else {
-               $config = parse_ini_file('/var/www/private/db-config.ini'); //Should use absolute path because when method is called from different places, the relative path is different    
-               $servername = $config['servername'];
-               $username = $config['username'];
-               $password = $config['password'];
-               $dbname = $config['dbname'];
-        }
-     
-        $dsn = "mysql:host=$servername;dbname=$dbname;";
-        try {
-            $pdo = new PDO($dsn, $username, $password);
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch (Exception $e) {
-            throw new PDOException($e->getMessage(), (int) $e->getCode());
-        }
-        $stmt = $pdo->query("SELECT * FROM $tableName");
-        $data = $stmt->fetchAll();
 
+        if ($GLOBALS['localtesting']) {
+            $servername = "localhost";
+            $username = "root";
+            $password = "";
+            $dbname = "carpark";
+        } else {
+            $config = parse_ini_file('/var/www/private/db-config.ini'); //Should use absolute path because when method is called from different places, the relative path is different    
+            $servername = $config['servername'];
+            $username = $config['username'];
+            $password = $config['password'];
+            $dbname = $config['dbname'];
+        }
+
+        $conn = new mysqli($servername, $username, $password, $dbname);
+
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $sql = "SELECT * FROM ?";
+        echo $sql;
+        $stmt = $conn->prepare($sql);
+        echo $stmt;
+        $stmt->bind_param("i", $tableName);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        echo $result;
+        $data = $result->fetch_all(MYSQLI_ASSOC);
+                        
+        
         return $data;
     }
 
-    
     function retrieve_cp_by_occupancy($threshold) {
         if ($GLOBALS['localtesting']) {
             $conn = new mysqli("localhost", "root", "", "carpark");
@@ -89,5 +95,3 @@ class connections {
     }
 
 }
-
-
