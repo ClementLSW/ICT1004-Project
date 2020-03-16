@@ -16,7 +16,7 @@ and open the template in the editor.
     <body>
         <?php
         include "navigation.php";
-        include "connections.php";
+        include "connection_test.php";
         ?>        
         <table id="myTable" class="display" style="width:100%;">
             <thead>
@@ -32,22 +32,7 @@ and open the template in the editor.
             </thead>
             <tbody>                
                 <?php
-                $config = parse_ini_file('/var/www/private/db-config.ini'); //Should use absolute path because when method is called from different places, the relative path is different    
-                $servername = $config['servername'];
-                $username = $config['username'];
-                $password = $config['password'];
-                $dbname = $config['dbname'];
-                $dsn = "mysql:host=$servername;dbname=$dbname;";
-                try {
-                    $pdo = new PDO($dsn, $username, $password);
-                    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                } catch (Exception $e) {
-                    throw new PDOException($e->getMessage(), (int) $e->getCode());
-                }
-                $stmt = $pdo->prepare("SELECT * FROM :users");
-                $stmt->execute([':users'=>'users']);
-                $data = $stmt->fetchAll();
-                // output data of each row             
+                retrieve_all_data('users');
                 foreach ($data as $row) {
                     echo $row['username'] . "<br>";
                 }

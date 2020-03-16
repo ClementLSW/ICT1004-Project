@@ -17,7 +17,7 @@
                 }else{
                     //ECHO 
                       echo "<li><a href='/ICT1004-Project/userlogin'>Login<span class='sr-only'>(current)</span></a></li>";
-                      echo "<li><a href='register'>Register</a></li>";
+                      echo "<li><a href='/ICT1004-Project/register'>Register</a></li>";
                 }
                 ?>
             </ul>
