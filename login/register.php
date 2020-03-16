@@ -1,15 +1,8 @@
-<head>
-    <?php
-    //turn off error reporting
-    error_reporting(0);
-    include '../header.inc.php';
-    ?>
-</head>
+
 <body>
-<?php include 'navigation.php'; ?>
-    <main class="container">
+    <main class="header">
         <h1>Member Registration</h1>
-        <p>For existing members, please go to the<a href="login.php"> Sign In page</a>.</p>
+        <p>For existing members, please go to the<a href="/ICT1004-Project/userlogin"> Sign In page</a>.</p>
         <form action="process_register.php" method="post">
             <div class="form-group">
                 <label for="username">Username:</label><input class="form-control" type="text" id="username"name="username" maxlength="50" placeholder="Enter username">

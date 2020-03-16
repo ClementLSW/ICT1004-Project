@@ -15,11 +15,9 @@
                 $password = $_COOKIE["pwd"];
                 setcookie("username", $username, time()-1);
                 setcookie("pwd", $password, time()-1);
-            }
+            }   
             echo "You have successfully logged out.";
-            echo "<form action = '../index.php'>";
-            echo "<button class='btn btn-success'>Return Home</button></form> "
-        
+            echo "<a href='/ICT1004-Project/home'><button class='btn btn-success'>Return Home</button></a></form> "
         ?>
            
         </main>
