@@ -8,12 +8,15 @@
         // include 'connections.php';
         //URL Routing
         require_once "router.php";
+        $GLOBALS['debug'] = true;
         route('/ICT1004-Project/home', function () {
             $GLOBALS['root'] = __DIR__;
             $GLOBALS['valid'] = true; // Used to block ppl from direct accessing my pages
             require __DIR__ . '/header.inc.php';
-             require __DIR__ . '/connections.php';
-             require __DIR__ . '/views/home.php';
+            if($GLOBALS['debug']){print("Header is working");};
+            require __DIR__ . '/connections.php';
+            if($GLOBALS['debug']){print("Connection is working");};
+            require __DIR__ . '/views/home.php';
         });
         
         route('/ICT1004-Project/login', function () {
@@ -34,4 +37,5 @@
         
         ?> 
     </head>
+    <body>sss</body>
 </html>
