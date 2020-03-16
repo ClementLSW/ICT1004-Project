@@ -16,7 +16,7 @@ and open the template in the editor.
     <body>
         <?php
         include "navigation.php";
-        include "connection_test.php";
+        include "connections.php";
         ?>        
         <table id="myTable" class="display" style="width:100%;">
             <thead>
@@ -32,36 +32,35 @@ and open the template in the editor.
             </thead>
             <tbody>                
                 <?php
-                retrieve_all_data('users');
-                foreach ($data as $row) {
-                    echo $row['username'] . "<br>";
+                $conn = new connections();
+                $data = $conn->retrieve_all_data('users');
+                
+                if(sizeof($data) > 0){
+                foreach ($data as $user) {
+                    echo "<tr style='color:black;'>"
+                    . "<td>" . $user['username'] . "</td>"
+                    . "<td>" . $user['fname'] . "</td>"
+                    . "<td>" . $user['lname'] . "</td>"
+                    . "<td>" . $user['password'] . "</td>"
+                    . "<td>" . $user['email'] . "</td>"
+                    . "<td>" . $user['contact'] . "</td>"
+                    . "<td>" . $user['permissions'] . "</td>"
+                    . "</tr>";
                 }
-//                if (sizeof($results) > 0) {
-//                    foreach ($results as $user) {
-//                        echo "<tr style='color:black;'>"
-//                        . "<td>" . $user['username'] . "</td>"
-//                        . "<td>" . $user['fname'] . "</td>"
-//                        . "<td>" . $user['lname'] . "</td>"
-//                        . "<td>" . $user['password'] . "</td>"
-//                        . "<td>" . $user['email'] . "</td>"
-//                        . "<td>" . $user['contact'] . "</td>"
-//                        . "<td>" . $user['permissions'] . "</td>"
-//                        . "</tr>";
-//                    }                
-                ?>
-            </tbody>
-        </table>     
-        <script>
-            $(document).ready(function () {
-                $('#myTable').DataTable();
-            });
-        </script>
+                    ?>
+                </tbody>
+            </table>     
+            <script>
+                $(document).ready(function () {
+                    $('#myTable').DataTable();
+                });
+            </script>
 
-        <?php
-//        } else {
-//            echo "0 Results";
-//        }
-        ?>
+            <?php
+        } else {
+            echo "0 Results";
+        }
+            ?>
 
     </body>
 </html>
