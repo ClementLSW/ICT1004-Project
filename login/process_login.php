@@ -53,15 +53,18 @@
                     $_SESSION["username"] = $username;
                     $permission = $row["permissions"];
                     $_SESSION["permissions"] = $permission;
+                   
                     echo "<h3>Login successful!</h3>";
                     echo "<h4>Welcome back, $firstname $lastname. </h4>";
                     echo "<a href='/ICT1004-Project/userlogin'><button class='btn btn-success'>Return to Login</button></a></form> ";
+               
                 } else {
                     $success = false;
                     $errorMsg = "Email not found or password doesn't match...";
                     echo"<h3>Oops!</h3>";
                     echo "<h4>The following input errors were detected:</h4> <p>$errorMsg</p>";
-                    echo "<a href='/ICT1004-Project/userlogin'><button class='btn btn-success'>Return to Login</button></a></form> ";
+                    echo "<a href='/ICT1004-Project/userlogin'><button class='btn  btn-primary'>Return to Login</button></a></form> ";
+                   
                 }
                 $result->free_result();
 
