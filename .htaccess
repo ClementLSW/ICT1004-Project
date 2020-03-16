@@ -1,0 +1,10 @@
+RewriteEngine On
+RewriteBase /ICT1004-Project/
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.+)$ index.php [QSA,L]
+Options -Indexes
+
+#RewriteEngine On
+#RedirectMatch ^/$ /ICT1004-Project/
+#RewriteRule ^.*$ index.php
