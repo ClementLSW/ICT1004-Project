@@ -7,10 +7,12 @@
             <ul class="navlinks">
                  <li><a href='/ICT1004-Project/home'>Home</a></li>
                 <?php
-                session_start();
+                if($GLOBALS['debug']){
+                    print_r($_SESSION);
+                }
                 if (isset($_SESSION['username'])) {
                     echo '<li><a>'. $_SESSION['username'] . '</a></li>';
-                    echo "<li><a href='login/logout.php'>Logout</a></li>";
+                    echo "<li><a href='/ICT1004-Project/logout'>Logout</a></li>";
                    if ($_SESSION["permissions"] == 'admin'){
                        echo "<li><a href='management.php'>Management</a></li>";
                    }

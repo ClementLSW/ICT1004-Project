@@ -4,6 +4,7 @@
         //turn off error reporting
         error_reporting(1);
         include '../header.inc.php';
+        include '../initialize.php';
         ?>
     </head>
     <body>
@@ -23,7 +24,7 @@
 
 // Create database connection.
                 if($GLOBALS['localtesting']){
-                 $conn = new mysqli("localhost", "root", "", "carpark");
+                 $conn = new mysqli("localhost", "sqldev", "P@ssw0rd", "carpark");
                 }else{
                   $config = parse_ini_file('/var/www/private/db-config.ini');
                   $conn = new mysqli($config['servername'], $config['username'], $config['password'], $config['dbname']);
@@ -41,13 +42,14 @@
 // Execute the query
                     
                 $result = $conn->query($sql);
-                $row = $result->fetch_assoc();
+               
                 if($GLOBALS['debug']){
                     print("results");
                     print(var_dump($row["username"]));
                 }
                 if ($result->num_rows > 0 || $username = $row["username"] || $password = $row["password"]) {
                     session_start();
+                    $row = $result->fetch_assoc();
                     $firstname = $row["fname"];
                     $lastname = $row["lname"];
                     $_SESSION["username"] = $username;
@@ -55,7 +57,7 @@
                     $_SESSION["permissions"] = $permission;
                     echo "<h3>Login successful!</h3>";
                     echo "<h4>Welcome back, $firstname $lastname. </h4>";
-                    echo "<a href='/ICT1004-Project/userlogin'><button class='btn btn-success'>Return to Login</button></a></form> ";
+                    echo "<a href='/ICT1004-Project/home'><button class='btn btn-success'>Return to Home</button></a></form> ";
                 } else {
                     $success = false;
                     $errorMsg = "Email not found or password doesn't match...";
@@ -63,8 +65,9 @@
                     echo "<h4>The following input errors were detected:</h4> <p>$errorMsg</p>";
                     echo "<a href='/ICT1004-Project/userlogin'><button class='btn btn-success'>Return to Login</button></a></form> ";
                 }
-                $result->free_result();
-
+                if($GLOBAL['localtesting']){
+                    $result->free_results();
+                }
                 $conn->close();
             }
 
