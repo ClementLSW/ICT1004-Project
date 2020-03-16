@@ -5,6 +5,7 @@
         </div>
         <div id="mainListDiv" class="main_list">
             <ul class="navlinks">
+                 <li><a href='/ICT1004-Project/home'>Home</a></li>
                 <?php
                 session_start();
                 if (isset($_SESSION['username'])) {
@@ -13,11 +14,12 @@
                    if ($_SESSION["permissions"] == 'admin'){
                        echo "<li><a href='management.php'>Management</a></li>";
                    }
+                }else{
+                    //ECHO 
+                      echo "<li><a href='/ICT1004-Project/userlogin'>Login<span class='sr-only'>(current)</span></a></li>";
+                      echo "<li><a href='login/register.php'>Register</a></li>";
                 }
                 ?>
-                <li><a href='/ICT1004-Project/home'>Home</a></li>
-                <li><a href="/ICT1004-Project/login1">Login<span class="sr-only">(current)</span></a></li>
-                <li><a href="login/register.php">Register</a></li>
             </ul>
         </div>
         <span class="navTrigger">
