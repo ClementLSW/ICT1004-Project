@@ -2,7 +2,7 @@
 
 //turn off error reporting
 error_reporting(1);
-include "../connections.php";
+include "../connection_test.php";
 $currentDestination = null;
 $currentShop = null;
 $products = [];
