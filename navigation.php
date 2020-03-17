@@ -11,17 +11,16 @@
                     if ($_SESSION["permissions"] == 'admin') {
                         echo '<li><a>' . $_SESSION['username'] . '</a></li>';
                         echo "<li><a href='management.php'>Management</a></li>";
-                        echo "<li><a href='login/logout.php'>Logout</a></li>";                      
+                         echo "<li><a href='/ICT1004-Project/logout'>Logout</a></li>";
                     } else {
                         echo '<li><a>' . $_SESSION['username'] . '</a></li>';
-                        echo "<li><a href='login/logout.php'>Logout</a></li>";
-                    }
+                         echo "<li><a href='/ICT1004-Project/logout'>Logout</a></li>";
+                    }                
                 } else {
                     //ECHO 
                     echo "<li><a href='/ICT1004-Project/userlogin'>Login<span class='sr-only'>(current)</span></a></li>";
-                    echo "<li><a href='/ICT1004-Project/register'>Register<span class='sr-only'>(current)</span></a></li>";
+                    echo "<li><a href='/ICT1004-Project/register'>Register</a></li>";
                 }
-             
                 ?>
             </ul>
         </div>
