@@ -25,7 +25,7 @@
             <?php
             session_start();
             if (!empty($_SESSION['error']) && $_SESSION['error'] == 1) {
-                echo "<p style='color:red;'>" . "Incorrect email or password." . "</p>";
+                echo "<p style='color:red;'>" . "Incorrect email or password.Please try again." . "</p>";
             }
             if (isset($_SESSION["registersuccess"]) && $_SESSION["registersuccess"] == 1){
                 echo "<p style='color:green;'>" . "Registration Successful!" . "</p>";
