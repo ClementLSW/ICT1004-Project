@@ -22,7 +22,7 @@
 
             /** Helper function to authenticate the login. */
             function authenticateUser() {
-                global $username, $firstname, $permission, $lastname, $email, $password, $errorMsg, $success;
+                global $username, $firstname, $permission, $lastname, $email, $password, $password_hash, $errorMsg, $success;
 
 // Create database connection.
                 if ($GLOBALS['localtesting']) {
@@ -38,7 +38,7 @@
                     $success = false;
                 } else {
                     $sql = "SELECT * FROM users WHERE ";
-                    $sql .= "username='$username' AND password='$password'";
+                    $sql .= "username='$username'";
                 }
 // Execute the query
 
@@ -48,16 +48,27 @@
                     print("results");
                     print(var_dump($row["username"]));
                 }
-                if ($result->num_rows > 0 || $username = $row["username"] || $password = $row["password"]) {
+                if ($result->num_rows > 0) {
                     //session_start();
                     $row = $result->fetch_assoc();
-                    $firstname = $row["fname"];
-                    $lastname = $row["lname"];
-                    $_SESSION["username"] = $username;
-                    $permission = $row["permissions"];
-                    $_SESSION["permissions"] = $permission;
-                    header('location:/ICT1004-Project/home');
-//                   
+                    $password_hash = $row["password"];
+                    if (password_verify($password, $password_hash)) {
+                        $firstname = $row["fname"];
+                        $lastname = $row["lname"];
+                        $_SESSION["username"] = $username;
+                        $permission = $row["permissions"];
+                        $_SESSION["permissions"] = $permission;
+                        header('location:/ICT1004-Project/home');
+                    } elseif ($password == $row["password"]) {
+                        $firstname = $row["fname"];
+                        $lastname = $row["lname"];
+                        $_SESSION["username"] = $username;
+                        $permission = $row["permissions"];
+                        $_SESSION["permissions"] = $permission;
+                        header('location:/ICT1004-Project/home');
+                    }
+
+
 //                    echo "<h3>Login successful!</h3>";
 //                    echo "<h4>Welcome back, $firstname $lastname. </h4>";
 //
