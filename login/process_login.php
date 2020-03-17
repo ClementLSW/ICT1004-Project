@@ -66,6 +66,10 @@
                         $permission = $row["permissions"];
                         $_SESSION["permissions"] = $permission;
                         header('location:/ICT1004-Project/home');
+                    } else {
+                        $success = false;
+                        header('location:/ICT1004-Project/userlogin');
+                        $_SESSION["error"] = 1;
                     }
 
 
