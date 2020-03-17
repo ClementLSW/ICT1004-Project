@@ -3,6 +3,7 @@
     //turn off error reporting
     error_reporting(0);
     include '../header.inc.php';
+    session_start();
     ?>
 </head>
 <body>
@@ -11,7 +12,6 @@
         <?php
         $errorMsgpwd = "";
         $email = $errorMsg = "";
-        $username = $_POST["username"];
         $lastname = $_POST["lname"];
         $username = $_POST["username"];
         $firstname = $_POST["fname"];
@@ -58,16 +58,19 @@
         sanitize_input($password);
         sanitize_input($cmfpassword);
         sanitize_input($contact);        
-        saveMemberToDB();        
-        if ($success) {            
-            echo "<h4>Registration successful!</h4>";
-            echo "<p>Username: " . $username;
-            echo "<p>Email: " . $email;
-            echo "<p>First Name: " . $firstname;
-            echo "<p>Last Name: " . $lastname;
-            echo "<p>Contact: " . $contact;                        
-            echo "<form action = '../index.php'>";
-            echo "<button class='btn btn-success'>Home</button></form> ";
+             
+        if ($success){ 
+//            echo "<h4>Registration successful!</h4>";
+          
+//            echo "<p>Email: " . $email;
+//            echo "<p>First Name: " . $firstname;
+//            echo "<p>Last Name: " . $lastname;
+//            echo "<p>Contact: " . $contact;                        
+//            echo "<form action = '../index.php'>";
+//            echo "<button class='btn btn-success'>Home</button></form> ";
+            $_SESSION["registersuccess"] = 1;
+            saveMemberToDB();
+            header('location:/ICT1004-Project/userlogin');;
         } else{
             echo "<h4>The following input errors were detected:</h4>";
             echo "<p>" . $errorMsg . "</p>";
