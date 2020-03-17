@@ -60,8 +60,8 @@
                 <div class="textbox">
                       <i class="fas fa-lock"></i>
                       <input type="password" name="pwd_confirm" required placeholder="Confirm Password" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$">
-            </div>
-             
+            </div>        
+               <p id="terms"><label><input type="checkbox" required name="agree"> <a href="Park_now_tAc.pdf">I agree to terms and conditions.</a></label></p>              
                 <div class="form-group"><button class="btn btn-primary" type="submit">Register</button></div></form>
         </div>
     </body>
