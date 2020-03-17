@@ -16,7 +16,7 @@ error_reporting(0);
         </section>
         <section id="user_submit" class="w-100 container1 justify-content-center row">
             <button type="button" id="shop_back" name="shop_back" value="back" class=" one_btn btn btn-primary">Back</button>
-            <button type="button" id="shop_submit" name="shop_submit" value="next" class=" two_btn btn btn-primary">Search</button>
+            <button type="button" id="shop_submit" name="shop_submit" value="next" class=" two_btn btn btn-primary">Next</button>
         </section>
     </form>
     <div id="txtHint"></div>
