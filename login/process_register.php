@@ -7,7 +7,7 @@
     ?>
 </head>
 <body>
-    <?php include '../navigation.php'; ?>
+    
     <main class = "container">
         <?php
         $errorMsgpwd = "";
@@ -57,11 +57,10 @@
         sanitize_input($lastname);
         sanitize_input($password);
         sanitize_input($cmfpassword);
-        sanitize_input($contact);        
-             
-        if ($success){ 
+        sanitize_input($contact);
+
+        if ($success) {
 //            echo "<h4>Registration successful!</h4>";
-          
 //            echo "<p>Email: " . $email;
 //            echo "<p>First Name: " . $firstname;
 //            echo "<p>Last Name: " . $lastname;
@@ -71,8 +70,9 @@
             $_SESSION["registersuccess"] = 1;
             $password_hash = password_hash($password, PASSWORD_DEFAULT);
             saveMemberToDB();
-            header('location:/ICT1004-Project/userlogin');;
-        } else{
+            header('location:/ICT1004-Project/userlogin');
+            ;
+        } else {
             echo "<h4>The following input errors were detected:</h4>";
             echo "<p>" . $errorMsg . "</p>";
             echo "<p>" . $errorMsgpwd . "</p>";
@@ -90,7 +90,7 @@
 
 //Helper function to write the member data to the DB
         function saveMemberToDB() {
-            global $username, $firstname, $lastname, $email, $password, $password_hash ,$contact, $errorMsg, $success, $permissions;
+            global $username, $firstname, $lastname, $email, $password, $password_hash, $contact, $errorMsg, $success, $permissions;
 
             //Creating databse connection.
             $config = parse_ini_file('/var/www/private/db-config.ini');
@@ -106,12 +106,15 @@
                 if (!$conn->query($sql)) {
                     $errorMsg = "Database error: " . $conn->error;
                     $success = false;
-                }                
+                }
                 return $success;
                 $result->free_result();
             }
             $conn->close();
+            header('location:/ICT1004-Project/userlogin');
         }
+
+        
         ?>
     </main>        
 </body>
