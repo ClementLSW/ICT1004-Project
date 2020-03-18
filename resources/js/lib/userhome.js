@@ -1,3 +1,5 @@
+var choosenLat;
+var choosenLng;
 function toggleMapView(loadingMap) {
   // if(loadingMap){
   //   $('#beforeload').show();
@@ -64,8 +66,7 @@ async function initAutocomplete() {
   $('#currentWindow').css('left', '-300%');
   $('#currentWindow').css('position', 'absolute');
   $('#currentWindow').prepend('<button type="button" id="currentLocationButton" class="btn-primary-location"  style="display:flex; background-color: #bbb;  border-radius: 50%;width: 40px; height: 40px;"><i class="material-icons" style="margin: auto">my_location</i></button>');
-  $('#comboSection').prepend('<input type="text" id="my-input-searchbox" style="margin-top: auto; margin-bottom: auto;"/>');
-
+  $('#comboSection').prepend('<input type="text" id="my-input-searchbox" style="margin-top: auto; margin-bottom: auto;" required type="text" pattern="^[a-zA-Z0-9,-.+ ]*$"/>');
 
   var input = document.getElementById('my-input-searchbox');
   var comboBox = document.getElementById('comboSection');
@@ -86,10 +87,14 @@ async function initAutocomplete() {
   autocomplete.setFields(
     ['address_components', 'geometry', 'name']);
 
+  
 
+    
   // Listen for the event fired when the user selects a prediction and retrieve
   // more details for that place.
   autocomplete.addListener('place_changed', function () {
+    choosenLat = "";
+    choosenLng = "";
     var place = autocomplete.getPlace();
     if (!place.geometry) {
       console.log("Returned place contains no geometry");
@@ -109,6 +114,8 @@ async function initAutocomplete() {
 
     var bounds = new google.maps.LatLngBounds();
     marker.setPosition(place.geometry.location);
+    choosenLat = place.geometry.location.lat();
+    choosenLng = place.geometry.location.lng();
     markersArray.push(marker);
 
     if (place.geometry.viewport) {
@@ -125,6 +132,8 @@ async function initAutocomplete() {
   $('#currentLocationButton').click(function () {
     if (confirm('Current location may not be accurate! Would you still like to get current location?')) {
          //Clear all the old array
+         choosenLat = "";
+         choosenLng = "";
         if (markersArray.length != 0) {
           for (var i = 0; i < markersArray.length; i++) {
             markersArray[i].setMap(null);
@@ -134,7 +143,8 @@ async function initAutocomplete() {
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function(position) {
              var currLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
-     
+             choosenLat = position.coords.latitude; 
+             choosenLng = position.coords.longitude;
              // plot the currLocation on Google Maps, or handle accordingly:
      
              var marker = new google.maps.Marker({ title: 'Current Location',
@@ -156,6 +166,7 @@ async function initAutocomplete() {
         }
     }
   })
+
 
   return true;
 
@@ -205,21 +216,13 @@ async function getCurrentLocation() {
   }
  
 }
-function processInput(currentDestination, currentShop) {
-
-  // $.ajax({
-  //   url: "https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyCmiOGqCQ_5z0FeMbuelO3H3kFPQC7JDPw",
-  //   method: 'POST', 
-  //   success: function(msg){
-  //     console.log(msg)
-  //   }
-  // })
+function processInput(currentDestination, currentShop, userlat, userlng) {
   $.ajax({
-    data: { currentDestination: currentDestination, currentShop: currentShop },
+    data: { currentDestination: currentDestination, currentShop: currentShop , userlat: userlat, userlng: userlng},
     url: 'users/user_input_process.php',
     method: 'POST', // or GET
     success: function (msg) {
-      console.log(msg);
+      window.open(msg, '_blank');
     }
   });
 
@@ -227,7 +230,7 @@ function processInput(currentDestination, currentShop) {
 
 function showShops(destination) {
   if (destination == "") {
-    //   document.getElementById("txtHint").innerHTML="";
+      document.getElementById("txtHint").innerHTML="";
     return;
   }
   if (window.XMLHttpRequest) {
@@ -282,7 +285,6 @@ $(document).ready(function () {
       //Do the search for source address 
       initAutocomplete().then(value => {
         while (true) {
-          console.log(value);
           if (value == true) {
             $('#comboSection').css('right', '300%');
             $('#currentWindow').css('right', '300%');
@@ -304,8 +306,22 @@ $(document).ready(function () {
     toggleView(currentlyChoosen);
   })
 
+  $('#user_location_form').submit(function(e){
+    e.preventDefault();
+    })
+
+  $('#my-input-searchbox').keyup(function(e){
+    var keyCode = e.keyCode || e.which;
+            if (keyCode == 13){
+                console.log("Entered is press");
+            }
+    })
+
   $('#location_submit').click(function () {
-    processInput(currentDestination, currentShop);
+    if($('#my-input-searchbox').val() != ""){
+      if(choosenLat != undefined && choosenLat !=undefined){
+        processInput(currentDestination, currentShop , choosenLat , choosenLng);}
+    }
   })
 
 
