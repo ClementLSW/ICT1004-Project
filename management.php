@@ -17,6 +17,7 @@ and open the template in the editor.
         <?php
         include "navigation.php";
         include "connections.php";
+        include "initialize.php";
         ?>        
         <table id="myTable" class="display" style="width:100%;">
             <thead>
@@ -34,6 +35,7 @@ and open the template in the editor.
                 <?php
                 $conn = new connections();
                 $data = $conn->retrieve_all_data('users');               
+                print_r($data);
                 if(sizeof($data) > 0){
                 foreach ($data as $user) {
                     echo "<tr style='color:black;'>"
