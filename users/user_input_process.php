@@ -56,6 +56,17 @@ if(isset($_POST['getKey'])){
     }
 }
 
+if(isset($_POST['getServerKey'])){
+    if($GLOBALS['localtesting']){
+        $param = parse_ini_file($GLOBALS['root'] . '/../var/www/private/db-config.ini');
+        $key = $param['googlekey'];
+        echo $key;
+
+    }else{
+        echo "AIzaSyDo4fLUAb1snqCHGfOI8xMsT8dECiI_mc8";   
+    }
+}
+
 //Check if got both value 
 if (isset($_POST['currentDestination']) && isset($_POST['currentShop']) ) {
     $currentDestination = $_POST['currentDestination'];

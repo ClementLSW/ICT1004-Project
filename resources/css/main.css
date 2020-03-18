@@ -11,7 +11,7 @@ html , body {
 /* direction Home */
 .bg {
     /* The image used */
-    background-image: url('http://ict-1004-project1.s3-ap-southeast-1.amazonaws.com/background4.jpg');
+    background-image: url('https://ict-1004-project1.s3-ap-southeast-1.amazonaws.com/background4.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
