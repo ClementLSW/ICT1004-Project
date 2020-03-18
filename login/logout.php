@@ -9,8 +9,8 @@
 //                setcookie("username", $username, time()-1);
 //                setcookie("pwd", $password, time()-1);
 //            }   
-            echo "You have successfully logged out.";
-            echo "<a href='/ICT1004-Project/home'><button class='btn btn-success'>Return Home</button></a></form> "
+              header('location:/ICT1004-Project/home');
+           
         ?>
            
         </main>

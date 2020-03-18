@@ -3,6 +3,7 @@
     //turn off error reporting
     error_reporting(0);
     include '../header.inc.php';
+    session_start();
     ?>
 </head>
 <body>
@@ -11,7 +12,6 @@
         <?php
         $errorMsgpwd = "";
         $email = $errorMsg = "";
-        $username = $_POST["username"];
         $lastname = $_POST["lname"];
         $username = $_POST["username"];
         $firstname = $_POST["fname"];
@@ -58,16 +58,20 @@
         sanitize_input($password);
         sanitize_input($cmfpassword);
         sanitize_input($contact);        
-        saveMemberToDB();        
-        if ($success) {            
-            echo "<h4>Registration successful!</h4>";
-            echo "<p>Username: " . $username;
-            echo "<p>Email: " . $email;
-            echo "<p>First Name: " . $firstname;
-            echo "<p>Last Name: " . $lastname;
-            echo "<p>Contact: " . $contact;                        
-            echo "<form action = '../index.php'>";
-            echo "<button class='btn btn-success'>Home</button></form> ";
+             
+        if ($success){ 
+//            echo "<h4>Registration successful!</h4>";
+          
+//            echo "<p>Email: " . $email;
+//            echo "<p>First Name: " . $firstname;
+//            echo "<p>Last Name: " . $lastname;
+//            echo "<p>Contact: " . $contact;                        
+//            echo "<form action = '../index.php'>";
+//            echo "<button class='btn btn-success'>Home</button></form> ";
+            $_SESSION["registersuccess"] = 1;
+            $password_hash = password_hash($password, PASSWORD_DEFAULT);
+            saveMemberToDB();
+            header('location:/ICT1004-Project/userlogin');;
         } else{
             echo "<h4>The following input errors were detected:</h4>";
             echo "<p>" . $errorMsg . "</p>";
@@ -86,7 +90,7 @@
 
 //Helper function to write the member data to the DB
         function saveMemberToDB() {
-            global $username, $firstname, $lastname, $email, $password, $contact, $errorMsg, $success, $permissions;
+            global $username, $firstname, $lastname, $email, $password, $password_hash ,$contact, $errorMsg, $success, $permissions;
 
             //Creating databse connection.
             $config = parse_ini_file('/var/www/private/db-config.ini');
@@ -97,7 +101,7 @@
                 $success = false;
             } else {
                 $sql = "INSERT INTO carpark.users(username, fname, lname, email, password, contact, permissions)";
-                $sql .= " VALUES ('$username','$firstname', '$lastname', '$email', '$password', '$contact', '$permissions')";
+                $sql .= " VALUES ('$username','$firstname', '$lastname', '$email', '$password_hash', '$contact', '$permissions')";
                 //Execute the query
                 if (!$conn->query($sql)) {
                     $errorMsg = "Database error: " . $conn->error;

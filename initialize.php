@@ -1,4 +1,5 @@
 <?php
-    $GLOBALS['debug'] = false;
-    $GLOBALS['localtesting'] = false;
+    $GLOBALS['debug'] = true;
+    $GLOBALS['localtesting'] = true;
+    $GLOBALS['root'] = __DIR__;
  
