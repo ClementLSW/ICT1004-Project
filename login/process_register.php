@@ -59,14 +59,7 @@
         sanitize_input($cmfpassword);
         sanitize_input($contact);
 
-        if ($success) {
-//            echo "<h4>Registration successful!</h4>";
-//            echo "<p>Email: " . $email;
-//            echo "<p>First Name: " . $firstname;
-//            echo "<p>Last Name: " . $lastname;
-//            echo "<p>Contact: " . $contact;                        
-//            echo "<form action = '../index.php'>";
-//            echo "<button class='btn btn-success'>Home</button></form> ";
+        if ($success) {           
             $_SESSION["registersuccess"] = 1;
             $password_hash = password_hash($password, PASSWORD_DEFAULT);
             saveMemberToDB();

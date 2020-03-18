@@ -81,8 +81,8 @@ class connections {
             // echo json_encode($data); // dont remove pls 
         } else {
             // echo json_encode([]);
-        }
-        $conn->close();
+        } 
+       $conn->close();
         return $data;
     }
 
