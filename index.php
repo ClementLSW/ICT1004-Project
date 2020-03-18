@@ -44,7 +44,7 @@
          route('/ICT1004-Project/logout', function () {
             $GLOBALS['root'] = __DIR__;
             $GLOBALS['valid'] = true; // Used to block ppl from direct accessing my pages
-             require __DIR__ . '/views/logout.php';
+            require __DIR__ . '/views/logout.php';
         });
         
         

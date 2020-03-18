@@ -63,3 +63,5 @@ link.setAttribute('rel' , 'stylesheet');
 link.setAttribute('href','/' + dir[1] + '/' + "resources/css/mapview.css" );
 document.getElementsByTagName('link')[0].parentNode.appendChild(link);
 </script>
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">

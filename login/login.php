@@ -23,7 +23,7 @@
         <div class="login-box">
             <h1>Members Login</h1>
             <?php
-            session_start();
+            // session_start();
             if (!empty($_SESSION['error']) && $_SESSION['error'] == 1) {
                 echo "<p style='color:red;'>" . "Incorrect email or password.Please try again." . "</p>";
             }

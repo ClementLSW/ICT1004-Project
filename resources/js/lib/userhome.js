@@ -8,6 +8,18 @@ function toggleMapView(loadingMap){
   //   $('#afterload').css('display', 'block');
   // }
 }
+
+
+function changeBackground(currentDestination){
+  if(currentDestination == 1){
+    $('.overlay').css('background-color', 'rgba(0,0,0,0.7');
+    $('#mainbody').css('background-image','url(http://ict-1004-project1.s3-ap-southeast-1.amazonaws.com/backgroundexpo.jpg)');
+  }
+  if(currentDestination == 2){
+    $('.overlay').css('background-color', 'rgba(0,0,0,0.7');
+    $('#mainbody').css('background-image','url(http://ict-1004-project1.s3-ap-southeast-1.amazonaws.com/backgroundsuntec.jpg)');
+  }
+}
 function toggleView(currentlyChoosen){
     //If currently choosen == 1, show shops div
      if(currentlyChoosen == 1){
@@ -33,34 +45,47 @@ function toggleView(currentlyChoosen){
     }
 }
 
-function initAutocomplete() {
+async function initAutocomplete() {
   var map = new google.maps.Map(document.getElementById('map1'), {
     center: {
-      lat: 48,
-      lng: 4
+      lat: 1.3521,
+      lng: 103.8198
     },
-    zoom: 4,
+    zoom: 12,
     disableDefaultUI: true
   });
 
   // Create the search box and link it to the UI element.
   
   // var input = document.getElementById('my-input-searchbox');
-  $('#searchWindow').append('<input type="text" id="my-input-searchbox" style="display:none"/>');
+  $('#searchWindow').prepend('<section id="comboSection" class="justify-content-center w-100" style="margin-top: 3%; display: flex;" ></section>')
+  $('#comboSection').css('left', '-300%');
+  $('#comboSection').css('position', 'absolute');
+  $('#currentWindow').css('left', '-300%');
+  $('#currentWindow').css('position', 'absolute');
+  $('#currentWindow').prepend('<button type="button" id="currentLocationButton" class="btn-primary-location"  style="display:flex; background-color: #bbb;  border-radius: 50%;width: 40px; height: 40px;"><i class="material-icons" style="margin: auto">my_location</i></button>');
+  $('#comboSection').prepend('<input type="text" id="my-input-searchbox" style="margin-top: auto; margin-bottom: auto;"/>');
+  
+  
   var input = document.getElementById('my-input-searchbox');
+  var comboBox = document.getElementById('comboSection');
+  var currentLocButton = document.getElementById('currentLocationButton');
   var autocomplete = new google.maps.places.Autocomplete(input);
-  map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
+  var markersArray = [];
+  map.controls[google.maps.ControlPosition.TOP_CENTER].push(comboBox);
+  map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(currentLocButton);
+
   var marker = new google.maps.Marker({
     map: map
   });
-  $('#my-input-searchbox').show();
-
+  
 
   // Bias the SearchBox results towards current map's viewport.
   autocomplete.bindTo('bounds', map);
   // Set the data fields to return when the user selects a place.
   autocomplete.setFields(
     ['address_components', 'geometry', 'name']);
+
 
   // Listen for the event fired when the user selects a prediction and retrieve
   // more details for that place.
@@ -70,8 +95,22 @@ function initAutocomplete() {
       console.log("Returned place contains no geometry");
       return;
     }
+
+    if(markersArray.length != 0){
+      for (var i = 0; i < markersArray.length; i++ ) {
+        markersArray[i].setMap(null);
+      }
+      markersArray.length = 0;
+    }
+
+    var marker = new google.maps.Marker({
+      map: map
+    });
+
     var bounds = new google.maps.LatLngBounds();
     marker.setPosition(place.geometry.location);
+    markersArray.push(marker);
+    map.fitBounds(bounds);
 
     if (place.geometry.viewport) {
       // Only geocodes have viewport.
@@ -82,9 +121,82 @@ function initAutocomplete() {
     map.fitBounds(bounds);
   });
 
+
+  //Bind the currentLoction button 
+  $('#currentLocationButton').click(function(){
+    if (confirm('Current location may not be accurate! Would you still like to get current location?')) {
+      //Get current location
+      getCurrentLocation().then(value=> {
+        lat = value[0];
+        lng = value[1];
+        key = value[2];
+        map.setCenter({lat: lat , lng: lng});
+        bounds = new google.maps.LatLngBounds();
+        bounds.extend({lat,lng});
+        map.fitBounds(bounds);
+        //Make a new marker
+        var marker = new google.maps.Marker({
+          position: {lat: lat , lng: lng},
+          title: lat + ',' + lng
+        });
+
+
+        //Clear all the old array
+        if(markersArray.length != 0){
+          for (var i = 0; i < markersArray.length; i++ ) {
+            markersArray[i].setMap(null);
+          }
+          markersArray.length = 0;
+        }
+        
+        //Push the marker into the map and the markerarray
+        marker.setMap(map);
+        markersArray.push(marker);
+        
+        
+
+        $.ajax({
+          url: 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + lat +',' + lng + '&key=' + key,
+          method: 'POST',
+          success: function(msg){
+            document.getElementById("my-input-searchbox").value = msg.results['0'].formatted_address;
+
+          }
+
+        })
+        // document.getElementById("my-input-searchbox").value = lat + "," + lng;
+      });
+     
+  }
+})
+  
+  return true;
+ 
 }
 
+async function getCurrentLocation(){
+   //Get the key first 
+   var key;
+   var lat; 
+   var lng; 
+   await $.ajax({
+    data: {getKey:true},
+    url:  'users/user_input_process.php',
+    method: 'POST', // or GET
+    success: function(msg) {
+        key = msg;
+    }});
 
+    await $.ajax({
+        url: "https://www.googleapis.com/geolocation/v1/geolocate?key=" + key,
+        method: 'POST', 
+        success: function(msg){
+          lat = msg.location.lat;
+          lng = msg.location.lng;
+        }
+      })
+    return [lat, lng , key];
+}
 function processInput(currentDestination , currentShop){
   
     // $.ajax({
@@ -126,7 +238,7 @@ function showShops(destination) {
             $("#shopInput").append("<option value=" + obj[i].area_id +  ">" + obj[i].name + "</option>");
           }
         }else{
-          $("#shopInput").append("<option value=0 selected > No Options available</option>");
+          $("#shopInput").append("<option value=-1 selected > No Options available</option>");
         }
       }
     })
@@ -139,21 +251,12 @@ $(document).ready(function() {
     var currentShop = $('#shopInput').val();
     // $('.js-example-basic-single').select2(); // Shun han look here 
     $(".js-example-basic-single").select2({ dropdownParent: "#user_form" });
-    
     $('#destination_submit').click(function() {
+        console.log("is this working");
         currentDestination = $('#destinationInput').val();
         if(currentDestination != 0){
             currentlyChoosen = 1;
-            if(currentDestination == 1){
-                //Expo City
-                $('.overlay').css('background-color', 'rgba(0,0,0,0.7');
-                $('#mainbody').css('background-image','url(http://ict-1004-project1.s3-ap-southeast-1.amazonaws.com/backgroundexpo.jpg)');
-            }
-            if(currentDestination == 2){
-                //Suntec City
-                $('.overlay').css('background-color', 'rgba(0,0,0,0.7');
-                $('#mainbody').css('background-image','url(http://ict-1004-project1.s3-ap-southeast-1.amazonaws.com/backgroundsuntec.jpg)');
-            }
+            changeBackground(currentDestination);
             toggleView(currentlyChoosen)
             //Retrieve current Destination data from DB 
             $("#shopInput").empty();
@@ -163,10 +266,24 @@ $(document).ready(function() {
 
     $('#shop_submit').click(function() {
         currentShop = $('#shopInput').val();
-        currentlyChoosen = 2;
-        toggleView(currentlyChoosen);
-        //Do the search for source address 
-        window.onload = initAutocomplete();
+
+        if(currentShop != -1){
+          currentlyChoosen = 2;
+          toggleView(currentlyChoosen);
+          //Do the search for source address 
+          initAutocomplete().then(value => {
+            while(true){
+              console.log(value);
+              if(value == true){
+                $('#comboSection').css('right' , '300%');
+                $('#currentWindow').css('right', '300%');
+                $('#currentLocationButton').css('margin', '0% 3% 2% 0%');
+                break;
+              }
+            }
+          });
+        }
+
         // processInput(currentDestination , currentShop);
         
     })
@@ -179,7 +296,6 @@ $(document).ready(function() {
     })
 
     $('#location_submit').click(function() {
-      
       processInput(currentDestination , currentShop);
   })
 
@@ -187,8 +303,6 @@ $(document).ready(function() {
 
   $('#location_back').click(function() {
       currentlyChoosen = 1;
-      $('.overlay').css('background-color', 'rgba(0,0,0,0.5');
-      $('#mainbody').css('background-image','url(http://ict-1004-project1.s3-ap-southeast-1.amazonaws.com/background4.jpg)');
       toggleView(currentlyChoosen);
   })
 
