@@ -1,13 +1,27 @@
 <head>
     <?php
+
+    //require 'PHPMailer/PHPMailerAutoload.php';
+// Import PHPMailer classes into the global namespace
+// These must be at the top of your script, not inside a function
+//    use PHPMailer\PHPMailer\PHPMailer;
+//    use PHPMailer\PHPMailer\Exception;
+//    use PHPMailer\PHPMailer\SMTP;
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\Exception;
+    use PHPMailer\PHPMailer\SMTP;
+
+require '../PHPMailer/src/Exception.php';
+    require '../PHPMailer/src/PHPMailer.php';
+    require '../PHPMailer/src/SMTP.php';
     //turn off error reporting
     error_reporting(0);
     include '../header.inc.php';
     session_start();
     ?>
 </head>
-<body>
-    
+<body> 
+
     <main class = "container">
         <?php
         $errorMsgpwd = "";
@@ -59,12 +73,27 @@
         sanitize_input($cmfpassword);
         sanitize_input($contact);
 
-        if ($success) {           
+        if ($success) {
             $_SESSION["registersuccess"] = 1;
             $password_hash = password_hash($password, PASSWORD_DEFAULT);
             saveMemberToDB();
+            $mail = new PHPMailer;
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->Port = 587;
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->SMTPAuth = true;
+            $mail->Username = 'parknow38@gmail.com';
+            $mail->Password = 'Singapore@123';
+            $mail->setFrom('parknow38@gmail.com', 'ParkNow');
+            $mail->addReplyTo('parknow38@gmail.com', 'ParkNow');
+            $mail->addAddress($email, $firstname);
+            $mail->Subject = 'Welcome to Park Now!';
+            $mail->Body = "Thank you for registering to be a member! If this is not you, send a reply to this email and we will contact you shortly";
+            $mail->send();
+
+
             header('location:/ICT1004-Project/userlogin');
-            ;
         } else {
             echo "<h4>The following input errors were detected:</h4>";
             echo "<p>" . $errorMsg . "</p>";
@@ -106,8 +135,6 @@
             $conn->close();
             header('location:/ICT1004-Project/userlogin');
         }
-
-        
         ?>
     </main>        
 </body>

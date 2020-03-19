@@ -23,14 +23,14 @@
         <div class="login-box">
             <h1>Members Login</h1>
             <?php
-            session_start();
+            // session_start();
             if (!empty($_SESSION['error']) && $_SESSION['error'] == 1) {
                 echo "<p style='color:red;'>" . "Incorrect email or password.Please try again." . "</p>";
             }
             if (isset($_SESSION["registersuccess"]) && $_SESSION["registersuccess"] == 1){
                 echo "<p style='color:green;'>" . "Registration Successful!" . "</p>";
             }
-            
+          
             ?>
             <p>For New members, please go to the<a href="/ICT1004-Project/register"> Register page</a>.</p>
             <form action="/ICT1004-Project/login/process_login.php" method="post">
