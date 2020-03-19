@@ -28,7 +28,7 @@
                 echo "<p style='color:red;'>" . "Incorrect email or password.Please try again." . "</p>";
             }
             if (isset($_SESSION["registersuccess"]) && $_SESSION["registersuccess"] == 1){
-                echo "<p style='color:green;'>" . "Registration Successful!" . "</p>";
+                echo "<p style='color:green;'>" . "Registration Successful! Confirmation Email Sent" . "</p>";
             }
           
             ?>
