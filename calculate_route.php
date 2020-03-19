@@ -13,6 +13,7 @@
         
         <?php
         include "connections.php";
+        $connection = new connections();
         
         function get_dest() {
             $dest = $_POST["shopInput"];
@@ -20,13 +21,15 @@
         }
         
         function get_available_CP(){
-            $availCP = retrieve_cp_by_occupancy(80);
+            global $connection;
+            $availCP = $connection->retrieve_cp_by_occupancy(80);
             return $availCP;
         }
         
         function checkZoneValue(){
+            global $connection;
             $validCP = get_available_CP();
-            if(retrieve_data_where("AREA", "area_id", get_dest())["zone"] == "1"){
+            if($connection->retrieve_data_where("AREA", "area_id", get_dest())["zone"] == "1"){
                 for($i=0; $i<count($validCP); $i++){
                     if($validCP[$i]["zone"] == "A"){
                         $validCP[$i]["y_weight"] = 1;
@@ -42,7 +45,7 @@
                 
                 // Zone A lots weight 1
             }
-            else if (retrieve_data_where("AREA", "area_id", get_dest())["zone"] == "2"){
+            else if ($connection->retrieve_data_where("AREA", "area_id", get_dest())["zone"] == "2"){
                 for($i=0; $i<count($validCP); $i++){
                     if($validCP[$i]["zone"] == "A"){
                         $validCP[$i]["y_weight"] = 2;

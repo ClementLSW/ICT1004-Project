@@ -11,7 +11,7 @@ html , body {
 /* direction Home */
 .bg {
     /* The image used */
-    background-image: url('http://ict-1004-project1.s3-ap-southeast-1.amazonaws.com/background4.jpg');
+    background-image: url('https://ict-1004-project1.s3-ap-southeast-1.amazonaws.com/background4.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -42,6 +42,23 @@ html , body {
     border-color: #4477b2 !important;
     color: white !important;
 }
+
+
+.btn-primary-location,
+.btn-primary-location:hover,
+.btn-primary-location:visited,
+.btn-primary-location:focus {
+    background-color: #7B9EB0 !important;
+    border-color: #7B9EB0 !important;
+    color: #f2f2f2 !important;
+}
+.btn-primary-location:active{
+    background-color: #7B9EB0 !important;
+    border-color: #7B9EB0 !important;
+    color: #f2f2f2 !important;
+}
+
+
 
 .navheight {
     max-height: 20% !important;

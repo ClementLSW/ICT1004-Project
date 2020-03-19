@@ -45,15 +45,34 @@ if (isset($_POST['destination'])) {
     }
 }
 
+if(isset($_POST['getKey'])){
+    if($GLOBALS['localtesting']){
+        $param = parse_ini_file($GLOBALS['root'] . '/../var/www/private/db-config.ini');
+        $key = $param['googlekey'];
+        echo $key;
+
+    }else{
+        echo "AIzaSyCmiOGqCQ_5z0FeMbuelO3H3kFPQC7JDPw";   
+    }
+}
+
+if(isset($_POST['getServerKey'])){
+    if($GLOBALS['localtesting']){
+        $param = parse_ini_file($GLOBALS['root'] . '/../var/www/private/db-config.ini');
+        $key = $param['googlekey'];
+        echo $key;
+
+    }else{
+        echo "AIzaSyDo4fLUAb1snqCHGfOI8xMsT8dECiI_mc8";   
+    }
+}
 
 //Check if got both value 
-if (isset($_POST['currentDestination']) && isset($_POST['currentShop']) ) {
+if (isset($_POST['currentDestination']) && isset($_POST['currentShop']) && isset($_POST['userlat']) && isset($_POST['userlng'])) {
     $currentDestination = $_POST['currentDestination'];
     $currentShop = $_POST['currentShop'];
     $validDestination = filter_var($_POST['currentDestination'], FILTER_VALIDATE_INT);
     $validShop = filter_var($_POST['currentShop'], FILTER_VALIDATE_INT);
-    
-    echo $_POST['userlatitude'];
     if (!$validShop === false && !$validDestination === false){
         $destinationValue = trim(strval($_POST['currentDestination']));
         $shopValue = trim(strval($_POST['currentShop']));
@@ -73,13 +92,14 @@ if (isset($_POST['currentDestination']) && isset($_POST['currentShop']) ) {
         $typeArray = ["int" , "string" , "int"];
         $operators = ["=" , "=" , "="];
         $area = $connection->retrieve_data_where_multiple_equals("area", $colArray , $valArray, $length , $typeArray , $operators);
-        $userlatitude = $_POST['userlatitude'];
-        $userlongitude = $_POST['userlongitude'];
-        echo $userlatitude;
-        getCoordinatesFromArea($area);
-        
-        
-        
+        $userlatitude = $_POST['userlat'];
+        $userlongitude = $_POST['userlng'];
+        list($destlat,  $destlng) = getCoordinatesFromArea($area);
+        $url = "https://www.google.com/maps/dir/" . $userlatitude . "," . $userlongitude . "/" . $destlat . "," . $destlng;
+        echo $url;
+        // echo '<a href="'. $url . '"target="_blank">Direct</a>';
+
+
         // if($GLOBALS['debug']){print($destinationValue);}
     }
 }
@@ -125,7 +145,7 @@ function getCoordinatesFromArea($area){
         $e = 103.959673;
     }
 
-
+    return array($n, $e);
 
 }
 
