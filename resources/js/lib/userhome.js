@@ -47,6 +47,65 @@ function toggleView(currentlyChoosen) {
   }
 }
 
+async function initAutocompleteNoMap(){
+  $('#searchWindow').prepend('<section id="comboSection" class="justify-content-center w-100" style="margin-top: 3%; display: flex;" ></section>')
+  $('#getCurrentLocationContainer').append('<button type="button" id="currentLocationButton" class="col btn-primary btn" style="display:flex;border:0px ;color: none; margin-top: 0px !important; width: 100%;"><section style="margin:auto; display: flex;"><i font-feature-settings: "liga" class="material-icons" style="color: white;  display: inline-block; margin:auto 0px auto 0px">my_location</i><h3 style="color: white;font-weight: italics; width: 98%; position: relative; left: 2%; margin:auto ; font-size: smaller;">Get Current Location</h3></section></button>');
+  $('#comboSection').prepend('<input type="text" id="my-input-searchbox" style="width:100%; font-family:sans-serif; font-size:2em;  text-align:center;padding: 5% 0px 5% 0px; margin-top: auto; margin-bottom: auto;"  type="text" pattern="^[a-zA-Z0-9,-.+ ]*$" required/>');
+  var input = document.getElementById('my-input-searchbox');
+  var autocomplete = new google.maps.places.Autocomplete(input);
+  
+ 
+  // Set the data fields to return when the user selects a place.
+  autocomplete.setFields(
+    ['address_components', 'geometry', 'name']);
+
+   // Listen for the event fired when the user selects a prediction and retrieve
+  // more details for that place.
+  autocomplete.addListener('place_changed', function () {
+    choosenLat = "";
+    choosenLng = "";
+    var place = autocomplete.getPlace();
+    if (!place.geometry) {
+      alert("Invalid location");
+      console.log("Returned place contains no geometry");
+      return;
+    }
+  });
+
+
+  //Bind the currentLoction button 
+  $('#currentLocationButton').click(function () {
+    if (confirm('Current location may not be accurate! Would you still like to get current location?')) {
+      document.getElementById("my-input-searchbox").value = "Loading . . .";
+         //Clear all the old array
+         choosenLat = "";
+         choosenLng = "";
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+             var currLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+             choosenLat = position.coords.latitude; 
+             choosenLng = position.coords.longitude;
+             var geocoder = new google.maps.Geocoder();
+             geocoder.geocode({'address': position.coords.latitude + "," + position.coords.longitude}, function(results, status) {
+               if (status === 'OK') {
+                 document.getElementById("my-input-searchbox").value = results['0'].formatted_address;
+               } else {
+                 alert('Geocode was not successful for the following reason: ' + status);
+               }
+             });
+          }, function(err){
+            if(err.code == 1){
+              alert("Please enable your location access");
+            }
+          });
+        }else{
+          alert("Navigation Geolocation API is not supported");
+        }
+    }
+  })
+
+}
+
 async function initAutocomplete() {
   var map = new google.maps.Map(document.getElementById('map1'), {
     center: {
@@ -55,6 +114,7 @@ async function initAutocomplete() {
     },
     zoom: 12,
     disableDefaultUI: true
+    
   });
 
   // Create the search box and link it to the UI element.
@@ -65,9 +125,8 @@ async function initAutocomplete() {
   $('#comboSection').css('position', 'absolute');
   $('#currentWindow').css('left', '-300%');
   $('#currentWindow').css('position', 'absolute');
-  $('#currentWindow').prepend('<button type="button" id="currentLocationButton" class="btn-primary-location"  style="display:flex; background-color: #bbb;  border-radius: 50%;width: 40px; height: 40px;"><i class="material-icons" style="margin: auto">my_location</i></button>');
+  $('#currentWindow').prepend('<button type="button" id="currentLocationButton" class="btn-primary-location"  style="display:flex; background-color: #bbb;  border-radius: 50%;width: 40px; height: 40px;"><i font-feature-settings: "liga" class="material-icons" style="margin: auto">my_location</i></button>');
   $('#comboSection').prepend('<input type="text" id="my-input-searchbox" style="margin-top: auto; margin-bottom: auto;" required type="text" pattern="^[a-zA-Z0-9,-.+ ]*$"/>');
-
   var input = document.getElementById('my-input-searchbox');
   var comboBox = document.getElementById('comboSection');
   var currentLocButton = document.getElementById('currentLocationButton');
@@ -75,7 +134,7 @@ async function initAutocomplete() {
   var markersArray = [];
   map.controls[google.maps.ControlPosition.TOP_CENTER].push(comboBox);
   map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(currentLocButton);
-
+  
   var marker = new google.maps.Marker({
     map: map
   });
@@ -140,13 +199,13 @@ async function initAutocomplete() {
           }
           markersArray.length = 0;
         }
+        
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function(position) {
              var currLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
              choosenLat = position.coords.latitude; 
              choosenLng = position.coords.longitude;
              // plot the currLocation on Google Maps, or handle accordingly:
-     
              var marker = new google.maps.Marker({ title: 'Current Location',
                                       map: map, 
                                       position: currLocation });
@@ -162,11 +221,21 @@ async function initAutocomplete() {
                  alert('Geocode was not successful for the following reason: ' + status);
                }
              });
+          }, function(err){
+            if(err.code == 1){
+              alert("Please enable your location access");
+            }
           });
+        }else{
+          alert("Navigation Geolocation API is not supported");
         }
     }
   })
 
+   $(window).resize(function() {
+    // (the 'map' here is the result of the created 'var map = ...' above)
+    google.maps.event.trigger(map, "resize");
+  });
 
   return true;
 
@@ -176,7 +245,7 @@ async function plotCurrentLocation(map) {
   if (navigator.geolocation) {
      navigator.geolocation.getCurrentPosition(function(position) {
         var currLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
-
+        
         // plot the currLocation on Google Maps, or handle accordingly:
 
         var marker = new google.maps.Marker({ title: 'Current Location',
@@ -217,11 +286,14 @@ async function getCurrentLocation() {
  
 }
 function processInput(currentDestination, currentShop, userlat, userlng) {
-  $.ajax({
+
+    $.ajax({
     data: { currentDestination: currentDestination, currentShop: currentShop , userlat: userlat, userlng: userlng},
     url: 'users/user_input_process.php',
+    async: false,
     method: 'POST', // or GET
     success: function (msg) {
+       
       window.open(msg, '_blank');
     }
   });
@@ -273,6 +345,8 @@ $(document).ready(function () {
       //Retrieve current Destination data from DB 
       $("#shopInput").empty();
       showShops(currentDestination);
+    }else{
+      alert("Please input a value first");
     }
   })
 
@@ -283,16 +357,17 @@ $(document).ready(function () {
       currentlyChoosen = 2;
       toggleView(currentlyChoosen);
       //Do the search for source address 
-      initAutocomplete().then(value => {
-        while (true) {
-          if (value == true) {
-            $('#comboSection').css('right', '300%');
-            $('#currentWindow').css('right', '300%');
-            $('#currentLocationButton').css('margin', '0% 3% 2% 0%');
-            break;
-          }
-        }
-      });
+      initAutocompleteNoMap();
+      // initAutocompleteNoMap().then(value => {
+      //   while (true) {
+      //     if (value == true) {
+      //       $('#comboSection').css('right', '300%');
+      //       $('#currentWindow').css('right', '300%');
+      //       $('#currentLocationButton').css('margin', '0% 3% 2% 0%');
+      //       break;
+      //     }
+      //   }
+      // });
     }
 
     // processInput(currentDestination , currentShop);
@@ -321,6 +396,8 @@ $(document).ready(function () {
     if($('#my-input-searchbox').val() != ""){
       if(choosenLat != undefined && choosenLat !=undefined){
         processInput(currentDestination, currentShop , choosenLat , choosenLng);}
+    }else{
+      alert("Please input a value first");
     }
   })
 
@@ -329,6 +406,9 @@ $(document).ready(function () {
   $('#location_back').click(function () {
     currentlyChoosen = 1;
     toggleView(currentlyChoosen);
+    $('#comboSection').remove();
+    $('#currentLocationButton').remove();
+
   })
 
 

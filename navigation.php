@@ -31,7 +31,19 @@
         </span>
     </div>
 </nav>
-<div style="height:80px;"></div>
+<!-- <div style="height:80px;"></div> -->
 
 
+<script>
+   
+            $(window).scroll(function() {
+                if ($(document).scrollTop() > 10) {
+                    console.log("OK");
+                    $('.nav').addClass('affix');
+                } else {
+                    $('.nav').removeClass('affix');
+                }
+            });
 
+            
+    </script>
