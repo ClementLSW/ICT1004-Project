@@ -33,8 +33,16 @@
             $GLOBALS['valid'] = true; // Used to block ppl from direct accessing my pages
              require __DIR__ . '/views/register.php';
         });
-        
-       
+          route('/ICT1004-Project/reset', function () {
+            // $GLOBALS['root'] = __DIR__;
+            $GLOBALS['valid'] = true; // Used to block ppl from direct accessing my pages
+             require __DIR__ . '/views/reset.php';
+        });
+         route('/ICT1004-Project/forgot', function () {
+            // $GLOBALS['root'] = __DIR__;
+            $GLOBALS['valid'] = true; // Used to block ppl from direct accessing my pages
+             require __DIR__ . '/views/forgot.php';
+        });
         
         //  route('/ICT1004-Project/testing', function () {
         //     $GLOBALS['root'] = __DIR__;

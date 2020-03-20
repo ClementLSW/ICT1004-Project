@@ -2,8 +2,9 @@
 
 <body id="registerpage">
     <div class="register-box">
+          <div class ="card">
         <h1>Members Registration</h1>
-        <p>For existing members, please go to the<a href="/ICT1004-Project/userlogin"> Login page</a>.</p>
+        <p>For existing members, please go to the<a href="/ICT1004-Project/userlogin"style="color: #32b5c7"> Login page</a></p>
         <form action="/ICT1004-Project/login/process_register.php" method="post">
             <?php
             // session_start();
@@ -11,10 +12,11 @@
                 echo "<p style='color:red;'>" . "Duplicate username.Please try again." . "</p>";
             }
             ?>
-
+            
             <div class="textbox">
+               
                 <i class="fas fa-user"></i>
-                <input type="text" placeholder="Username" id="username" required name="username" maxlength="50" placeholder="Enter username">
+                <input type="text" placeholder="Username (required)" id="username" required name="username" maxlength="50">
             </div>
             <div class="textbox">
                 <i class="fas fa-user"></i>
@@ -26,7 +28,7 @@
             </div>
             <div class="textbox">
                 <i class="fas fa-user"></i>
-                <input type="email" name="email" id="email" required placeholder="Email" pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$">
+                <input type="email" name="email" id="email" required placeholder="Email (required)" pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$">
             </div>
             <div class="textbox">
                 <i class="fas fa-user"></i>
@@ -36,13 +38,23 @@
                 <i class="fas fa-lock"></i>
                 <input type="password" name="pwd" required placeholder="Password" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$">
             </div>
+             <p class ="smalltext" style ="font-size:12px" >Min.8 Characters, alplanumeric, at least one upper case and lower case character and one special character</p>
             <div class="textbox">
                 <i class="fas fa-lock"></i>
                 <input type="password" name="pwd_confirm" required placeholder="Confirm Password" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$">
             </div>        
-            <p id="terms"><label><input type="checkbox" required name="agree"> <a href="Park_now_tAc.pdf" target="_blank">I agree to terms and conditions.</a></label></p>              
+            <p id="terms"><label><input type="checkbox" required name="agree"> <a href="Park_now_tAc.pdf" target="_blank" style="color: #32b5c7">I agree to terms and conditions.</a></label></p>              
             <div class="form-group"><button class="btn btn-primary" type="submit">Register</button></div></form>
+    </div>
     </div>
     <?php $_SESSION['duplicateerror'] = 0;
     ?>
+    <style>
+        .btn-primary{
+            background-color:#32b5c7 !important;
+            border: 2px solid #32b5c7 !important;
+        }
+        
+        
+        </style>
 </body>

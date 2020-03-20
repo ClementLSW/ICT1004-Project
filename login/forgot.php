@@ -18,6 +18,7 @@
         <meta charset="utf-8">
     </head>
     <body>
+     
 
         <div class="login-box">
             <h1 style="color:white;">Password Recovery</h1>
