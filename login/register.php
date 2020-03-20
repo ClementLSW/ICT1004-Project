@@ -51,6 +51,7 @@
     </div>
     </div>
     <?php $_SESSION['duplicateerror'] = 0;
+          $_SESSION['duplicateemail'] = 0;
     ?>
     <style>
         .btn-primary{
