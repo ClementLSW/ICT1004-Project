@@ -26,7 +26,7 @@
                     <i class="fas fa-user"></i>
                     <input type="text" placeholder="Enter Email" required id="email" name="email">
                 </div>
-                <div class="form-group"><button class="btn btn-primary" type="submit">Recover</button></div></form>
+                <div class="form-group"><button class="btn btn-primary" name="submit_email" type="submit">Recover</button></div></form>
             <div>
             </div>
         </div>
