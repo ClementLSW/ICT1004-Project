@@ -1,7 +1,4 @@
-<?php 
-    include __DIR__ . "../../header.inc.php";
-    include __DIR__ . "../../connections.php";
-    ?>
+
 <body id="mainbody" class="bg">
         <section class="overlay justify-content-center" style="margin-top: auto; margin-bottom: auto;">
             <section style="margin:auto;" >

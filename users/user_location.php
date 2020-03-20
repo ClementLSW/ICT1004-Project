@@ -26,7 +26,6 @@ error_reporting(1);
         $param = parse_ini_file($GLOBALS['root'] . '/../var/www/private/db-config.ini');
         $key = $param['googlekey'];
         echo '<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=' . $key . '&libraries=places"></script>';
-
     }else{
         echo '<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmiOGqCQ_5z0FeMbuelO3H3kFPQC7JDPw&libraries=places"></script>';        
     }

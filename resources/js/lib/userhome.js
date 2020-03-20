@@ -27,6 +27,7 @@ function toggleView(currentlyChoosen) {
   if (currentlyChoosen == 1) {
     $('#destination_selection').hide();
     $('#starting_location').hide();
+    $('#summary_page').hide();
     $('#shop_selection').show();
     $(".js-example-basic-single").select2({ dropdownParent: "#shops_form" });
 
@@ -36,23 +37,35 @@ function toggleView(currentlyChoosen) {
     $('#destination_selection').show();
     $('#shop_selection').hide();
     $('#starting_location').hide();
+    $('#summary_page').hide();
     $(".js-example-basic-single").select2({ dropdownParent: "#user_form" });
 
   }
   else if (currentlyChoosen == 2) {
     $('#destination_selection').hide();
     $('#shop_selection').hide();
+    $('#summary_page').hide();
     $('#starting_location').show();
     // $(".js-example-basic-single").select2({ dropdownParent: "#user_form" });
+  }else if(currentlyChoosen == 3){
+    $('#destination_selection').hide();
+    $('#shop_selection').hide();
+    $('#summary_page').show();
+    $('#starting_location').hide();
   }
 }
 
 async function initAutocompleteNoMap(){
   $('#searchWindow').prepend('<section id="comboSection" class="justify-content-center w-100" style="margin-top: 3%; display: flex;" ></section>')
   $('#getCurrentLocationContainer').append('<button type="button" id="currentLocationButton" class="col btn-primary btn" style="display:flex;border:0px ;color: none; margin-top: 0px !important; width: 100%;"><section style="margin:auto; display: flex;"><i font-feature-settings: "liga" class="material-icons" style="color: white;  display: inline-block; margin:auto 0px auto 0px">my_location</i><h3 style="color: white;font-weight: italics; width: 98%; position: relative; left: 2%; margin:auto ; font-size: smaller;">Get Current Location</h3></section></button>');
-  $('#comboSection').prepend('<input type="text" id="my-input-searchbox" style="width:100%; font-family:sans-serif; font-size:2em;  text-align:center;padding: 5% 0px 5% 0px; margin-top: auto; margin-bottom: auto;"  type="text" pattern="^[a-zA-Z0-9,-.+ ]*$" required/>');
+  $('#comboSection').prepend('<input type="text" id="my-input-searchbox" style="width:100%; font-family:sans-serif; font-size:2em;  text-align:center;padding: 5% 0px 5% 0px; margin-top: auto; margin-bottom: auto;"  type="text" pattern="^[a-zA-Z0-9,-.&+_ ]*$" required/>');
   var input = document.getElementById('my-input-searchbox');
-  var autocomplete = new google.maps.places.Autocomplete(input);
+
+var options = {
+  componentRestrictions: {country: "sg"}
+ };
+
+  var autocomplete = new google.maps.places.Autocomplete(input , options);
   
  
   // Set the data fields to return when the user selects a place.
@@ -293,8 +306,25 @@ function processInput(currentDestination, currentShop, userlat, userlng) {
     async: false,
     method: 'POST', // or GET
     success: function (msg) {
-       
-      window.open(msg, '_blank');
+      console.log(msg);
+      currentlyChoosen = 3;
+      toggleView(currentlyChoosen);
+      console.log(msg);
+      var obj = JSON.parse(msg);
+      console.log(obj);
+      carparkName = obj['carparkName'];
+      destlat = obj['destlat'];
+      destlng = obj['destlng'];
+      url = obj['url'];
+      userlat = obj['userlat'];
+      userlng = obj['userlng'];
+      shopName = obj['areaName'];
+
+      $("#final_header").append('<h3 id="header_text_final" class="direction_text  extra-bold">Head towards <span class="highlight">' + shopName + '</span> via <span class="highlight">' + carparkName + '</span><br></h3>');
+      $('#url_button').attr('href' , url);
+      $('#url_button').attr('target' , "_blank");
+
+      // window.open(msg, '_blank');
     }
   });
 
@@ -393,7 +423,7 @@ $(document).ready(function () {
     })
 
   $('#location_submit').click(function () {
-    if($('#my-input-searchbox').val() != ""){
+    if($('#my-input-searchbox').val() != "" && $('#my-input-searchbox').val() != "Loading . . ."){
       if(choosenLat != undefined && choosenLat !=undefined){
         processInput(currentDestination, currentShop , choosenLat , choosenLng);}
     }else{
@@ -408,10 +438,17 @@ $(document).ready(function () {
     toggleView(currentlyChoosen);
     $('#comboSection').remove();
     $('#currentLocationButton').remove();
+  })
 
+  $('#final_back').click(function () {
+    currentlyChoosen = 2;
+    $('#header_text_final').remove();
+    toggleView(currentlyChoosen);
   })
 
 
 
 
 });
+
+

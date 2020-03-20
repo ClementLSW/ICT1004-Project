@@ -79,12 +79,20 @@ if (isset($_POST['currentDestination']) && isset($_POST['currentShop']) && isset
         $destinationValue = htmlspecialchars($destinationValue);
         $shopValue = htmlspecialchars($shopValue);
 
-        //Use Clement Method 
-        // include $GLOBALS['root'] . '/calculate_route.php';
-        // $area_id = get_best_cp();
-        $area_id = 20; // Hardcoded for now, the value is a carpark ID 11 - 20 
-        //Retrieve the area data based on area id
+
         $connection = new connections();
+        $colArray = ["area_id" ];
+        $valArray = [$currentShop];
+        $length = count($valArray);
+        $typeArray = ["int" ];
+        $operators = ["="];
+        $getAreaName = $connection->retrieve_data_where_multiple_equals("area", $colArray , $valArray, $length , $typeArray , $operators);
+        
+        //Use Clement Method 
+        include  '../calculate_route.php';
+        // $area_id = get_best_cp($shopValue);
+        $area_id = 20;
+        // Retrieve the area data based on area id
         // $area = $connection->retrieve_data_where_multiple_equals("area", ["location_id" ] , [$destinationValue ] , 1 , ['int']);
 
         $colArray = ["location_id" , "type" , "area_id"];
@@ -97,7 +105,8 @@ if (isset($_POST['currentDestination']) && isset($_POST['currentShop']) && isset
         $userlongitude = $_POST['userlng'];
         list($destlat,  $destlng) = getCoordinatesFromArea($area);
         $url = "https://www.google.com/maps/dir/" . $userlatitude . "," . $userlongitude . "/" . $destlat . "," . $destlng;
-        echo $url;
+        $arr = array('carparkName' => $area[0]['name'], 'destlat' => $destlat, 'destlng' => $destlng, 'url' => $url, 'userlat' => $userlatitude , 'userlng' => $userlongitude , 'areaName' => $getAreaName[0]['name']);
+        echo json_encode($arr);
         // echo '<a href="'. $url . '"target="_blank">Direct</a>';
 
 
