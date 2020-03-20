@@ -21,13 +21,17 @@ if (isset($_POST['update'])) {
         $username = $_POST['username'];
         $fname = $_POST['fname'];
         $lname = $_POST['lname'];
-        $password = $_POST['password'];
+        $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
         $email = $_POST['email'];
         $contact = $_POST['contact'];
         $permissions = $_POST['permissions'];
         $id = $_POST['id'];
-        $conn->query("UPDATE users SET username='$username', fname='$fname', password='$password',"
+        $sql = $conn->query("UPDATE users SET username='$username', fname='$fname',lname='$lname', password='$password',"
                 . "email='$email', contact='$contact', permissions='$permissions' WHERE id='$id'");
+//        $sql = $conn->prepare("UPDATE users SET username=?, fname=?, lname=? password=?,"
+//                . "email=?, contact=?, permissions=? WHERE id=?");        
+//        $sql->bind_param('ssssssss', $username,$fname,$lname,$password,$email,$contact,$permissions,$id);
+//        $sql->execute();
         $_SESSION['message'] = "User has been updated";
         $_SESSION['msg_type'] = "success";
         header("location: index.php");

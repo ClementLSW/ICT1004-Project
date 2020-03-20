@@ -14,7 +14,7 @@
     </head>
     <body style="color:white;">
         <?php
-        include "../navigation.php";        
+        include "../navigation.php";
         require_once "process.php";
         require_once "debug.php";
         ?>        
@@ -38,33 +38,28 @@
             if ($conn->connect_error) {
                 die("Connection error: " . $conn->connect_error);
             }
-            $result = $conn->query("SELECT * FROM users");
+            $result = $conn->query("SELECT * FROM area");
             ?> 
             <table id="table" class="table table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                 <thead>
                     <tr>                        
-                        <th class="th-sm">Username</th>
-                        <th class="th-sm">First Name</th>
-                        <th class="th-sm">Last Name</th>
-                        <th class="th-sm">Password</th>
-                        <th class="th-sm">Email</th>
-                        <th class="th-sm">Contact</th>
-                        <th class="th-sm">Permissions</th>                    
-                        <th class="th-sm">Actions</th>                          
+                        <th class="th-sm">Area ID</th>
+                        <th class="th-sm">Type</th>
+                        <th class="th-sm">Occupancy</th>
+                        <th class="th-sm">Location ID</th>
+                        <th class="th-sm">Name</th>      
+                        <th class="th-sm">Action</th>                        
                     </tr>
                 </thead>
                 <tbody>
                     <?php while ($row = $result->fetch_assoc()) { ?>
                         <tr>                            
-                            <td><?php echo $row['username']; ?></td>
-                            <td><?php echo $row['fname']; ?></td>
-                            <td><?php echo $row['lname']; ?></td>
-                            <td><?php echo $row['password']; ?></td>
-                            <td><?php echo $row['email']; ?></td>
-                            <td><?php echo $row['contact']; ?></td>
-                            <td><?php echo $row['permissions']; ?></td>
-                            <td><a href="update.php?user=<?php echo $row['id']; ?>" class="btn btn-success">Edit</a>
-                                <a href="process.php?delete=<?php echo $row['id']; ?>" class="btn btn-danger">Delete</a></td>
+                            <td><?php echo $row['area_id']; ?></td>
+                            <td><?php echo $row['type']; ?></td>
+                            <td><?php echo $row['occupancy']; ?></td>
+                            <td><?php echo $row['location_id']; ?></td>
+                            <td><?php echo $row['name']; ?></td>                                                           
+                            <td><a href="update.php?area=<?php echo $row['area_id']; ?>" class="btn btn-success">Edit</a></td>
                         </tr>
                     <?php } ?>
                 </tbody>
