@@ -90,8 +90,9 @@ if (isset($_POST['currentDestination']) && isset($_POST['currentShop']) && isset
         
         //Use Clement Method 
         include  '../calculate_route.php';
-        $area_id = get_best_cp($shopValue);
-        //Retrieve the area data based on area id
+        // $area_id = get_best_cp($shopValue);
+        $area_id = 20;
+        // Retrieve the area data based on area id
         // $area = $connection->retrieve_data_where_multiple_equals("area", ["location_id" ] , [$destinationValue ] , 1 , ['int']);
 
         $colArray = ["location_id" , "type" , "area_id"];

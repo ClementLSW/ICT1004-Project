@@ -62,7 +62,7 @@
             // returns area_id of bestCP;
             $finalCPList = checkZoneValue($hallValue);
             array_multisort(
-                $finalCPList, 
+                $finalCPList,
                 $finalCPList["total"],
                 SORT_ASC,
                 SORT_NUMERIC,
