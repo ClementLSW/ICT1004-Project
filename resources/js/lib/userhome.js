@@ -306,6 +306,7 @@ function processInput(currentDestination, currentShop, userlat, userlng) {
     async: false,
     method: 'POST', // or GET
     success: function (msg) {
+      console.log(msg);
       currentlyChoosen = 3;
       toggleView(currentlyChoosen);
       console.log(msg);

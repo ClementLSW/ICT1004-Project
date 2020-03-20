@@ -89,10 +89,10 @@ if (isset($_POST['currentDestination']) && isset($_POST['currentShop']) && isset
         $getAreaName = $connection->retrieve_data_where_multiple_equals("area", $colArray , $valArray, $length , $typeArray , $operators);
         
         //Use Clement Method 
-        // include $GLOBALS['root'] . '/calculate_route.php';
-        // $area_id = get_best_cp();
-        $area_id = 20; // Hardcoded for now, the value is a carpark ID 11 - 20 
-        //Retrieve the area data based on area id
+        include  '../calculate_route.php';
+        // $area_id = get_best_cp($shopValue);
+        $area_id = 20;
+        // Retrieve the area data based on area id
         // $area = $connection->retrieve_data_where_multiple_equals("area", ["location_id" ] , [$destinationValue ] , 1 , ['int']);
 
         $colArray = ["location_id" , "type" , "area_id"];

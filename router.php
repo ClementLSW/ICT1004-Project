@@ -1,5 +1,5 @@
 <?php
-
+error_reporting(0);
 /**
  * Holds the registered routes
  *
@@ -29,8 +29,22 @@ function dispatch($action)
 {
     global $routes;
     $action = trim($action, '/');
-    $callback = $routes[$action];
-    echo call_user_func($callback);
+    try{
+        
+        if(isset($routes[$action])){
+            $callback = $routes[$action];
+            echo call_user_func($callback);
+        }else{
+            $actionError = trim("/ICT1004-Project/error", '/');
+            $callbackError = $routes[$actionError];
+            echo call_user_func($callbackError);
+        }
+
+    }catch(Exception $e){
+        echo 'Caught exception: ',  $e->getMessage(), "\n";
+
+    }
+    
 }
 
 ?>
