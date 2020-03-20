@@ -23,6 +23,7 @@
         <div class="login-box">
             <h1>Members Login</h1>
             <?php
+            
             // session_start();
             if (!empty($_SESSION['error']) && $_SESSION['error'] == 1) {
                 echo "<p style='color:red;'>" . "Incorrect email or password.Please try again." . "</p>";
@@ -33,7 +34,7 @@
             if (isset($_SESSION["errorforgot"]) && $_SESSION["errorforgot"] == 1) {
                 echo "<p style='color:red;'>" . "No Such Email" . "</p>";
             }
-            if (isset($_SESSION["forgotsuccess"]) && $_SESSION["forgotsuccess"] == 1) {
+            if (!empty($_SESSION["forgotsuccess"]) && $_SESSION["forgotsuccess"] == 1) {
                 echo "<p style='color:green;'>" . "Email sent to recover password" . "</p>";
             }
             if (isset($_SESSION["resetsuccess"]) && $_SESSION["resetsuccess"] == 1) {
