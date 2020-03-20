@@ -164,29 +164,6 @@ require '../PHPMailer/src/Exception.php';
             $data = htmlspecialchars($data);
             return $data;
         }
-
-//Helper function to write the member data to the DB
-//        function saveMemberToDB() {
-//            global $username, $firstname, $lastname, $email, $password, $password_hash, $contact, $errorMsg, $success, $permissions;
-//
-//            //Creating databse connection.
-//            $config = parse_ini_file('/var/www/private/db-config.ini');
-//            $conn = new mysqli($config['servername'], $config['username'], $config['password'], $config['dbname']);
-//            // Check connection
-//            if ($conn->connect_error) {
-//                $errorMsg = "Connection failed: " . $conn->connect_error;
-//                $success = false;
-//            } else {
-//                $sql = "INSERT INTO carpark.users(username, fname, lname, email, password, contact, permissions)";
-//                $sql .= " VALUES ('$username','$firstname', '$lastname', '$email', '$password_hash', '$contact', '$permissions')";
-//                //Execute the query
-//                if (!$conn->query($sql)) {
-//                    $errorMsg = "Database error: " . $conn->error;
-//                    $success = false;
-//                }
-//                return $success;
-//                $result->free_result();
-//            }
         ?>
     </main>        
 </body>
