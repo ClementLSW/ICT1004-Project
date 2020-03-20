@@ -11,6 +11,9 @@
             if (!empty($_SESSION['duplicateerror']) && $_SESSION['duplicateerror'] == 1) {
                 echo "<p style='color:red;'>" . "Duplicate username.Please try again." . "</p>";
             }
+             if (!empty($_SESSION['duplicateemail']) && $_SESSION['duplicateemail'] == 1) {
+                echo "<p style='color:red;'>" . "Duplicate Email.Please try again." . "</p>";
+            }
             ?>
             
             <div class="textbox">
