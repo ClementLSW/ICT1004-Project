@@ -54,10 +54,9 @@
             http_response_code(404);
             require __DIR__ . '/views/404.php';
         });
-
         $action = $_SERVER['REQUEST_URI'];
         dispatch($action);
-        
+      
         ?> 
 
    

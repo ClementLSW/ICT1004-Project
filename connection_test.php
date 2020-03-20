@@ -1,6 +1,6 @@
 <?php
 
-class connections {
+class connections1 {
 
     function retrieve_data_where(String $tableName, String $colname, String $colval) {
         //INPUT: 1 Argum , Returns Array

@@ -31,6 +31,7 @@ function dispatch($action)
     $action = trim($action, '/');
     $callback = $routes[$action];
     echo call_user_func($callback);
+    
 }
 
 ?>
