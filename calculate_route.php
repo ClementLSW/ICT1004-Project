@@ -1,67 +1,75 @@
-<html>
-    <head>
+
         <?php
-        //turn off error reporting
-        error_reporting(0);
-        include 'header.inc.php';
-        ?>
-    </head>
-    <body>
-        <?php include 'navigation.php'; ?>
-        <h1>Why are you here?</h1>
-        <p>I'm calling the police</p>
-        
-        <?php
-        include "connections.php";
-        
-        function get_dest() {
-            $dest = $_POST["shopInput"];
+        // include "connections.php";
+        $connection2 = new connections();
+
+        function get_dest($hallValue)
+        {
+            $dest = $hallValue;
             return $dest;
         }
-        
-        function get_available_CP(){
-            $availCP = retrieve_cp_by_occupancy(80);
+
+        function get_available_CP()
+        {
+            global $connection2;
+            $availCP = $connection2->retrieve_cp_by_occupancy(80);
             return $availCP;
         }
-        
-        function checkZoneValue(){
+
+        function checkZoneValue($hallValue)
+        {
+            global $connection2;
             $validCP = get_available_CP();
-            if(retrieve_data_where("AREA", "area_id", get_dest())["zone"] == "1"){
-                for($i=0; $i<count($validCP); $i++){
-                    if($validCP[$i]["zone"] == "A"){
-                        $validCP[$i]["y_weight"] = 1;
+            $validCPList = [];
+            for($i = 0; $i < count($validCP); $i++){
+                if($validCP[$i]["location_id"] == 1){
+                    if($validCP[$i]["type"] != "hall"){
+                        array_push($validCPList, $validCP[$i]);
                     }
-                    else if($validCP[$i]["zone"] == "B"){
-                        $validCP[$i]["y_weight"] = 2;
-                    }
-                    
-                    $validCP[$i]["total"] = $validCP[$i]["x_weight"] + $validCP[$i]["y_weight"];
-                    return $validCP;
                 }
-                
-                
+            }
+
+            $validCP = $validCPList;
+                for ($i = 0; $i < count($validCP); $i++) {
+                    if ($validCP[$i]["zone"] == "A") {
+                        $validCP[$i]["yweight"] = 1;
+                    } else if ($validCP[$i]["zone"] == "B") {
+                        $validCP[$i]["yweight"] = 2;
+                    }
+
+                    $validCP[$i]["total"] = $validCP[$i]["xweight"] + $validCP[$i]["yweight"];}
+            print_r($validCP);
+                return $validCP;
+
                 // Zone A lots weight 1
-            }
-            else if (retrieve_data_where("AREA", "area_id", get_dest())["zone"] == "2"){
-                for($i=0; $i<count($validCP); $i++){
-                    if($validCP[$i]["zone"] == "A"){
-                        $validCP[$i]["y_weight"] = 2;
-                    }
-                    else if($validCP[$i]["zone"] == "B"){
-                        $validCP[$i]["y_weight"] = 1;
-                    }
-                    
-                    $validCP[$i]["total_weight"] = $validCP[$i]["x_weight"] + $validCP[$i]["y_weight"];
-                    return $validCP;
-                }
-            }
+            // } else if ($connection2->retrieve_data_where("AREA", "area_id", get_dest($hallValue))["zone"] == "2") {
+            //     for ($i = 0; $i < count($validCP); $i++) {
+            //         if ($validCP[$i]["zone"] == "A") {
+            //             $validCP[$i]["y_weight"] = 2;
+            //         } else if ($validCP[$i]["zone"] == "B") {
+            //             $validCP[$i]["y_weight"] = 1;
+            //         }
+
+            //         $validCP[$i]["total_weight"] = $validCP[$i]["x_weight"] + $validCP[$i]["y_weight"];
+            //         return $validCP;
+            //     }
+            
         }
-        
-        function get_best_cp(){
+
+        function get_best_cp($hallValue)
+        {   
+         
             // returns area_id of bestCP;
-            $finalCPList = checkZoneValue();
-            array_multisort($finalCPList["total_weight"], SORT_ASC, SORT_NUMERIC,
-                    $finalCPList["occupancy"], SORT_ASC, SORT_NUMERIC);
+            $finalCPList = checkZoneValue($hallValue);
+            array_multisort(
+                $finalCPList,
+                $finalCPList["total"],
+                SORT_ASC,
+                SORT_NUMERIC,
+                $finalCPList["occupancy"],
+                SORT_ASC,
+                SORT_NUMERIC
+            );
             $bestCP = $finalCPList[0]["area_id"];
             return $bestCP;
         }
@@ -95,8 +103,3 @@
 ////                }
 ////            }
 //        }
-        ?>
-
-    </body>
-    <?php include "footer.inc.php"; ?>
-</html>

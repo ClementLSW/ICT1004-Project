@@ -14,8 +14,10 @@ error_reporting(1);
         ?>
     </section>
     <form action="user_process.php" method="POST">
+        <?php if($GLOBALS['debug']) {print('line 16');}?>
         <section class="w-100 container1 justify-content-center row">
             <div id="user_form" class="form-group ">
+                <?php if($GLOBALS['debug']) {print('user_destination.php');} ?>
                 <select class="user_input js-example-basic-single" id="destinationInput">
                     <?php
                     include '../connections.php';

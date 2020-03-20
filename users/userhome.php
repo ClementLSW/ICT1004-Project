@@ -8,6 +8,12 @@
         <section id="shop_selection">
             <?php include 'user_shop.php' ?>
         </section>
+        <section id="starting_location">
+            <?php include 'user_location.php' ?>
+        </section>
+        <section id="summary_page">
+            <?php include 'user_final.php' ?>
+        </section>
     </article>
 </section>
 

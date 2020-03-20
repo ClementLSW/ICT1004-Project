@@ -1,29 +1,39 @@
 @import url('https://fonts.googleapis.com/css?family=Quicksand:400,500,700');
 html , body {
-    height: 100%;
-    background-color: #141414;
+    height: 100vh;
+    background-color: #010103;
     font-family: "Quicksand" , 'Lato' , 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode';
-    overflow-x: hidden;
     font-size: 62.5%;
     font-size: 10px;
+    min-height: 100%;
 }
 
 /* direction Home */
 .bg {
     /* The image used */
-    background-image: url('http://ict-1004-project1.s3-ap-southeast-1.amazonaws.com/background4.jpg');
+    background-image: url('https://ict-1004-project1.s3-ap-southeast-1.amazonaws.com/background4.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
     background-position: 50% 60%;
     /* Full height */
-    height: 100%;
+    height: 100vh !important;
+    min-height: 100%;
+
   }
 
   .overlay {
     background-color: rgba(0, 0, 0, 0.5);
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
     width: 100%;
-    height: 100%;
+    height: 100vh !important;
+    min-height: 100%;
     display: flex;
     
   }
@@ -43,8 +53,26 @@ html , body {
     color: white !important;
 }
 
+
+.btn-primary-location,
+.btn-primary-location:hover,
+.btn-primary-location:visited,
+.btn-primary-location:focus {
+    background-color: #7B9EB0 !important;
+    border-color: #7B9EB0 !important;
+    color: #f2f2f2 !important;
+}
+.btn-primary-location:active{
+    background-color: #7B9EB0 !important;
+    border-color: #7B9EB0 !important;
+    color: #f2f2f2 !important;
+}
+
+
+
 .navheight {
-    max-height: 20% !important;
+    max-height: 25% !important;
+    padding-bottom: 3% !important;
     position: relative; z-index:1;
 }
 
@@ -120,8 +148,7 @@ html , body {
 }
 
 .nav {
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-bottom: 20px !important;
     -webkit-transition: all 0.4s ease;
     transition: all 0.4s ease;
 }
@@ -198,7 +225,7 @@ html , body {
     margin: auto;
     position: absolute;
     right: 30px;
-    top: 0;
+    top: 20px;
     bottom: 0;
 }
 
@@ -382,7 +409,7 @@ html , body {
 
 .affix {
     padding: 0;
-    background-color: #111;
+    background-color: #010102;
 }
 
 .myH2 {
@@ -395,8 +422,10 @@ html , body {
 	padding-right:15%;
 	font-size: 20px;
 }
+
 @media all and (max-width:700px){
 	.myP {
 		padding:2%;
 	}
 }
+

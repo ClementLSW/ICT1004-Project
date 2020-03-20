@@ -11,25 +11,11 @@
                     if ($_SESSION["permissions"] == 'admin') {
                         echo '<li><a>' . $_SESSION['username'] . '</a></li>';
                         echo "<li><a href='management.php'>Management</a></li>";
-                        echo "<li><a href='login/logout.php'>Logout</a></li>";
+                         echo "<li><a href='/ICT1004-Project/login/logout.php'>Logout</a></li>";
                     } else {
                         echo '<li><a>' . $_SESSION['username'] . '</a></li>';
-                        echo "<li><a href='login/logout.php'>Logout</a></li>";
-                    }
-                } else {
-                    //ECHO 
-                    echo "<li><a href='/ICT1004-Project/userlogin'>Login<span class='sr-only'>(current)</span></a></li>";
-                    echo "<li><a href='login/register.php'>Register</a></li>";
-                }
-                if ($GLOBALS['debug']) {
-                    print_r($_SESSION);
-                }
-                if (isset($_SESSION['username'])) {
-                    echo '<li><a>' . $_SESSION['username'] . '</a></li>';
-                    echo "<li><a href='/ICT1004-Project/logout'>Logout</a></li>";
-                    if ($_SESSION["permissions"] == 'admin') {
-                        echo "<li><a href='management.php'>Management</a></li>";
-                    }
+                         echo "<li><a href='/ICT1004-Project/login/logout.php'>Logout</a></li>";
+                    }                
                 } else {
                     //ECHO 
                     echo "<li><a href='/ICT1004-Project/userlogin'>Login<span class='sr-only'>(current)</span></a></li>";
@@ -45,7 +31,19 @@
         </span>
     </div>
 </nav>
-<div style="height:80px;"></div>
+<!-- <div style="height:80px;"></div> -->
 
 
+<script>
+   
+            $(window).scroll(function() {
+                if ($(document).scrollTop() > 10) {
+                    console.log("OK");
+                    $('.nav').addClass('affix');
+                } else {
+                    $('.nav').removeClass('affix');
+                }
+            });
 
+            
+    </script>

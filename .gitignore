@@ -1,3 +1,10 @@
 /nbproject/private/
 *.properties
 login/.gitkeep
+*.properties
+nbproject/project.properties
+nbproject/project.properties
+*.properties
+nbproject/project.properties
+*.properties
+/PHPMailer/nbproject/private/
