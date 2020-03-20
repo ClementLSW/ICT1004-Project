@@ -6,7 +6,7 @@
         <?php include 'navigation.php';?>
         <?php
         include "connections.php";
-        $occupancy[];
+        $occupancy = array();
         
         function get_occupancy(){
             // Returns key value pair array of AreaID and occupancy rate

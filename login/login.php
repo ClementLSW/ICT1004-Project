@@ -27,10 +27,18 @@
             if (!empty($_SESSION['error']) && $_SESSION['error'] == 1) {
                 echo "<p style='color:red;'>" . "Incorrect email or password.Please try again." . "</p>";
             }
-            if (isset($_SESSION["registersuccess"]) && $_SESSION["registersuccess"] == 1){
+            if (isset($_SESSION["registersuccess"]) && $_SESSION["registersuccess"] == 1) {
                 echo "<p style='color:green;'>" . "Registration Successful! Confirmation Email Sent" . "</p>";
             }
-          
+            if (isset($_SESSION["errorforgot"]) && $_SESSION["errorforgot"] == 1) {
+                echo "<p style='color:red;'>" . "No Such Email" . "</p>";
+            }
+            if (isset($_SESSION["forgotsuccess"]) && $_SESSION["forgotsuccess"] == 1) {
+                echo "<p style='color:green;'>" . "Email sent to recover password" . "</p>";
+            }
+            if (isset($_SESSION["resetsuccess"]) && $_SESSION["resetsuccess"] == 1) {
+                echo "<p style='color:green;'>" . "Password reset successful" . "</p>";
+            }
             ?>
             <p>For New members, please go to the<a href="/ICT1004-Project/register"> Register page</a>.</p>          
             <form action="/ICT1004-Project/login/process_login.php" method="post">
@@ -44,13 +52,16 @@
                     <input type="password"type="password" name="pwd" required placeholder="Enter password">
                 </div>
                 <div class="form-group"><button class="btn btn-primary" type="submit">Login</button></div></form>
-                <div>
-         <p><a href="/ICT1004-Project/login/forgot.php"> Forgot Password</a></p>
+            <div>
+                <p><a href="/ICT1004-Project/login/forgot.php"> Forgot Password</a></p>
+            </div>
         </div>
-                </div>
     </body>
     <?php
     $_SESSION['error'] = 0;
     $_SESSION['registersuccess'] = 0;
+    $_SESSION['forgotsuccess'] = 0;
+    $_SESSION['errorforgot'] = 0;
+    $_SESSION["resetsuccess"] = 0;
     ?>
 </html>
