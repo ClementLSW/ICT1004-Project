@@ -1,6 +1,6 @@
 <?php
 
-session_start();
+//session_start();
 require_once 'debug.php';
 if ($GLOBALS['local'] == true) {
     $conn = new mysqli('localhost', 'root', '', 'carpark');

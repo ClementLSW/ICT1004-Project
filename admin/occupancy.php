@@ -38,7 +38,7 @@
             if ($conn->connect_error) {
                 die("Connection error: " . $conn->connect_error);
             }
-            $result = $conn->query("SELECT * FROM area");
+            $result = $conn->query("SELECT * FROM area WHERE type='carpark'");
             ?> 
             <table id="table" class="table table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                 <thead>
