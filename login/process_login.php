@@ -9,11 +9,27 @@
         ?>
     </head>
     <body>
-   
+
         <main class = "container">
             <?php
-            $password = $_POST["pwd"];
-            $username = $_POST["username"];
+            
+            //Sanitisation of input
+            if (empty($_POST["username"])) {
+                $errorMsg .= "Username is required.<br>";
+                $success = false;
+                $_SESSION['Inputerror'] = $errorMsg;
+            } else {
+                $username = sanitize_input($_POST["username"]);
+            }
+
+            if (empty($_POST["pwd"])) {
+                $errorMsg .= "Username is required.<br>";
+                $success = false;
+                $_SESSION['Inputerror'] = $errorMsg;
+            } else {
+                $password = sanitize_input($_POST["pwd"]);
+            }
+
             if ($GLOBALS['debug']) {
                 print($_POST["pwd"]);
                 print($_POST["username"]);
@@ -71,7 +87,6 @@
                         header('location:/ICT1004-Project/userlogin');
                         $_SESSION["error"] = 1;
                     }
-
                 } else {
                     $success = false;
                     header('location:/ICT1004-Project/userlogin');
@@ -86,6 +101,13 @@
             $functionName = "authenticateUser();";
             eval($functionName);
             $success = true;
+
+            function sanitize_input($data) {
+                $data = trim($data);
+                $data = stripslashes($data);
+                $data = htmlspecialchars($data);
+                return $data;
+            }
             ?>
         </main>
     </body>    

@@ -133,10 +133,14 @@ require '../PHPMailer/src/Exception.php';
                         $mail->Subject = 'Welcome to Park Now!';
                         $mail->Body = "Thank you for registering to be a member! If this is not you, send a reply to this email and we will contact you shortly";
                         $mail->send();
-                        echo $username;
                         header('location:/ICT1004-Project/userlogin');
-                        $sql = "INSERT INTO carpark.users(username, fname, lname, email, password, contact, permissions)";
-                        $sql .= " VALUES ('$username','$firstname', '$lastname', '$email', '$password_hash', '$contact', '$permissions')";
+                        $stmt = $conn->prepare("INSERT INTO carpark.users (username, fname, lname, email, password, contact, permissions) "
+                                . "VALUES (?,?, ?, ?, ?, ?, ?)");
+                        $stmt->bind_param("sssssss", $username, $firstname, $lastname, $email, $password_hash, $contact, $permissions );
+                        $stmt->execute();
+                        $stmt->close();
+//                        $sql = "INSERT INTO carpark.users(username, fname, lname, email, password, contact, permissions)";
+//                        $sql .= " VALUES ('$username','$firstname', '$lastname', '$email', '$password_hash', '$contact', '$permissions')";
                         //Execute the query
                         if (!$conn->query($sql)) {
                             $errorMsg = "Database error: " . $conn->error;
