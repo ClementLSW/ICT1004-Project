@@ -6,7 +6,7 @@
 
         <div class="login-box">
             <h1 style="color:white;">Password Reset</h1>
-            
+
             <?php
             session_start();
             if (isset($_SESSION["nomatchpass"]) && $_SESSION["nomatchpass"] == 1) {
@@ -35,7 +35,10 @@
 
     <style>
 
+        .btn-primary{
 
+
+        }
         body{
             margin: 0px;
             padding: 0;

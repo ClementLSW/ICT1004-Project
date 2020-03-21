@@ -26,7 +26,7 @@
             <form action="/ICT1004-Project/login/process_forgot.php" method="post">
                 <div class="textbox">
                     <i class="fas fa-user"></i>
-                    <input type="text" placeholder="Enter Email" required id="email" name="email">
+                    <input type="email" placeholder="Enter Email" required id="email" name="email">
                 </div>
                 <div class="form-group"><button class="btn btn-primary" name="submit_email" type="submit">Recover</button></div></form>
             <div>
@@ -47,6 +47,12 @@
             background-color: black;
 
         }
+        .btn-primary{
+            background-color: #33ccff !important;
+            border: 2px solid  #03fcec !important;
+        }
+        
+        
         .resetheader{
             font-color:"white"
         }
@@ -68,7 +74,7 @@
         .login-box h1{
             float: left;
             font-size: 40px;
-            border-bottom: 6px solid #4caf50;
+            border-bottom: 6px solid #03fcec;
             margin-bottom: 50px;
             padding: 13px 0;
         }
@@ -78,7 +84,7 @@
             font-size: 20px;
             padding: 8px 0;
             margin: 8px 0;
-            border-bottom: 1px solid #4caf50;
+            border-bottom: 1px solid #03fcec;
         }
         .textbox i{
             width: 26px;
@@ -98,7 +104,7 @@
         .btn{
             width: 100%;
             background: none;
-            border: 2px solid #4caf50;
+            border: 2px solid #03fcec;
             color: white;
             padding: 5px;
             font-size: 18px;

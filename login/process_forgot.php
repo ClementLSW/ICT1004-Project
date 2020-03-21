@@ -8,14 +8,19 @@ require '../PHPMailer/src/Exception.php';
 require '../PHPMailer/src/PHPMailer.php';
 require '../PHPMailer/src/SMTP.php';
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 if (isset($_POST['submit_email']) && $_POST['email']) {
     global $email, $password_hash, $success, $firstname;
-    $email = $_POST['email'];
+    
+     if (empty($_POST["email"])) {
+                $errorMsg .= "Email is required.<br>";
+                $success = false;
+                $_SESSION['Inputerror'] = $errorMsg;
+                
+            } else {
+                $email = sanitize_input($_POST["email"]);
+            }
+    
+    
     if ($GLOBALS['localtesting']) {
         $conn = new mysqli("localhost", "sqldev", "P@ssw0rd", "carpark");
     } else {
@@ -35,9 +40,12 @@ if (isset($_POST['submit_email']) && $_POST['email']) {
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
 if ($result->num_rows > 0) {
+    
     $password_hash = $row['password'];
     $firstname = $row["fname"];
     $_SESSION['email'] = $email;
+    
+    //Send email to the user using phpmailer
     $mail = new PHPMailer;
     $mail->isSMTP();
     $mail->Host = 'smtp.gmail.com';
@@ -71,6 +79,12 @@ if ($result->num_rows > 0) {
     $_SESSION["errorforgot"] = 1;
     header('location:/ICT1004-Project/userlogin');
 }
+  function sanitize_input($data) {
+            $data = trim($data);
+            $data = stripslashes($data);
+            $data = htmlspecialchars($data);
+            return $data;
+        }
 
 $conn->close();
 $success = true;
