@@ -1,7 +1,7 @@
 
         <?php
         // include "connections.php";
-        $connection2 = new connections();
+        $connection = new connections();
 
         function get_dest($hallValue)
         {
@@ -9,16 +9,18 @@
             return $dest;
         }
 
-        function get_available_CP()
-        {
-            global $connection2;
-            $availCP = $connection2->retrieve_cp_by_occupancy(80);
+        function get_available_CP(){
+            global $connection;
+            $availCP = $connection->retrieve_cp_by_occupancy(80);
+            if($availCP == NULL){
+                $availCP = $connection->retrieve_data_where("AREA", "type", "CP");
+            }
             return $availCP;
         }
 
         function checkZoneValue($hallValue)
         {
-            global $connection2;
+            global $connection;
             $validCP = get_available_CP();
             $validCPList = [];
             for($i = 0; $i < count($validCP); $i++){
@@ -28,6 +30,7 @@
                     }
                 }
             }
+            
 
             $validCP = $validCPList;
                 for ($i = 0; $i < count($validCP); $i++) {
@@ -38,7 +41,6 @@
                     }
 
                     $validCP[$i]["total"] = $validCP[$i]["xweight"] + $validCP[$i]["yweight"];}
-            print_r($validCP);
                 return $validCP;
 
                 // Zone A lots weight 1
@@ -56,25 +58,111 @@
             
         }
 
-        function get_best_cp($hallValue)
-        {   
-         
-            // returns area_id of bestCP;
-            $finalCPList = checkZoneValue($hallValue);
-            array_multisort(
-                $finalCPList,
-                $finalCPList["total"],
-                SORT_ASC,
-                SORT_NUMERIC,
-                $finalCPList["occupancy"],
-                SORT_ASC,
-                SORT_NUMERIC
-            );
-            $bestCP = $finalCPList[0]["area_id"];
-            return $bestCP;
+        function get_best_cp($destzone){
+            global $connection;
+            $threshold = 80;
+            
+            // Gets the list by zone
+            $listA = $connection->retrieve_cp_by_zone('A');
+            $listB = $connection->retrieve_cp_by_zone('B');
+            $listC = $connection->retrieve_cp_by_zone('C');
+            
+            // Orders the lists by occupancy
+            usort($listA, function($a, $b){
+                return $a['occupancy'] <=> $b['occupancy'];
+            });
+            usort($listB, function($a, $b){
+                return $a['occupancy'] <=> $b['occupancy'];
+            });
+            usort($listC, function($a, $b){
+                return $a['occupancy'] <=> $b['occupancy'];
+            });
+            
+            // Depending on destination hall's zone, run through lists in specific sequence
+            switch($destzone){
+                case "A":
+                    for($i=0; $i<count($listA); $i++){
+                        if($listA[$i]['occupancy'] <= $threshold){
+                            return Array($listA[$i]['area_id'], $listA[$i]['occupancy']);
+                        }
+                    }
+                    for($i=0; $i<count($listB); $i++){
+                        if($listB[$i]['occupancy'] <= $threshold){
+                            return Array($listB[$i]['area_id'], $listB[$i]['occupancy']);
+
+
+                        }
+                    }
+                    for($i=0; $i<count($listC); $i++){
+                        if($listC[$i]['occupancy'] <= $threshold){
+                            return Array($listC[$i]['area_id'] ,$listC[$i]['occupancy']);
+
+
+                        }
+                    }
+                break;
+                case "B":
+                    for($i=0; $i<count($listB); $i++){
+                        if($listB[$i]['occupancy'] <= $threshold){
+                            return Array($listB[$i]['area_id'], $listB[$i]['occupancy']);
+
+
+                        }
+                    }
+                    for($i=0; $i<count($listA); $i++){
+                        if($listA[$i]['occupancy'] <= $threshold){
+                            return Array($listA[$i]['area_id'], $listA[$i]['occupancy']);
+
+                        }
+                    }
+                    for($i=0; $i<count($listC); $i++){
+                        if($listC[$i]['occupancy'] <= $threshold){
+                            return Array($listC[$i]['area_id'] ,$listC[$i]['occupancy']);
+
+
+                        }
+                    }
+                break;
+                case "C":
+                    for($i=0; $i<count($listC); $i++){
+                        if($listC[$i]['occupancy'] <= $threshold){
+                            return Array($listC[$i]['area_id'] ,$listC[$i]['occupancy']);
+
+
+                        }
+                    }
+                    for($i=0; $i<count($listB); $i++){
+                        if($listB[$i]['occupancy'] <= $threshold){
+                            return Array($listB[$i]['area_id'], $listB[$i]['occupancy']);
+
+                        }
+                    }
+                    for($i=0; $i<count($listA); $i++){
+                        if($listA[$i]['occupancy'] <= $threshold){
+                            return Array($listA[$i]['area_id'], $listA[$i]['occupancy']);
+
+                        }
+                    }
+                break;
+            }
+            
+            // In case no available lots just give best in their area
+            switch($destzone)
+            {
+                case "A":
+                    return Array($listA[0]['area_id'], $listA[0]['occupancy']);
+
+                case "B":
+                    return Array($listB[0]['area_id'], $listB[0]['occupancy']);
+
+                case "C":
+                    return Array($listC[0]['area_id'] ,$listC[0]['occupancy']);
+
+            }
         }
+
         
-        
+//        
 
 //        function get_start_nodes($routeList, $dest) {
 //            // From the array, get value of start node based on end node
@@ -103,3 +191,5 @@
 ////                }
 ////            }
 //        }
+
+

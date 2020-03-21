@@ -138,7 +138,41 @@
     margin-left: 5%;
 }
 
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    background-color: whitesmoke;
+    color: black;
+    padding: 2%;
+    width: 100%;
+    margin: auto;
+    text-align: center;
+  }
+  
+  .title {
+    color: grey;
+    font-size: 18px;
+  }
 
+  #final_back, #final_open , #final_copy {
+      margin:0.5% auto 0.5% auto;
+      color:white;
+  }
+
+  #header{
+      font-weight: bold;;
+  }
+  
+  a {
+    text-decoration: none;
+    font-size: 0.9em;
+    color: white;
+  }
+  a:hover {
+    color: white !important;
+  }
+  .dark_highlight {
+      color: #3d6ba0;
+  }
 @media only screen and (max-width: 768px) {
 
 }

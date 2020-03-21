@@ -86,6 +86,28 @@ class connections {
         return $data;
     }
 
+    function saveUserHistory($tableName, $username , $date_time , $start_point, $end_point , $startingName , $destinationName){
+        if ($GLOBALS['localtesting']) {
+            $conn = new mysqli("localhost", "root", "", "carpark");
+        } else {
+            $config = parse_ini_file('/var/www/private/db-config.ini'); //Should use absolute path because when method is called from different places, the relative path is different
+            $conn = new mysqli($config['servername'], $config['username'], $config['password'], $config['dbname']);
+        }
+        if ($conn->connect_error) {
+            die("Connection error: " . $conn->connect_error);
+        }
+
+        $sql = "INSERT INTO " . $tableName ."(username , date_time, start_point , end_point , startingName , destinationName)
+        VALUES ('" . $username . "' , '" . $date_time . "',' " . $start_point . "','" . $end_point . "','" . $startingName . "','" . $destinationName ."')";
+        if ($conn->query($sql) === TRUE) {
+        } else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
+
+        $conn->close();
+
+    }
+
 
     function retrieve_all_data($tableName) {
         
@@ -163,4 +185,26 @@ class connections {
         return $data;
     }
 
+    function retrieve_cp_by_zone($zone) {
+        if ($GLOBALS['localtesting']) {
+            $conn = new mysqli("localhost", "root", "", "carpark");
+        } else {
+            $config = parse_ini_file('/var/www/private/db-config.ini'); //Should use absolute path because when method is called from different places, the relative path is different
+            $conn = new mysqli($config['servername'], $config['username'], $config['password'], $config['dbname']);
+        }
+        if ($conn->connect_error) {
+            die("Connection error: " . $conn->connect_error);
+        }
+        $sql = "SELECT * FROM area WHERE zone = '$zone' AND type = 'carpark'";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while ($row = $result->fetch_assoc()) {
+                $data[] = $row;
+            }
+        }
+       
+        $conn->close();
+        return $data;
+    }
 }
