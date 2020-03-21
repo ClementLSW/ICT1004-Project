@@ -54,14 +54,17 @@
                 <tbody>
                     <?php while ($row = $result->fetch_assoc()) { ?>
                         <tr>                            
-                            <td><?php echo $row['area_id']; ?></td>
-                            <td><?php echo $row['type']; ?></td>
-                            <td><?php echo $row['occupancy']; ?></td>
-                            <td><?php echo $row['location_id']; ?></td>
-                            <td><?php echo $row['name']; ?></td>                                                           
-                            <td><a href="update.php?area=<?php echo $row['area_id']; ?>" class="btn btn-success">Edit</a></td>
-                        </tr>
-                    <?php } ?>
+                    <form action="process.php" method="get">
+                        <td><?php echo $row['area_id']; ?></td>
+                        <input type="hidden" name="area_id" value="<?php echo $row['area_id']; ?> ">
+                        <td><?php echo $row['type']; ?></td>                   
+                        <td><input type="text" style="color:black;" name="new_occupancy" value="<?php echo $row['occupancy']; ?>"></td>  
+                        <td><?php echo $row['location_id']; ?></td>
+                        <td><?php echo $row['name']; ?></td>                                                           
+                        <td><input type="submit" value="Update" class="btn btn-success""></a></td>
+                    </form> 
+                    </tr>
+                <?php } ?>
                 </tbody>
             </table>
             <script>
