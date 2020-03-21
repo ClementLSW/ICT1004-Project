@@ -6,9 +6,24 @@ global $password, $cmfpassword, $success, $errorMsgpwd, $email, $password_hash;
 
 $email = $_SESSION['email'];
 $username = $_SESSION['username'];
-$password = $_POST["pwd"];
-$cmfpassword = $_POST["cmfpassword"];
 
+
+//Sanitsation of input
+if (empty($_POST["pwd"])) {
+    $errorMsg .= "Password is required.<br>";
+    $success = false;
+    $_SESSION['Inputerror'] = $errorMsg;
+} else {
+    $password = sanitize_input($_POST["pwd"]);
+}
+if (empty($_POST["cmfpassword"])) {
+    $errorMsg .= "Password is required.<br>";
+    $success = false;
+    $_SESSION['Inputerror'] = $errorMsg;
+} else {
+    $cmfpassword = sanitize_input($_POST["cmfpassword"]);
+}
+//Comparing password string
 if (strcmp($password, $cmfpassword) !== 0) {
     $_SESSION["nomatchpass"] = 1;
     header('location:/ICT1004-Project/login/reset.php');
@@ -39,6 +54,10 @@ else {
         //header('location:/ICT1004-Project/userlogin');
     }
 }
-
-
-
+//Helper function to sanitise input
+function sanitize_input($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}

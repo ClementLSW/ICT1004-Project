@@ -52,6 +52,7 @@
                     $errorMsg = "Connection failed: " . $conn->connect_error;
                     $success = false;
                 } else {
+                    //Getting the row based on username
                     $sql = "SELECT * FROM users WHERE ";
                     $sql .= "username='$username'";
                 }
@@ -73,7 +74,7 @@
                         $_SESSION["username"] = $username;
                         $permission = $row["permissions"];
                         $_SESSION["permissions"] = $permission;
-                        echo $_SESSION["permissions"];
+                        
                         header('location:/ICT1004-Project/home');
                     } elseif ($password == $row["password"]) {
                         $firstname = $row["fname"];

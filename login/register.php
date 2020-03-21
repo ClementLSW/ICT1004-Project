@@ -4,7 +4,7 @@
     <div class="register-box">
           <div class ="card">
         <h1>Members Registration</h1>
-        <p>For existing members, please go to the<a href="/ICT1004-Project/userlogin"style="color: #32b5c7"> Login page</a></p>
+        <p>For existing members, please go to the<a href="/ICT1004-Project/userlogin"style="color:#00b8e6"> Login page</a></p>
         <form action="/ICT1004-Project/login/process_register.php" method="post">
             <?php
             // session_start();
@@ -46,7 +46,7 @@
                 <i class="fas fa-lock"></i>
                 <input type="password" name="pwd_confirm" required placeholder="Confirm Password" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$">
             </div>        
-            <p id="terms"><label><input type="checkbox" required name="agree"> <a href="Park_now_tAc.pdf" target="_blank" style="color: #32b5c7">I agree to terms and conditions.</a></label></p>              
+            <p id="terms"><label><input type="checkbox" required name="agree"> <a href="Park_now_tAc.pdf" target="_blank" style="color: #00b8e6">I agree to terms and conditions.</a></label></p>              
             <div class="form-group"><button class="btn btn-primary" type="submit">Register</button></div></form>
     </div>
     </div>
@@ -55,8 +55,8 @@
     ?>
     <style>
         .btn-primary{
-            background-color:#32b5c7 !important;
-            border: 2px solid #32b5c7 !important;
+            background-color:#00b8e6 !important;
+            border: 2px solid #00b8e6 !important;
         }
         
         

@@ -42,7 +42,7 @@
                 echo "<p style='color:green;'>" . "Password reset successful" . "</p>";
             }
             ?>
-            <p>For New members, please go to the<a href="/ICT1004-Project/register" style="color: #32b5c7"> Register page</a>.</p>          
+            <p>For New members, please go to the<a href="/ICT1004-Project/register" style="color: #3d6ba0"> Register page</a>.</p>          
             <form action="/ICT1004-Project/login/process_login.php" method="post">
                 <div class="textbox">
                     <i class="fas fa-user"></i>
@@ -55,7 +55,7 @@
                 </div>
                 <div class="form-group"><button class="btn btn-primary" type="submit" >Login</button></div></form>
             <div>
-                <p><a href="/ICT1004-Project/login/forgot.php" style="color: #32b5c7"> Forgot Password</a></p>
+                <p><a href="/ICT1004-Project/login/forgot.php" style="color: #3d6ba0"> Forgot Password</a></p>
                 </div>
             </div>
         </div>
@@ -63,8 +63,8 @@
     </body>
     <style>
         .btn-primary{
-            background-color:#32b5c7 !important;
-            border: 2px solid #32b5c7 !important;
+            background-color:#3d6ba0 !important;
+            border: 2px solid #3d6ba0 !important;
         }
         
         

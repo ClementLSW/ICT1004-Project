@@ -28,6 +28,8 @@ require '../PHPMailer/src/Exception.php';
         $email = $errorMsg = "";
         $success = true;
         $permissions = "user";
+        
+        //Sanitsation of user input
         if (empty($_POST["email"])) {
             $errorMsg .= "Email is required.<br>";
             $success = false;
@@ -82,11 +84,12 @@ require '../PHPMailer/src/Exception.php';
             $errorMsg .= "Invalid email format.";
             $success = false;
         }
-
+        //Comparing passworing strings
         if (strcmp($password, $cmfpassword) !== 0) {
             $errorMsgpwd .= "Passwords does not match";
             $success = false;
         }
+        
         if ($success) {
 
             //Creating databse connection.
@@ -117,6 +120,7 @@ require '../PHPMailer/src/Exception.php';
                         $_SESSION["duplicateemail"] = 1;
                         header('location:http://52.54.127.185/ICT1004-Project/register');
                     } else {
+                        //Sending mail using php mailer
                         $_SESSION["registersuccess"] = 1;
                         $password_hash = password_hash($password, PASSWORD_DEFAULT);
                         $mail = new PHPMailer;
@@ -134,13 +138,14 @@ require '../PHPMailer/src/Exception.php';
                         $mail->Body = "Thank you for registering to be a member! If this is not you, send a reply to this email and we will contact you shortly";
                         $mail->send();
                         header('location:/ICT1004-Project/userlogin');
+                        
+                        //Prepared statement
                         $stmt = $conn->prepare("INSERT INTO carpark.users (username, fname, lname, email, password, contact, permissions) "
                                 . "VALUES (?,?, ?, ?, ?, ?, ?)");
                         $stmt->bind_param("sssssss", $username, $firstname, $lastname, $email, $password_hash, $contact, $permissions );
                         $stmt->execute();
                         $stmt->close();
-//                        $sql = "INSERT INTO carpark.users(username, fname, lname, email, password, contact, permissions)";
-//                        $sql .= " VALUES ('$username','$firstname', '$lastname', '$email', '$password_hash', '$contact', '$permissions')";
+//                       
                         //Execute the query
                         if (!$conn->query($sql)) {
                             $errorMsg = "Database error: " . $conn->error;
