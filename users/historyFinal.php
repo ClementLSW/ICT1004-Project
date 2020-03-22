@@ -3,7 +3,7 @@
     <article id="user_input_container" class="offset-sm-2 col-sm-8 my_container justify-content-center"> 
         <section id="final_page">
         <?php if ($GLOBALS['valid']) : ?>
-            <section class="card">
+            <section class="card1">
                 <section id="header"><h1 id="carpark_placeholder">Park at : <span id="carpark_dynamic" class="dark_highlight"></span><?php echo $_POST['carparkName'] ?></h1></section>
                 <p id="occupancy_placeholder" alt="occupancy placeholder">Carpark is <?php echo $_POST['occupancy'] ?> % full</p>
                 <p class="title" id="starting_placeholder">From : <?php echo $_POST['startingName']?></p> 

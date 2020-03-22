@@ -3,7 +3,7 @@
     <head>
         <?php
         //turn off error reporting
-        error_reporting(1);
+        error_reporting(0);
         // include "header.inc.php";
         // include 'connections.php';
         //URL Routing
@@ -108,6 +108,6 @@
         dispatch($action);
         ?> 
 
-
     </head>
+    
 </html>

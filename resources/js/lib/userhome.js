@@ -401,15 +401,18 @@ $(document).ready(function () {
   // $('.js-example-basic-single').select2(); // Shun han look here 
   $(".js-example-basic-single").select2({ dropdownParent: "#user_form" });
   $('#destination_submit').click(function () {
-    console.log("is this working");
     currentDestination = $('#destinationInput').val();
-    if (currentDestination != 0) {
-      currentlyChoosen = 1;
-      changeBackground(currentDestination);
-      toggleView(currentlyChoosen)
-      //Retrieve current Destination data from DB 
-      $("#shopInput").empty();
-      showShops(currentDestination);
+    if(currentDestination != undefined){
+      if (currentDestination != 0) {
+        currentlyChoosen = 1;
+        changeBackground(currentDestination);
+        toggleView(currentlyChoosen)
+        //Retrieve current Destination data from DB 
+        $("#shopInput").empty();
+        showShops(currentDestination);
+      }else{
+        alert("Please input a value first");
+      }
     }else{
       alert("Please input a value first");
     }
@@ -417,24 +420,15 @@ $(document).ready(function () {
 
   $('#shop_submit').click(function () {
     currentShop = $('#shopInput').val();
-
-    if (currentShop != -1) {
-      currentlyChoosen = 2;
-      toggleView(currentlyChoosen);
-      //Do the search for source address 
-      initAutocompleteNoMap();
-      // initAutocompleteNoMap().then(value => {
-      //   while (true) {
-      //     if (value == true) {
-      //       $('#comboSection').css('right', '300%');
-      //       $('#currentWindow').css('right', '300%');
-      //       $('#currentLocationButton').css('margin', '0% 3% 2% 0%');
-      //       break;
-      //     }
-      //   }
-      // });
+    if(currentShop != undefined){
+      if (currentShop != -1) {
+        currentlyChoosen = 2;
+        toggleView(currentlyChoosen);
+        initAutocompleteNoMap();
+      }
+    }else{
+      alert("Please input a value first");
     }
-
     // processInput(currentDestination , currentShop);
 
   })
