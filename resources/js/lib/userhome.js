@@ -317,48 +317,50 @@ function processInput(currentDestination, currentShop, userlat, userlng, startin
     console.log(userlat);
     console.log(userlng);
     $.ajax({
-        data: {currentDestination: currentDestination, currentShop: currentShop, userlat: userlat, userlng: userlng, isLogin: isLogin, username: username, dateTime: dateTime, startingName: startingName},
-        url: 'users/user_input_process.php',
-        async: false,
-        method: 'POST', // or GET
-        success: function (msg) {
-            currentlyChoosen = 3;
-            toggleView(currentlyChoosen);
-            var obj = JSON.parse(msg);
-            destinationName = obj['destinationName'];
-            carparkName = obj['carparkName'];
-            destlat = obj['destlat'];
-            destlng = obj['destlng'];
-            occupancy = obj['occupancy'];
-            url = obj['url'];
-            userlat = obj['userlat'];
-            userlng = obj['userlng'];
-            shopName = obj['areaName'];
+    data: { currentDestination: currentDestination, currentShop: currentShop , userlat: userlat, userlng: userlng , isLogin: isLogin, username: username , dateTime: dateTime , startingName: startingName},
+    url: 'users/user_input_process.php',
+    async: false,
+    method: 'POST', // or GET
+    success: function (msg) {
+      currentlyChoosen = 3;
+      toggleView(currentlyChoosen);
+      var obj = JSON.parse(msg);
+      destinationName = obj['destinationName'];
+      carparkName = obj['carparkName'];
+      destlat = obj['destlat'];
+      destlng = obj['destlng'];
+      occupancy = obj['occupancy'];
+      url = obj['url'];
+      userlat = obj['userlat'];
+      userlng = obj['userlng'];
+      shopName = obj['areaName'];
+     
+      $("#carpark_dynamic").html(carparkName);
+      $("#starting_placeholder").text("From : " + startingName);
+      $("#destination_placeholder").text("To : " + shopName + ", " + destinationName);
+      $("#occupancy_placeholder").text("Carpark is " + occupancy + "% full");
+      $('#url_button').attr('href' , url);
+      $('#url_button').attr('target' , "_blank");
+      
 
-            $("#carpark_dynamic").html(carparkName);
-            $("#starting_placeholder").text("From : " + startingName);
-            $("#destination_placeholder").text("To : " + shopName + ", " + destinationName);
-            $("#occupancy_placeholder").text("Carpark is " + occupancy + "% full");
-            $('#url_button').attr('href', url);
-            $('#url_button').attr('target', "_blank");
+      $("#final_copy").click(function(){
+        var copyText = $('#url_button').attr('href');
+        var textarea = document.createElement("input");
+        textarea.value = copyText;
+        textarea.style.position = "fixed";
+        document.body.appendChild(textarea);
+        textarea.select();
+        textarea.setSelectionRange(0, 99999); /*For mobile devices*/
+        document.execCommand("copy"); 
+        alert("Successfully copied");
+        document.body.removeChild(textarea);
+        /* Alert the copied text */
+      })
 
-
-            $("#final_copy").click(function () {
-                var copyText = $('#url_button').attr('href');
-                var textarea = document.createElement("input");
-                textarea.value = copyText;
-                textarea.style.position = "fixed";
-                document.body.appendChild(textarea);
-                textarea.select();
-                textarea.setSelectionRange(0, 99999); /*For mobile devices*/
-                document.execCommand("copy");
-                alert("Successfully copied");
-                document.body.removeChild(textarea);
-                /* Alert the copied text */
-            })
-            // window.open(msg, '_blank');
-        }
-    });
+    
+      // window.open(msg, '_blank');
+    }
+  });
 
 }
 
@@ -393,45 +395,41 @@ function showShops(destination) {
 
 var currentlyChoosen = 0; // 0 = Destination , 1 = Shops
 $(document).ready(function () {
-    toggleView(currentlyChoosen);
-    var currentDestination = $('#destinationInput').val();
-    var currentShop = $('#shopInput').val();
-    // $('.js-example-basic-single').select2(); // Shun han look here 
-    $(".js-example-basic-single").select2({dropdownParent: "#user_form"});
-    $('#destination_submit').click(function () {
-        console.log("is this working");
-        currentDestination = $('#destinationInput').val();
-        if (currentDestination != 0) {
-            currentlyChoosen = 1;
-            changeBackground(currentDestination);
-            toggleView(currentlyChoosen)
-            //Retrieve current Destination data from DB 
-            $("#shopInput").empty();
-            showShops(currentDestination);
-        } else {
-            alert("Please input a value first");
-        }
-    })
+  toggleView(currentlyChoosen);
+  var currentDestination = $('#destinationInput').val();
+  var currentShop = $('#shopInput').val();
+  // $('.js-example-basic-single').select2(); // Shun han look here 
+  $(".js-example-basic-single").select2({ dropdownParent: "#user_form" });
+  $('#destination_submit').click(function () {
+    currentDestination = $('#destinationInput').val();
+    if(currentDestination != undefined){
+      if (currentDestination != 0) {
+        currentlyChoosen = 1;
+        changeBackground(currentDestination);
+        toggleView(currentlyChoosen)
+        //Retrieve current Destination data from DB 
+        $("#shopInput").empty();
+        showShops(currentDestination);
+      }else{
+        alert("Please input a value first");
+      }
+    }else{
+      alert("Please input a value first");
+    }
+  })
 
-    $('#shop_submit').click(function () {
-        currentShop = $('#shopInput').val();
-
-        if (currentShop != -1) {
-            currentlyChoosen = 2;
-            toggleView(currentlyChoosen);
-            //Do the search for source address 
-            initAutocompleteNoMap();
-            // initAutocompleteNoMap().then(value => {
-            //   while (true) {
-            //     if (value == true) {
-            //       $('#comboSection').css('right', '300%');
-            //       $('#currentWindow').css('right', '300%');
-            //       $('#currentLocationButton').css('margin', '0% 3% 2% 0%');
-            //       break;
-            //     }
-            //   }
-            // });
-        }
+  $('#shop_submit').click(function () {
+    currentShop = $('#shopInput').val();
+    if(currentShop != undefined){
+      if (currentShop != -1) {
+        currentlyChoosen = 2;
+        toggleView(currentlyChoosen);
+        initAutocompleteNoMap();
+      }
+    }else{
+      alert("Please input a value first");
+    }
+    // processInput(currentDestination , currentShop);
 
         // processInput(currentDestination , currentShop);
 
@@ -480,7 +478,19 @@ $(document).ready(function () {
         toggleView(currentlyChoosen);
     })
 
-
+  $("#history_copy").click(function(){
+    var copyText = $('#history_url_button').attr('href');
+    var textarea = document.createElement("input");
+    textarea.value = copyText;
+    textarea.style.position = "fixed";
+    document.body.appendChild(textarea);
+    textarea.select();
+    textarea.setSelectionRange(0, 99999); /*For mobile devices*/
+    document.execCommand("copy"); 
+    alert("Successfully copied");
+    document.body.removeChild(textarea);
+    /* Alert the copied text */
+  })
 
 
 });

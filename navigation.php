@@ -1,4 +1,4 @@
-<nav class="nav navheight">
+<nav id="navBar" style="display:none" class="nav navheight">
     <div class="w-100">
         <div class="logo">
             <a href="/ICT1004-Project/home">武汉</a>
@@ -36,7 +36,9 @@
 
 
 <script>
-   
+            $(document).ready(function(){
+                $("#navBar").show();
+            })
             $(window).scroll(function() {
                 if ($(document).scrollTop() > 10) {
                     console.log("OK");

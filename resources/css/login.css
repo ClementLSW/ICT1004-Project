@@ -25,16 +25,19 @@ body{
     padding-right: 70px;
     padding-bottom: 30px;
     padding-left: 70px;
-    width: 390px;
+    width: 100%;
     padding: 2px 16px;
+    height: auto;
 
 }
 
 
 .login-box{
     padding: 2px 16px;
-    width: 280px;
+    width: auto;
+    height: auto;
     position: absolute;
+    display: flex;
     top: 50%;
     left: 50%;
     bottom: -5px;
@@ -55,6 +58,7 @@ body{
 }
 .textbox{
     width: 100%;
+    display: flex;
     overflow: hidden;
     font-size: 20px;
     padding: 8px 0;
@@ -90,16 +94,26 @@ p{
     font-size: 20px;
 }
 .register-box{
-
-    width: 280px;
-    position: absolute;
-    top: 45%;
-    left: 50%;
-    bottom: -5px;
-    transform: translate(-50%,-50%);
+    height: 100%;
+    width: 90%;
+    position: relative;; 
+    top: 100px;
+    margin-top: 10%;
+    margin: auto;
 
 }
 #terms{
     font-size: 20px;
 
 }
+
+.textbox input{
+    width: 100%;
+}
+
+@media only screen and (max-width: 600px) {
+    .login-box{
+        height: 80%;
+        width: 80%
+    }
+  }

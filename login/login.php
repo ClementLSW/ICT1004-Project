@@ -22,7 +22,7 @@
         
         <div class="login-box">
                <div class ="card">
-            <h1>Members Login</h1>
+            <h1 style="padding:0px !important;margin:2% 0% 6% 0% !important">Login</h1>
             <?php
             
             // session_start();
@@ -42,20 +42,20 @@
                 echo "<p style='color:green;'>" . "Password reset successful" . "</p>";
             }
             ?>
-            <p>For New members, please go to the<a href="/ICT1004-Project/register" style="color: #3d6ba0"> Register page</a>.</p>          
+            <p>For New members, please go to the<a href="/ICT1004-Project/register" style="color: #90d4ed"> Register page</a>.</p>          
             <form action="/ICT1004-Project/login/process_login.php" method="post">
                   <div class="textbox">
                     <i class="fas fa-user"></i>
-                    <input type="text" placeholder="Username" required id="email" name="username">
+                    <input type="text" placeholder="Username" aria-label="username" required id="email" name="username">
                 </div>
 
                 <div class="textbox">
                     <i class="fas fa-lock"></i>
-                    <input type="password"type="password" name="pwd" required placeholder="Enter password">
+                    <input type="password"type="password" aria-label="password" name="pwd" required placeholder="Enter password">
                 </div>
                 <div class="form-group"><button class="btn btn-primary" type="submit" >Login</button></div></form>
             <div>
-                <p><a href="/ICT1004-Project/login/forgot.php" style="color: #3d6ba0"> Forgot Password</a></p>
+                <p><a href="/ICT1004-Project/login/forgot.php" style="color: white"> Forgot Password</a></p>
                 </div>
             </div>
         </div>

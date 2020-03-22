@@ -67,6 +67,49 @@ if(isset($_POST['getServerKey'])){
     }
 }
 
+if(isset($_POST['historyID'])){
+    $validID = filter_var($_POST['historyID'], FILTER_VALIDATE_INT);
+    if(!$validID === false){
+        $historyID = $_POST['historyID'];
+        $connection = new connections();
+        $colArray = ["user_id" ];
+        $valArray = [$historyID];
+        $length = count($valArray);
+        $typeArray = ["int" ];
+        $operators = ["="];
+        $historyInformation = $connection->retrieve_data_where_multiple_equals("history", $colArray , $valArray, $length , $typeArray , $operators);
+        echo json_encode($historyInformation);
+    }
+}
+
+
+if(isset($_POST['destinationName']) && isset($_POST['shopName'])){
+    $destinationName = $_POST['destinationName'];
+    $shopName = $_POST['shopName'];
+    $destinationValue = trim(strval($destinationName));
+    $shopValue = trim(strval($shopName));
+    $destinationValue = htmlspecialchars($destinationName);
+    $shopValue = htmlspecialchars($shopName);
+    $connection = new connections();
+    $colArray = ["name"];
+    $valArray = [$shopValue];
+    $length = count($valArray);
+    $typeArray = ["string" ];
+    $operators = ["="];
+    $getAreaID = $connection->retrieve_data_where_multiple_equals("area", $colArray , $valArray, $length , $typeArray , $operators);
+    
+
+    $colArray = ["location_name"];
+    $valArray = [$destinationValue];
+    $length = count($valArray);
+    $typeArray = ["string" ];
+    $operators = ["="];
+    $getLocationID = $connection->retrieve_data_where_multiple_equals("location", $colArray , $valArray, $length , $typeArray , $operators);
+    
+    $arr = array('destinationID' => $getLocationID[0]['location_id'] , 'shopID' => $getAreaID[0]['area_id']);
+    echo json_encode($arr);
+}
+
 //Check if got both value 
 if (isset($_POST['currentDestination']) && isset($_POST['currentShop']) && isset($_POST['userlat']) && isset($_POST['userlng'])) {
     $currentDestination = $_POST['currentDestination'];
@@ -78,7 +121,6 @@ if (isset($_POST['currentDestination']) && isset($_POST['currentShop']) && isset
         $shopValue = trim(strval($_POST['currentShop']));
         $destinationValue = htmlspecialchars($destinationValue);
         $shopValue = htmlspecialchars($shopValue);
-
 
         $connection = new connections();
         $colArray = ["area_id" ];
