@@ -49,6 +49,7 @@
                 <th class="th-sm">Date/Time</th>
                 <th class="th-sm">Starting Location</th>
                 <th class="th-sm">Destination</th>                                 
+                <th class="th-sm">Action</th>      
             </tr>
         </thead>
         <tbody>
@@ -56,7 +57,8 @@
                 <tr>                            
                     <td><?php echo $row['date_time']; ?></td>
                     <td><?php echo $row['startingName']; ?></td>
-                    <td><?php echo $row['destinationName']; ?></td>                        
+                    <td><?php echo $row['destinationName']; ?></td>      
+                    <td><a href="" class="btn btn-primary">Go to</a></td>
                 </tr>
             <?php } ?>
         </tbody>

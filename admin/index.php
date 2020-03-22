@@ -7,22 +7,20 @@ if ($GLOBALS['valid'] && isset($_SESSION["permissions"])):
         require $GLOBALS['root'] . '/navigation.php';
         require_once "debug.php";
         ?>        
-        <?php if(isset($_SESSION['message'])) { ?>
-            <section id="container2" style="margin-top: 120px;width: 100%; height:auto; margin-left: 2%; margin-right: 2%;">
+        <section id="container2" style="margin-top: 120px;width: 100%; margin-left: 2%; margin-right: 2%;">
+            <?php if (isset($_SESSION['message'])) { ?>
                 <div id="success-message" class="alert alert-<?php echo $_SESSION['msg_type'] ?>">
                     <?php
                     echo $_SESSION['message'];
                     unset($_SESSION['message']);
                     ?>
                 </div>
-            <?php
-            echo $_SESSION['message'];
-            unset($_SESSION['message']);?>
+                <?php
+                echo $_SESSION['message'];
+                unset($_SESSION['message']);
+                ?>
             <?php } ?>                
-            <?php
-            ?>
-        </div>
-
+      
         <?php
         if ($GLOBALS['localtesting'] == true) {
             $conn = new mysqli('localhost', 'root', '', 'carpark');
