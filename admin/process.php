@@ -1,9 +1,9 @@
 <?php
 
-session_start();
+//session_start();
 require_once 'debug.php';
 if ($GLOBALS['local'] == true) {
-    $conn = new mysqli('localhost', 'root', '', 'testing');
+    $conn = new mysqli('localhost', 'root', '', 'carpark');
 } else {
     $conn = new mysqli('localhost', 'sqldev', 'P@ssw0rd', 'carpark');
 }
@@ -52,6 +52,24 @@ if (isset($_GET['delete'])) {
     $_SESSION['message'] = "User " . $name . " has been deleted";
     $_SESSION['msg_type'] = "danger";
     header("location: index.php");
+}
+
+if (isset($_GET['area_id'])) {
+    $id = $_GET['area_id'];
+    $occupancy = $_GET['new_occupancy'];
+    $result = $conn->query("SELECT * FROM area WHERE area_id='$id'");
+    while ($area = $result->fetch_assoc()) {
+        if ($GLOBALS['local'] == true) {
+            $area = $area['name'];
+        } else {
+            $area = $area['name'];
+            echo $area;
+        }
+    }
+    $conn->query("UPDATE area SET occupancy='$occupancy' WHERE area_id='$id'");
+    $_SESSION['message'] = "Occupancy in " . $area . " has been updated";
+    $_SESSION['msg_type'] = "success";
+    header("location: occupancy.php");
 }
 
 $conn->close();

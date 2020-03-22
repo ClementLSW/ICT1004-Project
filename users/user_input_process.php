@@ -88,10 +88,11 @@ if (isset($_POST['currentDestination']) && isset($_POST['currentShop']) && isset
         $operators = ["="];
         $getAreaName = $connection->retrieve_data_where_multiple_equals("area", $colArray , $valArray, $length , $typeArray , $operators);
         
+        $getDestinationName = $connection->retrieve_data_where("location", "location_id", $currentDestination);
         //Use Clement Method 
         include  '../calculate_route.php';
-        // $area_id = get_best_cp($shopValue);
-        $area_id = 20;
+        list($area_id, $occupancy) = get_best_cp($getAreaName[0]['zone']);
+    //    $area_id = 20;
         // Retrieve the area data based on area id
         // $area = $connection->retrieve_data_where_multiple_equals("area", ["location_id" ] , [$destinationValue ] , 1 , ['int']);
 
@@ -103,14 +104,23 @@ if (isset($_POST['currentDestination']) && isset($_POST['currentShop']) && isset
         $area = $connection->retrieve_data_where_multiple_equals("area", $colArray , $valArray, $length , $typeArray , $operators);
         $userlatitude = $_POST['userlat'];
         $userlongitude = $_POST['userlng'];
+        $usercombined = $userlatitude . ",".  $userlongitude;
         list($destlat,  $destlng) = getCoordinatesFromArea($area);
-        $url = "https://www.google.com/maps/dir/" . $userlatitude . "," . $userlongitude . "/" . $destlat . "," . $destlng;
-        $arr = array('carparkName' => $area[0]['name'], 'destlat' => $destlat, 'destlng' => $destlng, 'url' => $url, 'userlat' => $userlatitude , 'userlng' => $userlongitude , 'areaName' => $getAreaName[0]['name']);
+        $destcombined = $destlat . "," . $destlng;
+        $url = "https://www.google.com/maps/dir/" . $usercombined . "/" . $destcombined;
+        
+        if($_POST['isLogin'] == 'true' && isset($_POST['username'])){
+            // save to history 
+            $fullDestinationName = $getDestinationName[0]['location_name'] . ", " .  $getAreaName[0]['name'];
+            $starting_address = $userlatitude . "," . $userlongitude;
+            $destination_address = $destlat . "," . $destlng;
+            $connection->saveUserHistory("history" , $_POST['username'] , $_POST['dateTime'] , $starting_address, "test", $_POST['startingName'] , $fullDestinationName);
+        }
+        $arr = array('destinationName' => $getDestinationName[0]['location_name'] , 'carparkName' => $area[0]['name'], 'destlat' => $destlat, 'destlng' => $destlng, 'url' => $url, 'userlat' => $userlatitude , 'userlng' => $userlongitude , 'areaName' => $getAreaName[0]['name'] , 'occupancy' => $occupancy);
         echo json_encode($arr);
+        
+       
         // echo '<a href="'. $url . '"target="_blank">Direct</a>';
-
-
-        // if($GLOBALS['debug']){print($destinationValue);}
     }
 }
 

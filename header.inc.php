@@ -7,31 +7,28 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
 
 <script> var loc = window.location.pathname;
-var script = document.createElement('script');
-var dir = loc.split('/'); 
-script.setAttribute('src','/' + dir[1] + '/' + "resources/js/lib/userhome.js" );
-document.getElementsByTagName('script')[0].parentNode.appendChild(script);
+    var script = document.createElement('script');
+    var dir = loc.split('/');
+    script.setAttribute('src', '/' + dir[1] + '/' + "resources/js/lib/userhome.js");
+    document.getElementsByTagName('script')[0].parentNode.appendChild(script);
 </script>
 <script> var loc = window.location.pathname;
-var script = document.createElement('script');
-var dir = loc.split('/'); 
-script.setAttribute('src','/' + dir[1] + '/' + "resources/js/lib/navigation.js" );
-document.getElementsByTagName('script')[0].parentNode.appendChild(script);
+    var script = document.createElement('script');
+    var dir = loc.split('/');
+    script.setAttribute('src', '/' + dir[1] + '/' + "resources/js/lib/navigation.js");
+    document.getElementsByTagName('script')[0].parentNode.appendChild(script);
 </script>
 <script> var loc = window.location.pathname;
-var script = document.createElement('script');
-var dir = loc.split('/'); 
-script.setAttribute('src','/' + dir[1] + '/' + "resources/js/lib/mapview.js" );
-document.getElementsByTagName('script')[0].parentNode.appendChild(script);
+    var script = document.createElement('script');
+    var dir = loc.split('/');
+    script.setAttribute('src', '/' + dir[1] + '/' + "resources/js/lib/mapview.js");
+    document.getElementsByTagName('script')[0].parentNode.appendChild(script);
 </script>
 
 <!-- External Style Sheet -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"></link>
 <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/darkly/bootstrap.min.css" rel="stylesheet" integrity="sha384-rCA2D+D9QXuP2TomtQwd+uP50EHjpafN+wruul0sXZzX/Da7Txn4tB9aLMZV4DZm" crossorigin="anonymous">
-<!-- DataTables -->
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
-<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
 
 <!-- Select 2  -->
 <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
@@ -41,27 +38,29 @@ document.getElementsByTagName('script')[0].parentNode.appendChild(script);
 
 <!-- Own Style Sheet -->
 <script> var loc = window.location.pathname;
-var link = document.createElement('link');
-var dir = loc.split('/'); 
-link.setAttribute('rel' , 'stylesheet');
-link.setAttribute('href','/' + dir[1] + '/' + "resources/css/main.css" );
-document.getElementsByTagName('link')[0].parentNode.appendChild(link);
+    var link = document.createElement('link');
+    var dir = loc.split('/');
+    link.setAttribute('rel', 'stylesheet');
+    link.setAttribute('href', '/' + dir[1] + '/' + "resources/css/main.css");
+    document.getElementsByTagName('link')[0].parentNode.appendChild(link);
 </script>
 
 <script> var loc = window.location.pathname;
-var link = document.createElement('link');
-var dir = loc.split('/'); 
-link.setAttribute('rel' , 'stylesheet');
-link.setAttribute('href','/' + dir[1] + '/' + "resources/css/login.css" );
-document.getElementsByTagName('link')[0].parentNode.appendChild(link);
+    var link = document.createElement('link');
+    var dir = loc.split('/');
+    link.setAttribute('rel', 'stylesheet');
+    link.setAttribute('href', '/' + dir[1] + '/' + "resources/css/login.css");
+    document.getElementsByTagName('link')[0].parentNode.appendChild(link);
 </script>
 
 <script> var loc = window.location.pathname;
-var link = document.createElement('link');
-var dir = loc.split('/'); 
-link.setAttribute('rel' , 'stylesheet');
-link.setAttribute('href','/' + dir[1] + '/' + "resources/css/mapview.css" );
-document.getElementsByTagName('link')[0].parentNode.appendChild(link);
+    var link = document.createElement('link');
+    var dir = loc.split('/');
+    link.setAttribute('rel', 'stylesheet');
+    link.setAttribute('href', '/' + dir[1] + '/' + "resources/css/mapview.css");
+    document.getElementsByTagName('link')[0].parentNode.appendChild(link);
 </script>
 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script defer src="https://use.fontawesome.com/releases/v5.12.1/js/all.js"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css">

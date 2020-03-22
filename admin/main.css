@@ -1,7 +1,7 @@
-html {
+#container2 {
     /*overflow: scroll;*/
     overflow-x: hidden;
-    max-width: 100%;
+    max-width: 100%; 
 }
 ::-webkit-scrollbar {
     width: 0px;  /* Remove scrollbar space */
