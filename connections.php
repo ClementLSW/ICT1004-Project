@@ -19,12 +19,40 @@ class connections {
                 if($types[$i] != "string"){
                     $argValue = $argValue . strval($colname[$i]) . $operators[$i] . "?";
                     $parameter .= "i";
-                    strval($valArr . ($i+1)) .= $colval[$i];
+                    if($i == 0){
+                        $varArr1 = $colval[$i];
+                    }
+                    else if($i == 1){
+                        $varArr2 = $colval[$i];
+                    }
+                    else if($i == 2){
+                        $varArr3 = $colval[$i];
+                    }
+                    else if($i == 3){
+                        $varArr4 = $colval[$i];
+                    }
+                    else if($i == 4){
+                        $varArr5 = $colval[$i];
+                    }
                 }
                 else{
                     $argValue = $argValue . strval($colname[$i]) .  $operators[$i] . "?";
                     $parameter .= "s";
-                    strval($valArr . ($i+1)) .= $colval[$i];
+                    if($i == 0){
+                        $varArr1 = $colval[$i];
+                    }
+                    else if($i == 1){
+                        $varArr2 = $colval[$i];
+                    }
+                    else if($i == 2){
+                        $varArr3 = $colval[$i];
+                    }
+                    else if($i == 3){
+                        $varArr4 = $colval[$i];
+                    }
+                    else if($i == 4){
+                        $varArr5 = $colval[$i];
+                    }
                 }
                 
                 if($i != $argCount -1){
