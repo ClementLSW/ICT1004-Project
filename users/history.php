@@ -1,4 +1,4 @@
-<?php if($GLOBALS['valid']): ?>
+<?php if($GLOBALS['valid'] && isset($_SESSION['username'])): ?>
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap.min.js"></script>
@@ -38,8 +38,9 @@
     if ($conn->connect_error) {
         die("Connection error: " . $conn->connect_error);
     }
-
-    $result = $conn->query("SELECT * FROM history WHERE username='test'");
+    
+    $result = $conn->query("SELECT * FROM history WHERE username='" . $_SESSION['username'] . "'");
+    $conn->close();
     ?> 
     <table id="table" class="table table-bordered dt-responsive nowrap" cellspacing="0" width="100%" style="background-color: #fff">
         <thead>
@@ -70,5 +71,6 @@
     </script>  
 </section>
 <?php else : ?>
-    <?php include '../views/404.php' ?>
+    <?php require $GLOBALS['root']. '/header.inc.php' ?>
+    <?php include $GLOBALS['root']. '/views/404.php' ?>
 <?php endif; ?>

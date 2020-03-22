@@ -109,15 +109,13 @@ if (isset($_POST['currentDestination']) && isset($_POST['currentShop']) && isset
         $destcombined = $destlat . "," . $destlng;
         $url = "https://www.google.com/maps/dir/" . $usercombined . "/" . $destcombined;
         
-        if(isset($_POST['isLogin'])){
+        if($_POST['isLogin'] == 'true' && isset($_POST['username'])){
             // save to history 
             $fullDestinationName = $getDestinationName[0]['location_name'] . ", " .  $getAreaName[0]['name'];
             $starting_address = $userlatitude . "," . $userlongitude;
             $destination_address = $destlat . "," . $destlng;
             $connection->saveUserHistory("history" , $_POST['username'] , $_POST['dateTime'] , $starting_address, "test", $_POST['startingName'] , $fullDestinationName);
         }
-        
-        
         $arr = array('destinationName' => $getDestinationName[0]['location_name'] , 'carparkName' => $area[0]['name'], 'destlat' => $destlat, 'destlng' => $destlng, 'url' => $url, 'userlat' => $userlatitude , 'userlng' => $userlongitude , 'areaName' => $getAreaName[0]['name'] , 'occupancy' => $occupancy);
         echo json_encode($arr);
         
