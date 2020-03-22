@@ -42,27 +42,27 @@
                 <form action="process.php" method="POST">
                     <div class="form-group">
                         <label>Username</label>
-                        <input class="form-control" type="text" name="username" class="form-control" value="<?php echo $username ?>">
+                        <input class="form-control" type="text" name="username" class="form-control" value="<?php echo $username ?>" maxlength="50">
                     </div>                
                     <div class="form-group">
                         <label>First Name</label>
-                        <input class="form-control" type="text" name="fname" class="form-control" value="<?php echo $fname ?>">
+                        <input class="form-control" type="text" name="fname" class="form-control" value="<?php echo $fname ?>" maxlength="50" pattern="^(?=.{1,40}$)[a-zA-Z]+(?:[-'\s][a-zA-Z]+)*$">
                     </div>       
                     <div class="form-group">
                         <label>Last Name</label>
-                        <input class="form-control" type="text" name="lname" class="form-control" value="<?php echo $lname ?>">
+                        <input class="form-control" type="text" name="lname" class="form-control" value="<?php echo $lname ?>" maxlength="50" pattern="^(?=.{1,40}$)[a-zA-Z]+(?:[-'\s][a-zA-Z]+)*$">
                     </div>        
                     <div class="form-group">
                         <label>Password</label>
-                        <input class="form-control" type="text" name="password" class="form-control" value="<?php echo $password ?>">
+                        <input class="form-control" type="password" name="password" class="form-control" value="<?php echo $password ?>" pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$">
                     </div>
                     <div class="form-group">
                         <label>Email</label>
-                        <input class="form-control" type="text" name="email" class="form-control" value="<?php echo $email ?>">
+                        <input class="form-control" type="text" name="email" class="form-control" value="<?php echo $email ?>" pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$">
                     </div>
                     <div class="form-group">
                         <label>Contact</label>
-                        <input class="form-control" type="text" name="contact" class="form-control" value="<?php echo $contact ?>">
+                        <input class="form-control" type="text" name="contact" class="form-control" value="<?php echo $contact ?>" pattern="[0-9]{3}[0-9]{2}[0-9]{3}">
                     </div>
                     <div class="form-group">
                         <label>Permissions</label><br>

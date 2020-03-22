@@ -22,13 +22,13 @@ if (isset($_POST['update'])) {
         $_SESSION['msg_type'] = "success";
         header("location: /ICT1004-Project/manage");
     } else {
-        $username = $_POST['username'];
-        $fname = $_POST['fname'];
-        $lname = $_POST['lname'];
-        $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-        $email = $_POST['email'];
-        $contact = $_POST['contact'];
-        $permissions = $_POST['permissions'];
+        $username = ($_POST['username']);
+        $fname = htmlspecialchars($_POST['fname']);
+        $lname = htmlspecialchars($_POST['lname']);
+        $password = password_hash(htmlspecialchars($_POST['password']), PASSWORD_DEFAULT);
+        $email = filter_var(($_POST['email']), FILTER_VALIDATE_EMAIL);
+        $contact = htmlspecialchars($_POST['contact']);
+        $permissions = htmlspecialchars($_POST['permissions']);
         print($permissions);
         $id = $_POST['id'];
         print("before preapre");
