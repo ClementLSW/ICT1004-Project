@@ -88,6 +88,8 @@ require '../PHPMailer/src/Exception.php';
         if (strcmp($password, $cmfpassword) !== 0) {
             $errorMsgpwd .= "Passwords does not match";
             $success = false;
+            $_SESSION["duplicatepass"] = 1;
+            header('location:http://52.54.127.185/ICT1004-Project/register');
         }
 
         if ($success) {
@@ -100,26 +102,26 @@ require '../PHPMailer/src/Exception.php';
                 $errorMsg = "Connection failed: " . $conn->connect_error;
                 $success = false;
             } else {
-                $stmt = $conn->prepare("SELECT username FROM users WHERE username = ?");
+                $sql = "SELECT * FROM users WHERE ";
+                $sql .= "username=?";
+                $stmt = $conn->prepare($sql);
                 $stmt->bind_param('s', $username);
                 $stmt->execute();
-                $stmt->bind_result($username);
-                $stmt->store_result();
-                $stmt->close();
+                $result = $stmt->get_result();
+                $row = $result->fetch_assoc();
                 //Checking for duplicate username
-                if ($stmt->num_rows == 1) {
+                if ($result->num_rows > 0) {
                     $_SESSION["duplicateerror"] = 1;
                     header('location:http://52.54.127.185/ICT1004-Project/register');
                 } else {
-//                    $stmt = $conn->prepare("SELECT email FROM users WHERE email = ?");
-//                    $stmt->bind_param('s', $email);
-//                    $stmt->execute();
-//                    $stmt->bind_result($email);
-//                    $stmt->store_result();
-//                    $stmt->close();
+//                  
                     $sql = "SELECT * FROM users WHERE ";
-                    $sql .= "email='$email'";
-                    $result = $conn->query($sql);
+                    $sql .= "email=?";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->bind_param('s', $email);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+
                     $row = $result->fetch_assoc();
                     if ($result->num_rows > 0) {
                         $_SESSION["duplicateemail"] = 1;

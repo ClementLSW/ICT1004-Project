@@ -55,10 +55,15 @@
                     //Getting the row based on username
                     $sql = "SELECT * FROM users WHERE ";
                     $sql .= "username='$username'";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->bind_param('ss', $username, $username);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+                    
+//                    
                 }
 // Execute the query
-
-                $result = $conn->query($sql);
+              
                 $row = $result->fetch_assoc();
                 if ($GLOBALS['debug']) {
                     //print("results");
