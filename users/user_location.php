@@ -11,7 +11,7 @@ error_reporting(1);
             <section id="searchWindow">
                 <section id="getCurrentLocationContainer"></section>
                 <div id="map1" ></div>
-                <section id="user_submit" class="w-100  container1 justify-content-center row" style="margin-top: 2%"> 
+                <section  class="w-100  container1 justify-content-center row" style="margin-top: 2%"> 
                     <button type="button" id="location_back" name="location_back" value="back" class=" one_btn btn btn-primary">Back</button>
                     <button type="button" id="location_submit" name="location_submit" value="submit" class=" two_btn btn btn-primary">Submit</button>
                 </section>

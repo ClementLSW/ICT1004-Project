@@ -13,7 +13,7 @@
                     session_start();
                 }
                 if ($GLOBALS['local'] == true) {
-                    $conn = new mysqli('localhost', 'root', '', 'testing');
+                    $conn = new mysqli('localhost', 'root', '', 'carpark');
                 } else {
                     $conn = new mysqli('localhost', 'sqldev', 'P@ssw0rd', 'carpark');
                 }
@@ -23,10 +23,6 @@
                     $result = $conn->query("SELECT * FROM users WHERE id='$id'");
                 }
                 while ($row = $result->fetch_assoc()) {
-                    if ($GLOBALS['local'] == true) {
-                        $name = $row['name'];
-                        $location = $row['location'];
-                    } else {
                         $username = $row['username'];
                         $fname = $row['fname'];
                         $lname = $row['lname'];
@@ -34,7 +30,6 @@
                         $email = $row['email'];
                         $contact = $row['contact'];
                         $permissions = $row['permissions'];
-                    }
                 }
                 ?>
         <div class="container">

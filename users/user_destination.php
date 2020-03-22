@@ -32,7 +32,7 @@ error_reporting(1);
                 </select>
             </div>
         </section>
-        <section id="user_submit" class="w-100 container1 justify-content-center row">
+        <section class="w-100 container1 justify-content-center row">
             <button type="button" id="destination_submit" name="destination_submit" value="next" class="next_button btn btn-primary">Next</button>
         </section>
     </form>
