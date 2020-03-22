@@ -357,6 +357,8 @@ function processInput(currentDestination, currentShop, userlat, userlng, startin
         document.body.removeChild(textarea);
         /* Alert the copied text */
       })
+
+    
       // window.open(msg, '_blank');
     }
   });
@@ -479,7 +481,19 @@ $(document).ready(function () {
     toggleView(currentlyChoosen);
   })
 
-
+  $("#history_copy").click(function(){
+    var copyText = $('#history_url_button').attr('href');
+    var textarea = document.createElement("input");
+    textarea.value = copyText;
+    textarea.style.position = "fixed";
+    document.body.appendChild(textarea);
+    textarea.select();
+    textarea.setSelectionRange(0, 99999); /*For mobile devices*/
+    document.execCommand("copy"); 
+    alert("Successfully copied");
+    document.body.removeChild(textarea);
+    /* Alert the copied text */
+  })
 
 
 });

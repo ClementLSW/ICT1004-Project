@@ -3,7 +3,6 @@ error_reporting(1);
 //turn off error reporting
 ?>
 <?php if ($GLOBALS['valid']) : ?>
-
     <section class="card">
         <section id="header"><h1 id="carpark_placeholder">Park at : <span id="carpark_dynamic" class="dark_highlight">loading . . .</span></h1></section>
         <p id="occupancy_placeholder" alt="occupancy placeholder">Loading . . .</p>
