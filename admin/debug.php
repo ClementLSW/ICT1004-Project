@@ -1,3 +1,3 @@
 <?php
 
-$GLOBALS['local'] = true;
+$GLOBALS['local'] = false;

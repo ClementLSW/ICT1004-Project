@@ -10,7 +10,10 @@
                 if (isset($_SESSION['username'])) {
                     if ($_SESSION["permissions"] == 'admin') {
                         echo '<li><a>' . $_SESSION['username'] . '</a></li>';
+                        echo "<ul>";
                         echo "<li><a href='manage'>Management</a></li>";
+                        echo "<li><a href='occupancy'>Occupancy</a></li>";
+                        echo "<ul>";                        
                          echo "<li><a href='/ICT1004-Project/login/logout.php' aria-label='Log Out'><i class='fas fa-sign-out-alt'></i></a></li>";
                     } else {
                         echo "<li><a href='/ICT1004-Project/history'>History</a></li>";
