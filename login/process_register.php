@@ -100,23 +100,16 @@ require '../PHPMailer/src/Exception.php';
                 $errorMsg = "Connection failed: " . $conn->connect_error;
                 $success = false;
             } else {
-                $stmt = $conn->prepare("SELECT username FROM users WHERE username = ?");
-                $stmt->bind_param('s', $username);
-                $stmt->execute();
-                $stmt->bind_result($username);
-                $stmt->store_result();
-                $stmt->close();
+                $sql = "SELECT * FROM users WHERE ";
+                $sql .= "username='$username'";
+                $result = $conn->query($sql);
+                $row = $result->fetch_assoc();
                 //Checking for duplicate username
-                if ($stmt->num_rows == 1) {
+                if ($result->num_rows > 0) {
                     $_SESSION["duplicateerror"] = 1;
                     header('location:http://52.54.127.185/ICT1004-Project/register');
                 } else {
-//                    $stmt = $conn->prepare("SELECT email FROM users WHERE email = ?");
-//                    $stmt->bind_param('s', $email);
-//                    $stmt->execute();
-//                    $stmt->bind_result($email);
-//                    $stmt->store_result();
-//                    $stmt->close();
+//                  
                     $sql = "SELECT * FROM users WHERE ";
                     $sql .= "email='$email'";
                     $result = $conn->query($sql);
