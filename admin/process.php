@@ -1,6 +1,8 @@
 <?php
 
-//session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 require_once 'debug.php';
 if ($GLOBALS['local'] == true) {
     $conn = new mysqli('localhost', 'root', '', 'carpark');
@@ -16,7 +18,7 @@ if (isset($_POST['update'])) {
         $conn->query("UPDATE users SET name='$name', location='$location' WHERE id='$id'");
         $_SESSION['message'] = "User has been updated";
         $_SESSION['msg_type'] = "success";
-        header("location: index.php");
+        header("location: /ICT1004-Project/manage");
     } else {
         $username = $_POST['username'];
         $fname = $_POST['fname'];
@@ -34,7 +36,7 @@ if (isset($_POST['update'])) {
 //        $sql->execute();
         $_SESSION['message'] = "User has been updated";
         $_SESSION['msg_type'] = "success";
-        header("location: index.php");
+        header("location: /ICT1004-Project/manage");
     }
 }
 
@@ -51,7 +53,7 @@ if (isset($_GET['delete'])) {
     $conn->query("DELETE FROM users WHERE id='$id'");
     $_SESSION['message'] = "User " . $name . " has been deleted";
     $_SESSION['msg_type'] = "danger";
-    header("location: index.php");
+    header("location: /ICT1004-Project/manage");
 }
 
 if (isset($_GET['area_id'])) {
@@ -62,14 +64,14 @@ if (isset($_GET['area_id'])) {
         if ($GLOBALS['local'] == true) {
             $area = $area['name'];
         } else {
-            $area = $area['name'];
-            echo $area;
+            $area = $area['name'];      
+            print_r($area);
         }
     }
     $conn->query("UPDATE area SET occupancy='$occupancy' WHERE area_id='$id'");
-    $_SESSION['message'] = "Occupancy in " . $area . " has been updated";
+    $_SESSION['message'] = "Occupancy in $occupancy has been updated";
     $_SESSION['msg_type'] = "success";
-    header("location: occupancy.php");
+    header("location: /ICT1004-Project/occupancy");
 }
 
 $conn->close();

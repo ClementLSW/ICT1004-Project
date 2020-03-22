@@ -75,7 +75,14 @@
 //            require __DIR__ . '/header.inc.php';
             require __DIR__ . '/views/manage.php';
         });
-
+        
+        route('/ICT1004-Project/occupancy', function () {
+            //$GLOBALS['root'] = __DIR__;
+            $GLOBALS['valid'] = true; // Used to block ppl from direct accessing my pages
+//            require __DIR__ . '/header.inc.php';
+            require __DIR__ . '/views/occupancy.php';
+        });
+       
         route('/ICT1004-Project/history', function () {
             //$GLOBALS['root'] = __DIR__;
             $GLOBALS['valid'] = true; // Used to block ppl from direct accessing my pages

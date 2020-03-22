@@ -1,25 +1,10 @@
-<html>
-    <head>                     
-        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap.min.js"></script>
-        <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
-        <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
-
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css">
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap.min.css" type="text/css">
-        <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap.min.css" type="text/css">        
-        <?php include "header.inc.php"; ?>       
-        <link rel="stylesheet" href="main.css" type="text/css">       
-    </head>
-    <body style="color:white;">
-        <?php
-        include "../navigation.php";
-        require_once "process.php";
-        require_once "debug.php";
-        ?>        
-        <div style="height:80px;"></div>        
-        <div id="container1">
+<?php if ($GLOBALS['valid']): ?>
+    <?php
+    require __DIR__ . '/header.inc.php';
+    require $GLOBALS['root'] . '/navigation.php';
+    require_once "debug.php";
+    ?>                  
+        <section id="container2" style="margin-top: 120px;width: 100%; margin-left: 2%; margin-right: 2%;">
             <?php if (isset($_SESSION['message'])) { ?>
                 <div id="success-message" class="alert alert-<?php echo $_SESSION['msg_type'] ?>">
                     <?php
@@ -40,7 +25,7 @@
             }
             $result = $conn->query("SELECT * FROM area WHERE type='carpark'");
             ?> 
-            <table id="table" class="table table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+            <table id="table" class="table table-bordered dt-responsive nowrap rounded" cellspacing="0" width="100%" style="background-color: white;">
                 <thead>
                     <tr>                        
                         <th class="th-sm">Area ID</th>
@@ -54,7 +39,7 @@
                 <tbody>
                     <?php while ($row = $result->fetch_assoc()) { ?>
                         <tr>                            
-                    <form action="process.php" method="get">
+                    <form action="/ICT1004-Project/admin/process.php" method="get">
                         <td><?php echo $row['area_id']; ?></td>
                         <input type="hidden" name="area_id" value="<?php echo $row['area_id']; ?> ">
                         <td><?php echo $row['type']; ?></td>                   
@@ -76,6 +61,7 @@
                     $("#success-message").slideUp(500);
                 });
             </script>  
-        </div>
-    </body>
-</html>
+        </section>
+<?php else : ?>
+    <?php include '../views/404.php' ?>
+<?php endif; ?>
