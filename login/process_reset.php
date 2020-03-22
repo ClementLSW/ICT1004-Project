@@ -39,6 +39,14 @@ else {
         $success = false;
     } else {
         
+//        $sql = "UPDATE users SET password = '$password_hash' WHERE";
+//        $sql .= "email=?";
+//        $stmt = $conn->prepare($sql);
+//        $stmt->bind_param('s', $email);
+//        $stmt->execute();
+//        $result = $stmt->get_result();
+//        
+        
         
         $sqlpassword = "UPDATE users SET password = '$password_hash' WHERE email = '$email'";
         $resultpassword = $conn->query($sqlpassword);
