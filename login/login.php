@@ -44,7 +44,7 @@
             ?>
             <p>For New members, please go to the<a href="/ICT1004-Project/register" style="color: #3d6ba0"> Register page</a>.</p>          
             <form action="/ICT1004-Project/login/process_login.php" method="post">
-                <div class="textbox">
+                  <div class="textbox">
                     <i class="fas fa-user"></i>
                     <input type="text" placeholder="Username" required id="email" name="username">
                 </div>
@@ -66,8 +66,6 @@
             background-color:#3d6ba0 !important;
             border: 2px solid #3d6ba0 !important;
         }
-        
-        
         </style>
     <?php
     $_SESSION['error'] = 0;

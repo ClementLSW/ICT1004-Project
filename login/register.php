@@ -7,7 +7,7 @@
         <p>For existing members, please go to the<a href="/ICT1004-Project/userlogin"style="color:#00b8e6"> Login page</a></p>
         <form action="/ICT1004-Project/login/process_register.php" method="post">
             <?php
-            // session_start();
+            session_start();
             if (!empty($_SESSION['duplicateerror']) && $_SESSION['duplicateerror'] == 1) {
                 echo "<p style='color:red;'>" . "Duplicate username.Please try again." . "</p>";
             }

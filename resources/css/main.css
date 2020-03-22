@@ -106,7 +106,7 @@ html , body {
 }
 
 .nav div.logo a:hover {
-    color: #4477b2;
+    color: #4477b2 !important;
 }
 
 .nav div.main_list {
