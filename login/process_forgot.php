@@ -1,5 +1,7 @@
 <?php
+
 session_start();
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
@@ -10,17 +12,16 @@ require '../PHPMailer/src/SMTP.php';
 
 if (isset($_POST['submit_email']) && $_POST['email']) {
     global $email, $password_hash, $success, $firstname;
-    
-     if (empty($_POST["email"])) {
-                $errorMsg .= "Email is required.<br>";
-                $success = false;
-                $_SESSION['Inputerror'] = $errorMsg;
-                
-            } else {
-                $email = sanitize_input($_POST["email"]);
-            }
-    
-    
+
+    if (empty($_POST["email"])) {
+        $errorMsg .= "Email is required.<br>";
+        $success = false;
+        $_SESSION['Inputerror'] = $errorMsg;
+    } else {
+        $email = sanitize_input($_POST["email"]);
+    }
+
+
     if ($GLOBALS['localtesting']) {
         $conn = new mysqli("localhost", "sqldev", "P@ssw0rd", "carpark");
     } else {
@@ -35,16 +36,21 @@ if (isset($_POST['submit_email']) && $_POST['email']) {
     } else {
         $sql = "SELECT * FROM users WHERE ";
         $sql .= "email='$email'";
+
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('ss', $email, $email);
+        $stmt->execute();
     }
 }
-$result = $conn->query($sql);
+$result = $stmt->get_result();
 $row = $result->fetch_assoc();
 if ($result->num_rows > 0) {
-    
+
     $password_hash = $row['password'];
     $firstname = $row["fname"];
     $_SESSION['email'] = $email;
-    
+
     //Send email to the user using phpmailer
     $mail = new PHPMailer;
     $mail->isSMTP();
@@ -79,12 +85,13 @@ if ($result->num_rows > 0) {
     $_SESSION["errorforgot"] = 1;
     header('location:/ICT1004-Project/userlogin');
 }
-  function sanitize_input($data) {
-            $data = trim($data);
-            $data = stripslashes($data);
-            $data = htmlspecialchars($data);
-            return $data;
-        }
+
+function sanitize_input($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
 
 $conn->close();
 $success = true;
