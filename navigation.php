@@ -1,7 +1,7 @@
 <nav class="nav navheight">
     <div class="w-100">
         <div class="logo">
-            <a href="/ICT1004-Project/home">Your Logo</a>
+            <a href="/ICT1004-Project/home">武汉</a>
         </div>
         <div id="mainListDiv" class="main_list">
             <ul class="navlinks">

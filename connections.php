@@ -9,12 +9,22 @@ class connections {
         //Takes in a table name, array of col name , array of col val , total count of name-val pair and the type of each attribute
         try{
             $argValue = "";
+            $parameter = "";
+            $valArr1 = "";
+            $valArr2 = "";
+            $valArr3 = "";
+            $valArr4 = "";
+            $valArr5 = "";            
             for($i = 0; $i < $argCount; $i++){
                 if($types[$i] != "string"){
-                    $argValue = $argValue . strval($colname[$i]) . $operators[$i] . $colval[$i];
+                    $argValue = $argValue . strval($colname[$i]) . $operators[$i] . "?";
+                    $parameter .= "i";
+                    strval($valArr . ($i+1)) .= $colval[$i];
                 }
                 else{
-                    $argValue = $argValue . strval($colname[$i]) .  $operators[$i] . "'". $colval[$i] . "'";
+                    $argValue = $argValue . strval($colname[$i]) .  $operators[$i] . "?";
+                    $parameter .= "s";
+                    strval($valArr . ($i+1)) .= $colval[$i];
                 }
                 
                 if($i != $argCount -1){
@@ -31,24 +41,42 @@ class connections {
             }
             if ($conn->connect_error) {
                 die("Connection error: " . $conn->connect_error);
-            }
-
-            $sql = "SELECT * FROM " . $tableName . " WHERE " . $argValue;
-
-            $result = $conn->query($sql);
-//            $result->bind_param('s', $colval);
-//            $result->execute();
-//            $rows = $result->get_result();
+            }                        
+            $sql = "SELECT * FROM " . $tableName . " WHERE " . $argValue;      
+//            print_r($valArr);
+            $result = $conn->prepare($sql);
+//            echo $parameter;
+//            print_r($valArr);
+//            print_r(implode(",", $valArr));
+//            echo $sql;            
+            $result->bind_param($parameter, implode(",", $valArr));
+//            if($argCount == 1){
+//                $result->bind_param($parameter, $valArr1);
+//            }
+//            if($argCount == 2){
+//                $result->bind_param($parameter, $valArr1, $valArr2);
+//            }
+//            if($argCount == 3){
+//                $result->bind_param($parameter, $valArr1, $valArr2, $valArr3);
+//            }
+//            if($argCount == 4){
+//                $result->bind_param($parameter, $valArr1, $valArr2, $valArr3, $valArr4);
+//            }
+//            if($argCount == 5){
+//                $result->bind_param($parameter, $valArr1, $valArr2, $valArr3, $valArr5);
+//            }
+            $result->execute();
+            $rows = $result->get_result();
             $data = [];
-            if ($result->num_rows > 0) {
+            if ($rows->num_rows > 0) {
                 // output data of each row
-                while ($row = $result->fetch_assoc()) {
+                while ($row = $rows->fetch_assoc()) {
                     $data[] = $row;
                 }
                 // echo json_encode($data); // dont remove pls 
             } else {
                 // echo json_encode([]);
-            }
+            }            
             $conn->close();
             return $data;
 
