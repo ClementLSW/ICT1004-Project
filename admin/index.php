@@ -8,7 +8,7 @@ if ($GLOBALS['valid'] && isset($_SESSION["permissions"])):
         require_once "debug.php";
         ?>        
 
-        <?php if (isset($_SESSION['message'])) { ?>
+        <?php if(isset($_SESSION['message'])) { ?>
             <section id="container2" style="margin-top: 120px;width: 100%; margin-left: 2%; margin-right: 2%;">
                 <div id="success-message" class="alert alert-<?php echo $_SESSION['msg_type'] ?>">
                     <?php

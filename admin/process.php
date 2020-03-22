@@ -5,11 +5,12 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 require_once 'debug.php';
-if ($GLOBALS['localtesting'] == true) {
-    $conn = new mysqli('localhost', 'root', '', 'carpark');
-} else {
-    $conn = new mysqli('localhost', 'sqldev', 'P@ssw0rd', 'carpark');
-}
+    if ($GLOBALS['localtesting']) {
+        $conn = new mysqli("localhost", "sqldev", "P@ssw0rd", "carpark");
+    } else {
+        $config = parse_ini_file('/var/www/private/db-config.ini');
+        $conn = new mysqli($config['servername'], $config['username'], $config['password'], $config['dbname']);
+    }
 
 if (isset($_POST['update'])) {
     if ($GLOBALS['local'] == true) {
@@ -28,20 +29,15 @@ if (isset($_POST['update'])) {
         $email = $_POST['email'];
         $contact = $_POST['contact'];
         $permissions = $_POST['permissions'];
+        print($permissions);
         $id = $_POST['id'];
         print("before preapre");
-        $conn->prepare("UPDATE users SET username=? WHERE id=?");
+        $sql = $conn->prepare("UPDATE users SET password=? , fname=? , lname=? , email=?, contact=? , permissions=? , username=? WHERE id=?");
         print("after prepare");
-
-        $sql->bind_param('ss', "HELLO", 41);
-                print("after bind");
+        $sql->bind_param('ssssissi', $password, $fname , $lname, $email , $contact, $permissions , $username, $id);
+        print("after bind");
         $sql->execute();
-//        $sql = $conn->query("UPDATE users SET username='$username', fname='$fname',lname='$lname', password='$password',"
-//                . "email='$email', contact='$contact', permissions='$permissions' WHERE id='$id'");
-//        $sql = $conn->prepare("UPDATE users SET username=?, fname=?, lname=? , password=?, email=?, contact=?, permissions=? WHERE id=?");      
-//        
-//        $sql->bind_param('ssssssss', $username,$fname,$lname,$password,$email,$contact,$permissions,$id);
-        $sql->execute();
+        // $sql->execute();
         $_SESSION['message'] = "User has been updated";
         $_SESSION['msg_type'] = "success";
         header("location: /ICT1004-Project/manage");
