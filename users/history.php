@@ -64,15 +64,6 @@
                 <?php } ?>
             </tbody>
         </table>
-        destinatinationName: destinationName,
-                                carparkName :carparkName,
-                                destlat : destlat,
-                                destlng : destlng,
-                                occupancy : occupancy,
-                                url : url,
-                                userlat : userlat,
-                                userlng : userlng,
-                                shopName : shopName
         <form action="/ICT1004-Project/historySearch" method="POST" id="hiddenForm" style="display: none">
             <input id="carparkName" name="carparkName"></input>
             <input id="destlat" name="destlat"></input>
