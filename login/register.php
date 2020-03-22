@@ -14,6 +14,9 @@
              if (!empty($_SESSION['duplicateemail']) && $_SESSION['duplicateemail'] == 1) {
                 echo "<p style='color:red;'>" . "Duplicate Email.Please try again." . "</p>";
             }
+            if (!empty($_SESSION['duplicatepass']) && $_SESSION['duplicatepass'] == 1) {
+                echo "<p style='color:red;'>" . "Passwords do not match.Please try again." . "</p>";
+            }
             ?>
             
             <div class="textbox">
