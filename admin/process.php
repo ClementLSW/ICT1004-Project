@@ -42,11 +42,15 @@ if (isset($_POST['update'])) {
 
 if (isset($_GET['delete'])) {
     $id = $_GET['delete'];
-    $result = $conn->query("SELECT * FROM users WHERE id='$id'");
-    while ($user = $result->fetch_assoc()) {
-        $name = $user['username'];
-    }
-    $conn->query("DELETE FROM users WHERE id='$id'");
+    $result = $conn->prepare("SELECT * FROM users WHERE id=?");
+    $result->bind_param('i', $id);
+    $result->execute();
+    $rows = $result->get_result();
+    $user = $rows->fetch_assoc();
+    $name = $user['username'];
+    $stmt = $conn->prepare("DELETE FROM users WHERE id=?");
+    $stmt->bind_param('i', $id);
+    $stmt->execute();
     $_SESSION['message'] = "User " . $name . " has been deleted";
     $_SESSION['msg_type'] = "danger";
     header("location: /ICT1004-Project/manage");
@@ -55,15 +59,20 @@ if (isset($_GET['delete'])) {
 if (isset($_GET['area_id'])) {
     $id = $_GET['area_id'];
     $occupancy = $_GET['new_occupancy'];
-    $result = $conn->query("SELECT * FROM area WHERE area_id='$id'");
-    while ($area = $result->fetch_assoc()) {
+    $result = $conn->prepare("SELECT * FROM area WHERE area_id=?");
+    $result->bind_param('i', $id);
+    $result->execute();
+    $rows = $result->get_result();
+    while ($area = $rows->fetch_assoc()) {
         if ($GLOBALS['local'] == true) {
             $area = $area['name'];
         } else {
             $area = $area['name'];
         }
     }
-    $conn->query("UPDATE area SET occupancy='$occupancy' WHERE area_id='$id'");
+    $sql = $conn->prepare("UPDATE area SET occupancy=? WHERE area_id=?");
+    $sql->bind_param('ii', $occupancy, $id);
+    $sql->execute();
     $_SESSION['message'] = "Occupancy in $area has been updated";
     $_SESSION['msg_type'] = "success";
     header("location: /ICT1004-Project/occupancy");

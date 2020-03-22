@@ -11,10 +11,10 @@ class connections {
             $argValue = "";
             for($i = 0; $i < $argCount; $i++){
                 if($types[$i] != "string"){
-                    $argValue = $argValue . strval($colname[$i]) . $operators[$i] . strval($colval[$i]);
+                    $argValue = $argValue . strval($colname[$i]) . $operators[$i] . $colval[$i];
                 }
                 else{
-                    $argValue = $argValue . strval($colname[$i]) .  $operators[$i] . "'". strval($colval[$i]) . "'";
+                    $argValue = $argValue . strval($colname[$i]) .  $operators[$i] . "'". $colval[$i] . "'";
                 }
                 
                 if($i != $argCount -1){
@@ -36,6 +36,9 @@ class connections {
             $sql = "SELECT * FROM " . $tableName . " WHERE " . $argValue;
 
             $result = $conn->query($sql);
+//            $result->bind_param('s', $colval);
+//            $result->execute();
+//            $rows = $result->get_result();
             $data = [];
             if ($result->num_rows > 0) {
                 // output data of each row
@@ -70,12 +73,15 @@ class connections {
             die("Connection error: " . $conn->connect_error);
         }
 
-        $sql = "SELECT * FROM " . $tableName . " WHERE " . $colname . "=" . $colval;
-        $result = $conn->query($sql);
+        $sql = "SELECT * FROM " . $tableName . " WHERE " . $colname . "=?";
+        $result = $conn->prepare($sql);
+        $result->bind_param('i', $colval);
+        $result->execute();
+        $stmt = $result->get_result();
         $data = [];
-        if ($result->num_rows > 0) {
+        if ($stmt->num_rows > 0) {
             // output data of each row
-            while ($row = $result->fetch_assoc()) {
+            while ($row = $stmt->fetch_assoc()) {
                 $data[] = $row;
             }
             // echo json_encode($data); // dont remove pls 
@@ -98,8 +104,11 @@ class connections {
         }
 
         $sql = "INSERT INTO " . $tableName ."(username , date_time, start_point , end_point , startingName , destinationName)
-        VALUES ('" . $username . "' , '" . $date_time . "',' " . $start_point . "','" . $end_point . "','" . $startingName . "','" . $destinationName ."')";
-        if ($conn->query($sql) === TRUE) {
+        VALUES (?, ?, ?, ?, ?, ?)";
+        $result = $conn->prepare($sql);
+        $result->bind_param('ssssss', $username, $date_time, $start_point, $end_point, $startingName, $destinationName);
+        $result->execute();
+        if ($result) {
         } else {
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
@@ -173,11 +182,14 @@ class connections {
             die("Connection error: " . $conn->connect_error);
         }
 
-        $sql = "SELECT * FROM AREA WHERE occupancy < " . $threshold;
-        $result = $conn->query($sql);
-        if ($result->num_rows > 0) {
+        $sql = "SELECT * FROM AREA WHERE occupancy < ?";
+        $result = $conn->prepare($sql);
+        $result->bind_param('i', $threshold);
+        $result->execute();
+        $stmt = $result->get_result();
+        if ($stmt->num_rows > 0) {
             // output data of each row
-            while ($row = $result->fetch_assoc()) {
+            while ($row = $stmt->fetch_assoc()) {
                 $data[] = $row;
             }
         }
@@ -195,11 +207,15 @@ class connections {
         if ($conn->connect_error) {
             die("Connection error: " . $conn->connect_error);
         }
-        $sql = "SELECT * FROM area WHERE zone = '$zone' AND type = 'carpark'";
-        $result = $conn->query($sql);
-        if ($result->num_rows > 0) {
+        $type = "carpark";
+        $sql = "SELECT * FROM area WHERE zone = ? AND type = ?";
+        $result = $conn->prepare($sql);
+        $result->bind_param('ss', $zone, $type);
+        $result->execute();
+        $stmt = $result->get_result();
+        if ($stmt->num_rows > 0) {
             // output data of each row
-            while ($row = $result->fetch_assoc()) {
+            while ($row = $stmt->fetch_assoc()) {
                 $data[] = $row;
             }
         }

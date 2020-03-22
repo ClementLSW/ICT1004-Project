@@ -26,7 +26,11 @@ if ($GLOBALS['valid'] && isset($_SESSION["permissions"])):
             if ($conn->connect_error) {
                 die("Connection error: " . $conn->connect_error);
             }
-            $result = $conn->query("SELECT * FROM area WHERE type='carpark'");
+            $type = "carpark";
+            $result = $conn->prepare("SELECT * FROM area WHERE type=?");
+            $result->bind_param('s', $type);
+            $result->execute();
+            $rows = $result->get_result();
             ?> 
             <table id="table" class="table table-bordered dt-responsive nowrap rounded" cellspacing="0" width="100%" style="background-color: white;">
                 <thead>
@@ -40,7 +44,7 @@ if ($GLOBALS['valid'] && isset($_SESSION["permissions"])):
                     </tr>
                 </thead>
                 <tbody>
-                    <?php while ($row = $result->fetch_assoc()) { ?>
+                    <?php while ($row = $rows->fetch_assoc()) { ?>
                         <tr>                            
                     <form action="/ICT1004-Project/admin/process.php" method="get">
                         <td><?php echo $row['area_id']; ?></td>
