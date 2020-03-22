@@ -63,8 +63,7 @@
 //                    
                 }
 // Execute the query
-
-                //$result = $conn->query($sql);
+              
                 $row = $result->fetch_assoc();
                 if ($GLOBALS['debug']) {
                     //print("results");

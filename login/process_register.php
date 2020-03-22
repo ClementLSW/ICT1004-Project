@@ -102,7 +102,12 @@ require '../PHPMailer/src/Exception.php';
             } else {
                 $sql = "SELECT * FROM users WHERE ";
                 $sql .= "username='$username'";
-                $result = $conn->query($sql);
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param('ss', $username, $username);
+                $stmt->execute();
+                $result = $stmt->get_result();
+
+
                 $row = $result->fetch_assoc();
                 //Checking for duplicate username
                 if ($result->num_rows > 0) {
@@ -112,7 +117,11 @@ require '../PHPMailer/src/Exception.php';
 //                  
                     $sql = "SELECT * FROM users WHERE ";
                     $sql .= "email='$email'";
-                    $result = $conn->query($sql);
+                    $stmt = $conn->prepare($sql);
+                    $stmt->bind_param('ss', $email, $email);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+
                     $row = $result->fetch_assoc();
                     if ($result->num_rows > 0) {
                         $_SESSION["duplicateemail"] = 1;
