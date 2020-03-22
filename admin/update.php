@@ -7,34 +7,36 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>   
     </head>
     <body>
-        <?php
-        require_once "debug.php";
-        session_start();
-        if ($GLOBALS['local'] == true) {
-            $conn = new mysqli('localhost', 'root', '', 'testing');
-        } else {
-            $conn = new mysqli('localhost', 'sqldev', 'P@ssw0rd', 'carpark');
-        }
+                <?php
+                require_once "debug.php";
+                if (session_status() == PHP_SESSION_NONE) {
+                    session_start();
+                }
+                if ($GLOBALS['local'] == true) {
+                    $conn = new mysqli('localhost', 'root', '', 'testing');
+                } else {
+                    $conn = new mysqli('localhost', 'sqldev', 'P@ssw0rd', 'carpark');
+                }
 
-        if (isset($_GET['user'])) {
-            $id = $_GET['user'];
-            $result = $conn->query("SELECT * FROM users WHERE id='$id'");
-        }
-        while ($row = $result->fetch_assoc()) {
-            if ($GLOBALS['local'] == true) {
-                $name = $row['name'];
-                $location = $row['location'];
-            } else {
-                $username = $row['username'];
-                $fname = $row['fname'];
-                $lname = $row['lname'];
-                $password = $row['password'];
-                $email = $row['email'];
-                $contact = $row['contact'];
-                $permissions = $row['permissions'];
-            }
-        }
-        ?>
+                if (isset($_GET['user'])) {
+                    $id = $_GET['user'];
+                    $result = $conn->query("SELECT * FROM users WHERE id='$id'");
+                }
+                while ($row = $result->fetch_assoc()) {
+                    if ($GLOBALS['local'] == true) {
+                        $name = $row['name'];
+                        $location = $row['location'];
+                    } else {
+                        $username = $row['username'];
+                        $fname = $row['fname'];
+                        $lname = $row['lname'];
+                        $password = $row['password'];
+                        $email = $row['email'];
+                        $contact = $row['contact'];
+                        $permissions = $row['permissions'];
+                    }
+                }
+                ?>
         <div class="container">
             <div class="row justify-content-center">
                 <form action="process.php" method="POST">

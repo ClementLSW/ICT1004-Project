@@ -1,9 +1,12 @@
-<?php if ($GLOBALS['valid']): ?>
-    <?php
-    require __DIR__ . '/header.inc.php';
-    require $GLOBALS['root'] . '/navigation.php';
-    require_once "debug.php";
-    ?>                  
+<?php
+if ($GLOBALS['valid'] && isset($_SESSION["permissions"])):
+    if ($_SESSION["permissions"] == "admin"):
+        ?>
+        <?php
+        require __DIR__ . '/header.inc.php';
+        require $GLOBALS['root'] . '/navigation.php';
+        require_once "debug.php";
+        ?>                  
         <section id="container2" style="margin-top: 120px;width: 100%; margin-left: 2%; margin-right: 2%;">
             <?php if (isset($_SESSION['message'])) { ?>
                 <div id="success-message" class="alert alert-<?php echo $_SESSION['msg_type'] ?>">
@@ -62,6 +65,9 @@
                 });
             </script>  
         </section>
+    <?php else : ?>
+        <?php include $GLOBALS['root'] . "/views/404.php"; ?>
+    <?php endif; ?>
 <?php else : ?>
-    <?php include '../views/404.php' ?>
+    <?php include $GLOBALS['root'] . "/views/404.php"; ?>
 <?php endif; ?>

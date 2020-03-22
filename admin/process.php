@@ -28,12 +28,12 @@ if (isset($_POST['update'])) {
         $contact = $_POST['contact'];
         $permissions = $_POST['permissions'];
         $id = $_POST['id'];
-        $sql = $conn->query("UPDATE users SET username='$username', fname='$fname',lname='$lname', password='$password',"
-                . "email='$email', contact='$contact', permissions='$permissions' WHERE id='$id'");
-//        $sql = $conn->prepare("UPDATE users SET username=?, fname=?, lname=? password=?,"
-//                . "email=?, contact=?, permissions=? WHERE id=?");        
-//        $sql->bind_param('ssssssss', $username,$fname,$lname,$password,$email,$contact,$permissions,$id);
-//        $sql->execute();
+//                $sql = $conn->query("UPDATE users SET username='$username', fname='$fname',lname='$lname', password='$password',"
+//                        . "email='$email', contact='$contact', permissions='$permissions' WHERE id='$id'");
+        $sql = $conn->prepare("UPDATE users SET username=?, fname=?, lname=? password=?,"
+                . "email=?, contact=?, permissions=? WHERE id=?");
+        $sql->bind_param('sssssiss', $username, $fname, $lname, $password, $email, $contact, $permissions, $id);
+        $sql->execute();
         $_SESSION['message'] = "User has been updated";
         $_SESSION['msg_type'] = "success";
         header("location: /ICT1004-Project/manage");
@@ -64,14 +64,13 @@ if (isset($_GET['area_id'])) {
         if ($GLOBALS['local'] == true) {
             $area = $area['name'];
         } else {
-            $area = $area['name'];      
-            print_r($area);
+            $area = $area['name'];
         }
     }
     $conn->query("UPDATE area SET occupancy='$occupancy' WHERE area_id='$id'");
-    $_SESSION['message'] = "Occupancy in $occupancy has been updated";
+    $_SESSION['message'] = "Occupancy in $area has been updated";
     $_SESSION['msg_type'] = "success";
     header("location: /ICT1004-Project/occupancy");
 }
-
+$sql->close();
 $conn->close();
