@@ -10,6 +10,7 @@ class connections {
         try{
             $argValue = "";
             $parameter = "";
+            $valArr =[];
             $valArr1 = "";
             $valArr2 = "";
             $valArr3 = "";
@@ -19,6 +20,7 @@ class connections {
                 if($types[$i] != "string"){
                     $argValue = $argValue . strval($colname[$i]) . $operators[$i] . "?";
                     $parameter .= "i";
+                    array_push($valArr , $colval[$i]);
                     if($i == 0){
                         $varArr1 = $colval[$i];
                     }
@@ -38,6 +40,7 @@ class connections {
                 else{
                     $argValue = $argValue . strval($colname[$i]) .  $operators[$i] . "?";
                     $parameter .= "s";
+                    array_push($valArr , $colval[$i]);
                     if($i == 0){
                         $varArr1 = $colval[$i];
                     }
@@ -72,12 +75,14 @@ class connections {
             }                        
             $sql = "SELECT * FROM " . $tableName . " WHERE " . $argValue;      
 //            print_r($valArr);
+
             $result = $conn->prepare($sql);
 //            echo $parameter;
 //            print_r($valArr);
 //            print_r(implode(",", $valArr));
-//            echo $sql;            
-            $result->bind_param($parameter, implode(",", $valArr));
+//            echo $sql;        
+         
+            $result->bind_param($parameter, ...$valArr);
 //            if($argCount == 1){
 //                $result->bind_param($parameter, $valArr1);
 //            }
