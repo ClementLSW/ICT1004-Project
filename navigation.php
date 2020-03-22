@@ -6,15 +6,20 @@
         <div id="mainListDiv" class="main_list">
             <ul class="navlinks">
                 <li><a href='/ICT1004-Project/home'>Home</a></li>
+                <?php if(isset($_SESSION['username'])){
+                     if ($_SESSION["permissions"] == 'user') {
+                        echo "<li><a href='/ICT1004/history'>History</a></li>";
+                    }
+                } ?>
                 <?php
                 if (isset($_SESSION['username'])) {
                     if ($_SESSION["permissions"] == 'admin') {
                         echo '<li><a>' . $_SESSION['username'] . '</a></li>';
                         echo "<li><a href='management.php'>Management</a></li>";
-                         echo "<li><a href='/ICT1004-Project/login/logout.php'>Logout</a></li>";
+                         echo "<li><a href='/ICT1004-Project/login/logout.php'><i class='fas fa-sign-out-alt'></i></a></li>";
                     } else {
                         echo '<li><a>' . $_SESSION['username'] . '</a></li>';
-                         echo "<li><a href='/ICT1004-Project/login/logout.php'>Logout</a></li>";
+                         echo "<li><a href='/ICT1004-Project/login/logout.php'><i class='fas fa-sign-out-alt'></i></a></li>";
                     }                
                 } else {
                     //ECHO 
