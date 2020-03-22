@@ -83,6 +83,9 @@ var options = {
       console.log("Returned place contains no geometry");
       return;
     }
+    choosenLat = place.geometry.location.lat();
+    choosenLng = place.geometry.location.lng();
+
   });
 
 
@@ -107,10 +110,17 @@ var options = {
                }
              });
           }, function(err){
+            if(err.code == 3){
+              alert("Time out! Please manually input search");
+            }
             if(err.code == 1){
               alert("Please enable your location access");
             }
-          });
+            if(err.code == 2){
+              alert("Location Unavailable");
+            }
+          },{enableHighAccuracy:true, Infinity:Infinity, timeout:2000}
+          );
         }else{
           alert("Navigation Geolocation API is not supported");
         }
@@ -147,7 +157,6 @@ async function initAutocomplete() {
   var markersArray = [];
   map.controls[google.maps.ControlPosition.TOP_CENTER].push(comboBox);
   map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(currentLocButton);
-  
   var marker = new google.maps.Marker({
     map: map
   });
@@ -298,32 +307,56 @@ async function getCurrentLocation() {
   }
  
 }
-function processInput(currentDestination, currentShop, userlat, userlng) {
-
+function processInput(currentDestination, currentShop, userlat, userlng, startingName) {
+    var isLogin = false;
+    var dateTime = "";
+    if(username != ""){
+      isLogin = true; 
+      dateTime = new Date().toLocaleString();
+      
+    }
+    console.log(userlat);
+    console.log(userlng);
     $.ajax({
-    data: { currentDestination: currentDestination, currentShop: currentShop , userlat: userlat, userlng: userlng},
+    data: { currentDestination: currentDestination, currentShop: currentShop , userlat: userlat, userlng: userlng , isLogin: isLogin, username: username , dateTime: dateTime , startingName: startingName},
     url: 'users/user_input_process.php',
     async: false,
     method: 'POST', // or GET
     success: function (msg) {
-      console.log(msg);
       currentlyChoosen = 3;
       toggleView(currentlyChoosen);
-      console.log(msg);
       var obj = JSON.parse(msg);
-      console.log(obj);
+      destinationName = obj['destinationName'];
       carparkName = obj['carparkName'];
       destlat = obj['destlat'];
       destlng = obj['destlng'];
+      occupancy = obj['occupancy'];
       url = obj['url'];
       userlat = obj['userlat'];
       userlng = obj['userlng'];
       shopName = obj['areaName'];
-
-      $("#final_header").append('<h3 id="header_text_final" class="direction_text  extra-bold">Head towards <span class="highlight">' + shopName + '</span> via <span class="highlight">' + carparkName + '</span><br></h3>');
+     
+      $("#carpark_dynamic").html(carparkName);
+      $("#starting_placeholder").text("From : " + startingName);
+      $("#destination_placeholder").text("To : " + shopName + ", " + destinationName);
+      $("#occupancy_placeholder").text("Carpark is " + occupancy + "% full");
       $('#url_button').attr('href' , url);
       $('#url_button').attr('target' , "_blank");
+      
 
+      $("#final_copy").click(function(){
+        var copyText = $('#url_button').attr('href');
+        var textarea = document.createElement("input");
+        textarea.value = copyText;
+        textarea.style.position = "fixed";
+        document.body.appendChild(textarea);
+        textarea.select();
+        textarea.setSelectionRange(0, 99999); /*For mobile devices*/
+        document.execCommand("copy"); 
+        alert("Successfully copied");
+        document.body.removeChild(textarea);
+        /* Alert the copied text */
+      })
       // window.open(msg, '_blank');
     }
   });
@@ -425,7 +458,7 @@ $(document).ready(function () {
   $('#location_submit').click(function () {
     if($('#my-input-searchbox').val() != "" && $('#my-input-searchbox').val() != "Loading . . ."){
       if(choosenLat != undefined && choosenLat !=undefined){
-        processInput(currentDestination, currentShop , choosenLat , choosenLng);}
+        processInput(currentDestination, currentShop , choosenLat , choosenLng , $('#my-input-searchbox').val());}
     }else{
       alert("Please input a value first");
     }
