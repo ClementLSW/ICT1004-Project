@@ -1,10 +1,11 @@
+<?php if($GLOBALS['valid']): ?>
 <?php
 require __DIR__ . '/header.inc.php';
 require $GLOBALS['root'] . '/navigation.php';
 require_once "debug.php";
 ?>        
    
-<section id="container2" style="margin-top: 80px;width: 100%; margin-left: 2%; margin-right: 2%; color:#fff;">
+<section id="container2" style="margin-top: 120px;width: 100%; margin-left: 2%; margin-right: 2%;">
     <?php if (isset($_SESSION['message'])) { ?>
         <div id="success-message" class="alert alert-<?php echo $_SESSION['msg_type'] ?>">
             <?php
@@ -25,7 +26,7 @@ require_once "debug.php";
     }
     $result = $conn->query("SELECT * FROM users");
     ?> 
-    <table id="table" class="table table-bordered dt-responsive nowrap" cellspacing="0" width="100%" style="color:white;">
+    <table id="table" class="table table-bordered dt-responsive nowrap rounded" cellspacing="0" width="100%" style="background-color: white;">
         <thead>
             <tr>                        
                 <th class="th-sm">Username</th>
@@ -64,3 +65,6 @@ require_once "debug.php";
         });
     </script>  
 </section>
+<?php else : ?>
+    <?php include '../views/404.php' ?>
+<?php endif; ?>
