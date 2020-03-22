@@ -12,16 +12,17 @@ if ($GLOBALS['local']) {
 }
 
 if (isset($_POST['update'])) {
-        $username = ($_POST['username']);
-        $fname = htmlspecialchars($_POST['fname']);
-        $lname = htmlspecialchars($_POST['lname']);
-        $password = password_hash(htmlspecialchars($_POST['password']), PASSWORD_DEFAULT);
-        $email = filter_var(($_POST['email']), FILTER_VALIDATE_EMAIL);
-        $contact = htmlspecialchars($_POST['contact']);
-        $permissions = htmlspecialchars($_POST['permissions']);
-        print($permissions);
-        $id = $_POST['id'];
-        print("before preapre");
+    $username = htmlspecialchars($_POST['username']);
+    $fname = htmlspecialchars($_POST['fname']);
+    $lname = htmlspecialchars($_POST['lname']);
+    $password = password_hash(htmlspecialchars($_POST['password']), PASSWORD_DEFAULT);
+    $email = filter_var(($_POST['email']), FILTER_VALIDATE_EMAIL);
+    $contact = htmlspecialchars($_POST['contact']);
+    $permissions = htmlspecialchars($_POST['permissions']);
+    $id = htmlspecialchars($_POST['id']);  
+    //check database for duplicate username
+    $result = $conn->query("SELECT * FROM users WHERE username='$username' AND id!='$id'");
+    if($result->num_rows < 1){
         $sql = $conn->prepare("UPDATE users SET password=? , fname=? , lname=? , email=?, contact=? , permissions=? , username=? WHERE id=?");
         print("after prepare");
         $sql->bind_param('ssssissi', $password, $fname, $lname, $email, $contact, $permissions, $username, $id);
@@ -29,20 +30,21 @@ if (isset($_POST['update'])) {
         $sql->execute();
 
         // $sql->execute();
-        $_SESSION['message'] = "User has been updated";
+        $_SESSION['message'] = "User " . $username . " has been updated";
         $_SESSION['msg_type'] = "success";
         header("location: /ICT1004-Project/manage");
+    }else{
+         $_SESSION['message'] = "User " . $username . " already exists";
+        $_SESSION['msg_type'] = "danger";
+        header("location: /ICT1004-Project/manage");
+    }
 }
 
 if (isset($_GET['delete'])) {
     $id = $_GET['delete'];
     $result = $conn->query("SELECT * FROM users WHERE id='$id'");
     while ($user = $result->fetch_assoc()) {
-        if ($GLOBALS['local'] == true) {
-            $name = $user['name'];
-        } else {
-            $name = $user['username'];
-        }
+        $name = $user['username'];
     }
     $conn->query("DELETE FROM users WHERE id='$id'");
     $_SESSION['message'] = "User " . $name . " has been deleted";
