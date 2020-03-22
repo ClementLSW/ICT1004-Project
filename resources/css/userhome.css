@@ -162,12 +162,12 @@
       font-weight: bold;;
   }
   
-  a {
+  .thisa {
     text-decoration: none;
     font-size: 0.9em;
     color: white;
   }
-  a:hover {
+  .thisa:hover {
     color: white !important;
   }
   .dark_highlight {

@@ -15,7 +15,7 @@ require_once "debug.php";
         </div>
     <?php } ?>                
     <?php
-    if ($GLOBALS['local'] == true) {
+    if ($GLOBALS['localtesting'] == true) {
         $conn = new mysqli('localhost', 'root', '', 'carpark');
     } else {
         $config = parse_ini_file('/var/www/private/db-config.ini');

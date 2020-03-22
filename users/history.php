@@ -6,10 +6,12 @@
 <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap.min.css" type="text/css">
-<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap.min.css" type="text/css">                            
+<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap.min.css" type="text/css">
+<script defer src="https://use.fontawesome.com/releases/v5.12.1/js/all.js"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css">                            
     <?php
     require $GLOBALS['root'] . '/admin/header.inc.php';
-    require $GLOBALS['root'] . '/navigation.php';    
+;   require $GLOBALS['root'] . '/navigation.php';    
     ?>
 <section id="container2" style="margin-top: 120px;width: 100%; margin-left: 2%; margin-right: 2%;">        
     <?php if (isset($_SESSION['message'])) { ?>
