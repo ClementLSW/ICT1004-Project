@@ -28,7 +28,7 @@ require '../PHPMailer/src/Exception.php';
         $email = $errorMsg = "";
         $success = true;
         $permissions = "user";
-        
+
         //Sanitsation of user input
         if (empty($_POST["email"])) {
             $errorMsg .= "Email is required.<br>";
@@ -89,7 +89,7 @@ require '../PHPMailer/src/Exception.php';
             $errorMsgpwd .= "Passwords does not match";
             $success = false;
         }
-        
+
         if ($success) {
 
             //Creating databse connection.
@@ -100,18 +100,23 @@ require '../PHPMailer/src/Exception.php';
                 $errorMsg = "Connection failed: " . $conn->connect_error;
                 $success = false;
             } else {
-
-                $sql = "SELECT * FROM users WHERE ";
-                $sql .= "username='$username'";
-                $result = $conn->query($sql);
-                $row = $result->fetch_assoc();
-
-
+                $stmt = $conn->prepare("SELECT username FROM users WHERE username = ?");
+                $stmt->bind_param('s', $username);
+                $stmt->execute();
+                $stmt->bind_result($username);
+                $stmt->store_result();
+                $stmt->close();
                 //Checking for duplicate username
-                if ($result->num_rows > 0) {
+                if ($stmt->num_rows == 1) {
                     $_SESSION["duplicateerror"] = 1;
                     header('location:http://52.54.127.185/ICT1004-Project/register');
                 } else {
+//                    $stmt = $conn->prepare("SELECT email FROM users WHERE email = ?");
+//                    $stmt->bind_param('s', $email);
+//                    $stmt->execute();
+//                    $stmt->bind_result($email);
+//                    $stmt->store_result();
+//                    $stmt->close();
                     $sql = "SELECT * FROM users WHERE ";
                     $sql .= "email='$email'";
                     $result = $conn->query($sql);
@@ -138,11 +143,11 @@ require '../PHPMailer/src/Exception.php';
                         $mail->Body = "Thank you for registering to be a member! If this is not you, send a reply to this email and we will contact you shortly";
                         $mail->send();
                         header('location:/ICT1004-Project/userlogin');
-                        
+
                         //Prepared statement
                         $stmt = $conn->prepare("INSERT INTO carpark.users (username, fname, lname, email, password, contact, permissions) "
                                 . "VALUES (?,?, ?, ?, ?, ?, ?)");
-                        $stmt->bind_param("sssssss", $username, $firstname, $lastname, $email, $password_hash, $contact, $permissions );
+                        $stmt->bind_param("sssssss", $username, $firstname, $lastname, $email, $password_hash, $contact, $permissions);
                         $stmt->execute();
                         $stmt->close();
 //                       
