@@ -57,8 +57,8 @@ function toggleView(currentlyChoosen) {
 
 async function initAutocompleteNoMap(){
   $('#searchWindow').prepend('<section id="comboSection" class="justify-content-center w-100" style="margin-top: 3%; display: flex;" ></section>')
-  $('#getCurrentLocationContainer').append('<button type="button" id="currentLocationButton" class="col btn-primary btn" style="display:flex;border:0px ;color: none; margin-top: 0px !important; width: 100%;"><section style="margin:auto; display: flex;"><i font-feature-settings: "liga" class="material-icons" style="color: white;  display: inline-block; margin:auto 0px auto 0px">my_location</i><h3 style="color: white;font-weight: italics; width: 98%; position: relative; left: 2%; margin:auto ; font-size: smaller;">Get Current Location</h3></section></button>');
-  $('#comboSection').prepend('<input type="text" id="my-input-searchbox" style="width:100%; font-family:sans-serif; font-size:2em;  text-align:center;padding: 5% 0px 5% 0px; margin-top: auto; margin-bottom: auto;"  type="text" pattern="^[a-zA-Z0-9,-.&+_ ]*$" required/>');
+  $('#getCurrentLocationContainer').append('<button type="button" id="currentLocationButton" class="col btn-primary btn" style="display:flex;border:0px ;color: none; margin-top: 0px !important; width: 100%;"><section style="margin:auto; display: flex;"><i font-feature-settings: "liga" class="material-icons" aria-label="location_icon" style="color: white;  display: inline-block; margin:auto 0px auto 0px">my_location</i><h3 style="color: white;font-weight: italics; width: 98%; position: relative; left: 2%; margin:auto ; font-size: smaller;">Get Current Location</h3></section></button>');
+  $('#comboSection').prepend('<input type="text" id="my-input-searchbox" style="width:100%; font-family:sans-serif; font-size:2em;  text-align:center;padding: 5% 0px 5% 0px; margin-top: auto; margin-bottom: auto;"  type="text" pattern="^[a-zA-Z0-9,-.&+_ ]*$" aria-label="location_input_box" required/>');
   var input = document.getElementById('my-input-searchbox');
 
 var options = {

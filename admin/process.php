@@ -1,27 +1,17 @@
 <?php
 
-error_reporting(1);
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 require_once 'debug.php';
-    if ($GLOBALS['localtesting']) {
-        $conn = new mysqli("localhost", "sqldev", "P@ssw0rd", "carpark");
-    } else {
-        $config = parse_ini_file('/var/www/private/db-config.ini');
-        $conn = new mysqli($config['servername'], $config['username'], $config['password'], $config['dbname']);
-    }
+if ($GLOBALS['local']) {
+    $conn = new mysqli("localhost", "sqldev", "P@ssw0rd", "carpark");
+} else {
+    $config = parse_ini_file('/var/www/private/db-config.ini');
+    $conn = new mysqli($config['servername'], $config['username'], $config['password'], $config['dbname']);
+}
 
 if (isset($_POST['update'])) {
-    if ($GLOBALS['local'] == true) {
-        $name = $_POST['name'];
-        $location = $_POST['location'];
-        $id = $_POST['id'];
-        $conn->query("UPDATE users SET name='$name', location='$location' WHERE id='$id'");
-        $_SESSION['message'] = "User has been updated";
-        $_SESSION['msg_type'] = "success";
-        header("location: /ICT1004-Project/manage");
-    } else {
         $username = $_POST['username'];
         $fname = $_POST['fname'];
         $lname = $_POST['lname'];
@@ -34,15 +24,15 @@ if (isset($_POST['update'])) {
         print("before preapre");
         $sql = $conn->prepare("UPDATE users SET password=? , fname=? , lname=? , email=?, contact=? , permissions=? , username=? WHERE id=?");
         print("after prepare");
-        $sql->bind_param('ssssissi', $password, $fname , $lname, $email , $contact, $permissions , $username, $id);
+        $sql->bind_param('ssssissi', $password, $fname, $lname, $email, $contact, $permissions, $username, $id);
         print("after bind");
         $sql->execute();
+
         // $sql->execute();
         $_SESSION['message'] = "User has been updated";
         $_SESSION['msg_type'] = "success";
         header("location: /ICT1004-Project/manage");
     }
-}
 
 if (isset($_GET['delete'])) {
     $id = $_GET['delete'];
