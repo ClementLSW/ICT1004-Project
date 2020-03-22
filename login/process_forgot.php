@@ -35,7 +35,7 @@ if (isset($_POST['submit_email']) && $_POST['email']) {
         $success = false;
     } else {
         $sql = "SELECT * FROM users WHERE ";
-        $sql .= "email='$email'";
+        $sql .= "email='?'";
 
 
         $stmt = $conn->prepare($sql);

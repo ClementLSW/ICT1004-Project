@@ -88,6 +88,8 @@ require '../PHPMailer/src/Exception.php';
         if (strcmp($password, $cmfpassword) !== 0) {
             $errorMsgpwd .= "Passwords does not match";
             $success = false;
+            $_SESSION["duplicatepass"] = 1;
+            header('location:http://52.54.127.185/ICT1004-Project/register');
         }
 
         if ($success) {
@@ -101,13 +103,11 @@ require '../PHPMailer/src/Exception.php';
                 $success = false;
             } else {
                 $sql = "SELECT * FROM users WHERE ";
-                $sql .= "username='$username'";
+                $sql .= "username=?";
                 $stmt = $conn->prepare($sql);
-                $stmt->bind_param('ss', $username, $username);
+                $stmt->bind_param('s', $username);
                 $stmt->execute();
                 $result = $stmt->get_result();
-
-
                 $row = $result->fetch_assoc();
                 //Checking for duplicate username
                 if ($result->num_rows > 0) {
@@ -116,9 +116,9 @@ require '../PHPMailer/src/Exception.php';
                 } else {
 //                  
                     $sql = "SELECT * FROM users WHERE ";
-                    $sql .= "email='$email'";
+                    $sql .= "email=?";
                     $stmt = $conn->prepare($sql);
-                    $stmt->bind_param('ss', $email, $email);
+                    $stmt->bind_param('s', $email);
                     $stmt->execute();
                     $result = $stmt->get_result();
 

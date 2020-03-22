@@ -38,6 +38,8 @@ else {
         $errorMsg = "Connection failed: " . $conn->connect_error;
         $success = false;
     } else {
+        
+        
         $sqlpassword = "UPDATE users SET password = '$password_hash' WHERE email = '$email'";
         $resultpassword = $conn->query($sqlpassword);
         $_SESSION["resetsuccess"] = 1;
