@@ -35,11 +35,9 @@ if (isset($_POST['submit_email']) && $_POST['email']) {
         $success = false;
     } else {
         $sql = "SELECT * FROM users WHERE ";
-        $sql .= "email='?'";
-
-
+        $sql .= "email=?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param('ss', $email, $email);
+        $stmt->bind_param('s', $email);
         $stmt->execute();
     }
 }
