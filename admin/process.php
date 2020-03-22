@@ -1,10 +1,11 @@
 <?php
 
+error_reporting(1);
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 require_once 'debug.php';
-if ($GLOBALS['local'] == true) {
+if ($GLOBALS['localtesting'] == true) {
     $conn = new mysqli('localhost', 'root', '', 'carpark');
 } else {
     $conn = new mysqli('localhost', 'sqldev', 'P@ssw0rd', 'carpark');
@@ -28,11 +29,13 @@ if (isset($_POST['update'])) {
         $contact = $_POST['contact'];
         $permissions = $_POST['permissions'];
         $id = $_POST['id'];
+        print_r($id);
 //                $sql = $conn->query("UPDATE users SET username='$username', fname='$fname',lname='$lname', password='$password',"
 //                        . "email='$email', contact='$contact', permissions='$permissions' WHERE id='$id'");
-        $sql = $conn->prepare("UPDATE users SET username=?, fname=?, lname=? password=?,"
-                . "email=?, contact=?, permissions=? WHERE id=?");
-        $sql->bind_param('sssssiss', $username, $fname, $lname, $password, $email, $contact, $permissions, $id);
+        $sql = $conn->prepare("UPDATE users SET username=?, fname=?, lname=?, password=?, email=?, contact=?, permissions=? WHERE id=?");
+        $sql->bind_param("sssssisi", $username, $fname, $lname, $password, $email, $contact, $permissions, $id); 
+        print_r($sql);
+        echo $sql;
         $sql->execute();
         $_SESSION['message'] = "User has been updated";
         $_SESSION['msg_type'] = "success";
