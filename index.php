@@ -82,6 +82,8 @@
             //$GLOBALS['root'] = __DIR__;
             $GLOBALS['valid'] = true; // Used to block ppl from direct accessing my pages
 //            require __DIR__ . '/header.inc.php';
+            echo '<script defer src="https://use.fontawesome.com/releases/v5.12.1/js/all.js"></script>';
+            echo '<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css">';
             require __DIR__ . '/views/occupancy.php';
         });
        
