@@ -29,13 +29,18 @@ if (isset($_POST['update'])) {
         $contact = $_POST['contact'];
         $permissions = $_POST['permissions'];
         $id = $_POST['id'];
-        print_r($id);
-//                $sql = $conn->query("UPDATE users SET username='$username', fname='$fname',lname='$lname', password='$password',"
-//                        . "email='$email', contact='$contact', permissions='$permissions' WHERE id='$id'");
-        $sql = $conn->prepare("UPDATE users SET username=?, fname=?, lname=?, password=?, email=?, contact=?, permissions=? WHERE id=?");
-        $sql->bind_param("sssssisi", $username, $fname, $lname, $password, $email, $contact, $permissions, $id); 
-        print_r($sql);
-        echo $sql;
+        print("before preapre");
+        $conn->prepare("UPDATE users SET username=? WHERE id=?");
+        print("after prepare");
+
+        $sql->bind_param('ss', "HELLO", 41);
+                print("after bind");
+        $sql->execute();
+//        $sql = $conn->query("UPDATE users SET username='$username', fname='$fname',lname='$lname', password='$password',"
+//                . "email='$email', contact='$contact', permissions='$permissions' WHERE id='$id'");
+//        $sql = $conn->prepare("UPDATE users SET username=?, fname=?, lname=? , password=?, email=?, contact=?, permissions=? WHERE id=?");      
+//        
+//        $sql->bind_param('ssssssss', $username,$fname,$lname,$password,$email,$contact,$permissions,$id);
         $sql->execute();
         $_SESSION['message'] = "User has been updated";
         $_SESSION['msg_type'] = "success";
