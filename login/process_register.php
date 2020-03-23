@@ -84,6 +84,9 @@ require '../PHPMailer/src/Exception.php';
             $errorMsg .= "Invalid email format.";
             $success = false;
         }
+        $_SESSION['duplicateerror'] = 0;
+        $_SESSION['duplicateemail'] = 0;
+        $_SESSION['duplicatepass'] = 0;
         //Comparing passworing strings to see whether they match
         if (strcmp($password, $cmfpassword) !== 0) {
             $errorMsgpwd .= "Passwords does not match";
@@ -91,6 +94,7 @@ require '../PHPMailer/src/Exception.php';
             $_SESSION["duplicatepass"] = 1;
             header('location:http://52.54.127.185/ICT1004-Project/register');
         }
+     
 
         if ($success) {
 
@@ -108,22 +112,23 @@ require '../PHPMailer/src/Exception.php';
                 $stmt->bind_param('s', $username);
                 $stmt->execute();
                 $result = $stmt->get_result();
-                $row = $result->fetch_assoc();
+                //$row = $result->fetch_assoc();
                 //Checking for duplicate username
                 if ($result->num_rows > 0) {
+                    $success = false;
                     $_SESSION["duplicateerror"] = 1;
                     header('location:http://52.54.127.185/ICT1004-Project/register');
                 } else {
-//                  
+
                     $sql = "SELECT * FROM users WHERE ";
                     $sql .= "email=?";
                     $stmt = $conn->prepare($sql);
                     $stmt->bind_param('s', $email);
                     $stmt->execute();
                     $result = $stmt->get_result();
-
-                    $row = $result->fetch_assoc();
+                    //$row = $result->fetch_assoc();
                     if ($result->num_rows > 0) {
+                        $success = false;
                         $_SESSION["duplicateemail"] = 1;
                         header('location:http://52.54.127.185/ICT1004-Project/register');
                     } else {
@@ -159,9 +164,10 @@ require '../PHPMailer/src/Exception.php';
                             $success = false;
                         }
                         return $success;
-                        $result->free_result();
                         $conn->close();
                         header('location:/ICT1004-Project/userlogin');
+                        $success = true;
+                        //$result->free_result();
                     }
                 }
             }

@@ -23,7 +23,7 @@
             }
 
             if (empty($_POST["pwd"])) {
-                $errorMsg .= "Username is required.<br>";
+                $errorMsg .= "Password is required.<br>";
                 $success = false;
                 $_SESSION['Inputerror'] = $errorMsg;
             } else {
@@ -59,8 +59,7 @@
                     $stmt->bind_param('ss', $username, $username);
                     $stmt->execute();
                     $result = $stmt->get_result();
-                    
-//                    
+                           
                 }
 // Execute the query
               

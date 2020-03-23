@@ -1,7 +1,7 @@
 <nav id="navBar" style="display:none" class="nav navheight">
     <div class="w-100">
         <div class="logo">
-            <a href="/ICT1004-Project/home">武汉</a>
+            <a class ="navbar-brand" href="/ICT1004-Project/home" ><img id="logo" style="max-height: 60px; max-width: 60px" src="resources/img/android-chrome-192x192.png"></a>
         </div>
         <div id="mainListDiv" class="main_list">
             <ul class="navlinks">

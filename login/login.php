@@ -68,6 +68,7 @@
         }
         </style>
     <?php
+    //Resetting the error message
     $_SESSION['error'] = 0;
     $_SESSION['registersuccess'] = 0;
     $_SESSION['forgotsuccess'] = 0;
