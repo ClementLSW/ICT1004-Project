@@ -193,10 +193,7 @@ function getCoordinatesFromArea($area){
     }elseif($carparkName === "carpark g"){
         $n = 1.335612;
         $e =  103.959113;
-    }elseif($carparkName === "carpark g"){
-        $n = 1.335612;
-        $e =  103.959113;
-    }elseif($carparkName === "carpark g"){
+    }elseif($carparkName === "carpark h"){
         $n = 1.336347;
         $e =  103.959606;
     }elseif ($carparkName === "carpark k"){
@@ -206,7 +203,7 @@ function getCoordinatesFromArea($area){
         $n = 1.331695; 
         $e = 103.959673;
     }
-
+    
     return array($n, $e);
 
 }

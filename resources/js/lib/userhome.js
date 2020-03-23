@@ -329,7 +329,10 @@ function processInput(currentDestination, currentShop, userlat, userlng, startin
     method: 'POST', // or GET
     success: function (msg) {
       currentlyChoosen = 3;
-      toggleView(currentlyChoosen);
+      toggleView(currentlyChoosen);      
+      console.log(msg);
+
+      
       var obj = JSON.parse(msg);
       destinationName = obj['destinationName'];
       carparkName = obj['carparkName'];

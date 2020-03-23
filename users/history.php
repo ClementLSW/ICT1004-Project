@@ -213,7 +213,6 @@
                             })
                         processInput(currentDestination, currentShop, userlat, userlng, startingName , username);
                         }
-
                     });
                 });
          

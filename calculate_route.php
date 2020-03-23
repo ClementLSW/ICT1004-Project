@@ -13,7 +13,7 @@
             global $connection;
             $availCP = $connection->retrieve_cp_by_occupancy(80);
             if($availCP == NULL){
-                $availCP = $connection->retrieve_data_where("AREA", "type", "CP");
+                $availCP = $connection->retrieve_data_where("AREA", "type", "carpark");
             }
             return $availCP;
         }
@@ -89,8 +89,6 @@
                     for($i=0; $i<count($listB); $i++){
                         if($listB[$i]['occupancy'] <= $threshold){
                             return Array($listB[$i]['area_id'], $listB[$i]['occupancy']);
-
-
                         }
                     }
                     for($i=0; $i<count($listC); $i++){
