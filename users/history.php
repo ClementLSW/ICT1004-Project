@@ -1,4 +1,4 @@
-<?php if ($GLOBALS['valid'] && isset($_SESSION['username'])) : ?>
+<?php if (isset($GLOBALS['valid'])  && $GLOBALS['valid'] && isset($_SESSION['username'])) : ?>
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap.min.js"></script>
@@ -220,6 +220,6 @@
         </script>
     </section>
 <?php else : ?>
-    <?php require $GLOBALS['root'] . '/header.inc.php' ?>
-    <?php include $GLOBALS['root'] . '/views/404.php' ?>
+    <?php require '../header.inc.php' ?>
+    <?php include '../views/404.php' ?>
 <?php endif; ?>

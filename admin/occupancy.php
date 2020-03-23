@@ -1,5 +1,5 @@
 <?php
-if ($GLOBALS['valid'] && isset($_SESSION["permissions"])):
+if (isset($GLOBALS['valid']) && $GLOBALS['valid'] && isset($_SESSION["permissions"])):
     if ($_SESSION["permissions"] == "admin"):
         ?>
         <?php
@@ -61,7 +61,9 @@ if ($GLOBALS['valid'] && isset($_SESSION["permissions"])):
             </table>
             <script>
                 $(document).ready(function () {
-                    $('#table').DataTable();
+                    $('#table').DataTable({
+                    });
+                    
                 });
 
                 $("#success-message").fadeTo(2000, 500).slideUp(500, function () {
@@ -70,8 +72,10 @@ if ($GLOBALS['valid'] && isset($_SESSION["permissions"])):
             </script>  
         </section>
     <?php else : ?>
-        <?php include $GLOBALS['root'] . "/views/404.php"; ?>
+        <?php require '../header.inc.php';?>
+        <?php include "../views/404.php"; ?>
     <?php endif; ?>
 <?php else : ?>
-    <?php include $GLOBALS['root'] . "/views/404.php"; ?>
+    <?php require '../header.inc.php';?>
+    <?php include  "../views/404.php"; ?>
 <?php endif; ?>

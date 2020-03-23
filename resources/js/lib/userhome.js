@@ -111,14 +111,20 @@ async function initAutocompleteNoMap() {
                 }, function (err) {
                     if (err.code == 3) {
                         alert("Time out! Please manually input search");
+                         document.getElementById("my-input-searchbox").value = "";
+
                     }
                     if (err.code == 1) {
                         alert("Please enable your location access");
+                        document.getElementById("my-input-searchbox").value = "";
+
                     }
                     if (err.code == 2) {
                         alert("Location Unavailable");
+                        document.getElementById("my-input-searchbox").value = "";
+
                     }
-                }, {enableHighAccuracy: true, Infinity: Infinity, timeout: 2000}
+                }, {enableHighAccuracy: true, Infinity: Infinity, timeout: 6000}
                 );
             } else {
                 alert("Navigation Geolocation API is not supported");
@@ -380,7 +386,7 @@ function showShops(destination) {
         url: 'users/user_input_process.php',
         method: 'POST',
         success: function (msg) {
-            console.log(msg);
+            // console.log(msg);
             var obj = JSON.parse(msg);
             if (obj.length != 0) {
                 for (var i = 0; i < obj.length; i++) {
