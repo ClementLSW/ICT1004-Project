@@ -7,15 +7,18 @@
         <p>For existing members, please go to the<a href="/ICT1004-Project/userlogin"style="color:#00b8e6"> Login page</a></p>
         <form action="/ICT1004-Project/login/process_register.php" method="post">
             <?php
-//            session_start();
+            //session_start();
             if (!empty($_SESSION['duplicateerror']) && $_SESSION['duplicateerror'] == 1) {
                 echo "<p style='color:red;'>" . "Duplicate username.Please try again." . "</p>";
+                $_SESSION['duplicateerror'] = 0;
             }
              if (!empty($_SESSION['duplicateemail']) && $_SESSION['duplicateemail'] == 1) {
                 echo "<p style='color:red;'>" . "Duplicate Email.Please try again." . "</p>";
+                $_SESSION['duplicateemail'] = 0;
             }
             if (!empty($_SESSION['duplicatepass']) && $_SESSION['duplicatepass'] == 1) {
                 echo "<p style='color:red;'>" . "Passwords do not match.Please try again." . "</p>";
+                   $_SESSION['duplicatepass'] = 0;
             }
             ?>
             
@@ -53,9 +56,10 @@
             <div class="form-group"><button class="btn btn-primary" type="submit">Register</button></div></form>
     </div>
     </div>
-    <?php $_SESSION['duplicateerror'] = 0;
-          $_SESSION['duplicateemail'] = 0;
-          $_SESSION['duplicatepass'] = 0;
+    <?php 
+//          $_SESSION['duplicateerror'] = 0;
+//          $_SESSION['duplicateemail'] = 0;
+//          $_SESSION['duplicatepass'] = 0;
     ?>
     <style>
         .btn-primary{

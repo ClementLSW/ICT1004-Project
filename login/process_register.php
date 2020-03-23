@@ -84,7 +84,7 @@ require '../PHPMailer/src/Exception.php';
             $errorMsg .= "Invalid email format.";
             $success = false;
         }
-        //Comparing passworing strings
+        //Comparing passworing strings to see whether they match
         if (strcmp($password, $cmfpassword) !== 0) {
             $errorMsgpwd .= "Passwords does not match";
             $success = false;
