@@ -92,7 +92,7 @@ require '../PHPMailer/src/Exception.php';
             $errorMsgpwd .= "Passwords does not match";
             $success = false;
             $_SESSION["duplicatepass"] = 1;
-            header('location:http://52.54.127.185/ICT1004-Project/register');
+            header('location:/ICT1004-Project/register');
         }
      
 
@@ -117,7 +117,7 @@ require '../PHPMailer/src/Exception.php';
                 if ($result->num_rows > 0) {
                     $success = false;
                     $_SESSION["duplicateerror"] = 1;
-                    header('location:http://52.54.127.185/ICT1004-Project/register');
+                    header('location:/ICT1004-Project/register');
                 } else {
 
                     $sql = "SELECT * FROM users WHERE ";
@@ -130,7 +130,7 @@ require '../PHPMailer/src/Exception.php';
                     if ($result->num_rows > 0) {
                         $success = false;
                         $_SESSION["duplicateemail"] = 1;
-                        header('location:http://52.54.127.185/ICT1004-Project/register');
+                        header('location:/ICT1004-Project/register');
                     } else {
                         //Sending mail using php mailer
                         $_SESSION["registersuccess"] = 1;

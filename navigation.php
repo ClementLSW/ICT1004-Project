@@ -12,10 +12,10 @@
                         echo '<li><a>' . $_SESSION['username'] . '</a></li>';
                         if ($_SERVER['REQUEST_URI'] == "/ICT1004-Project/manage") {
                             echo "<li><a href='occupancy'>occupancy</a></li>";
-                        } else {
+                        } else { 
                             echo "<li><a href='manage'>manage</a></li>";
                         }
-                        echo "<li><a href='/ICT1004-Project/login/logout.php' aria-label='Log Out'><i class='fas fa-sign-out-alt'></i></a></li>";
+                        echo "<li><a href='/ICT10   04-Project/login/logout.php' aria-label='Log Out'><i class='fas fa-sign-out-alt'></i></a></li>";
                     } else {
                         echo "<li><a href='/ICT1004-Project/history'>History</a></li>";
                         echo "<li><a>" . $_SESSION['username'] . "</a></li>";

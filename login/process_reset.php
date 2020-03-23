@@ -51,7 +51,7 @@ else {
         $sqlpassword = "UPDATE users SET password = '$password_hash' WHERE email = '$email'";
         $resultpassword = $conn->query($sqlpassword);
         $_SESSION["resetsuccess"] = 1;
-        header('location:http://52.54.127.185/ICT1004-Project/userlogin');
+        header('location:/ICT1004-Project/userlogin');
         if (!$conn->query($sql)) {
 
             $errorMsg = "Database error: " . $conn->error;
