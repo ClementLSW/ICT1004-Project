@@ -109,6 +109,5 @@
         $action = $_SERVER['REQUEST_URI'];
         dispatch($action);
         ?> 
-    </head>
     
 </html>
