@@ -132,6 +132,7 @@ require '../PHPMailer/src/Exception.php';
                         $_SESSION["duplicateemail"] = 1;
                         header('location:/ICT1004-Project/register');
                     } else {
+                        $result->free_result();
                         //Sending mail using php mailer
                         $_SESSION["registersuccess"] = 1;
                         $password_hash = password_hash($password, PASSWORD_DEFAULT);
@@ -164,6 +165,7 @@ require '../PHPMailer/src/Exception.php';
                             $success = false;
                         }
                         return $success;
+                        
                         $conn->close();
                         header('location:/ICT1004-Project/userlogin');
                         $success = true;

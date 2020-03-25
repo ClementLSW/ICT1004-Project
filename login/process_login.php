@@ -106,7 +106,7 @@
             $functionName = "authenticateUser();";
             eval($functionName);
             $success = true;
-
+            $result->free_result();
             function sanitize_input($data) {
                 $data = trim($data);
                 $data = stripslashes($data);
