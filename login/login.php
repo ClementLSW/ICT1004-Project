@@ -25,7 +25,7 @@
             <h1 style="padding:0px !important;margin:2% 0% 6% 0% !important">Login</h1>
             <?php
             
-            // session_start();
+            // Checking if any of the error variables have been stored in the session
             if (!empty($_SESSION['error']) && $_SESSION['error'] == 1) {
                 echo "<p style='color:red;'>" . "Incorrect email or password.Please try again." . "</p>";
             }
