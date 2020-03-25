@@ -39,15 +39,7 @@ else {
         $success = false;
     } else {
         
-//        $sql = "UPDATE users SET password = '$password_hash' WHERE";
-//        $sql .= "email=?";
-//        $stmt = $conn->prepare($sql);
-//        $stmt->bind_param('s', $email);
-//        $stmt->execute();
-//        $result = $stmt->get_result();
-//        
-        
-        
+        //Replacing the old password hash with the new password hash
         $sqlpassword = "UPDATE users SET password = '$password_hash' WHERE email = '$email'";
         $resultpassword = $conn->query($sqlpassword);
         $_SESSION["resetsuccess"] = 1;
@@ -57,11 +49,9 @@ else {
             $errorMsg = "Database error: " . $conn->error;
 
             $success = false;
-            //header('location:/ICT1004-Project/login/reset.php');
         }
         $result->free_result();
         $conn->close();
-        //header('location:/ICT1004-Project/userlogin');
     }
 }
 //Helper function to sanitise input

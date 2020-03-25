@@ -2,6 +2,7 @@
 
 session_start();
 
+//Calling the php mailer library
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
@@ -10,6 +11,7 @@ require '../PHPMailer/src/Exception.php';
 require '../PHPMailer/src/PHPMailer.php';
 require '../PHPMailer/src/SMTP.php';
 
+//Checking if email is empty
 if (isset($_POST['submit_email']) && $_POST['email']) {
     global $email, $password_hash, $success, $firstname;
 
@@ -34,6 +36,7 @@ if (isset($_POST['submit_email']) && $_POST['email']) {
         $errorMsg = "Connection failed: " . $conn->connect_error;
         $success = false;
     } else {
+        //Prepared statement to execute the result
         $sql = "SELECT * FROM users WHERE ";
         $sql .= "email=?";
         $stmt = $conn->prepare($sql);
@@ -41,10 +44,12 @@ if (isset($_POST['submit_email']) && $_POST['email']) {
         $stmt->execute();
     }
 }
+
 $result = $stmt->get_result();
 $row = $result->fetch_assoc();
 if ($result->num_rows > 0) {
-
+    
+    
     $password_hash = $row['password'];
     $firstname = $row["fname"];
     $_SESSION['email'] = $email;
@@ -73,11 +78,6 @@ if ($result->num_rows > 0) {
         $_SESSION["forgotsuccess"] = 1;
         header('location:/ICT1004-Project/userlogin');
     }
-    //Section 2: IMAP
-    //Uncomment these to save your message in the 'Sent Mail' folder.
-    #if (save_mail($mail)) {
-    #    echo "Message saved!";
-    #}
 } else {
     $success = false;
     $_SESSION["errorforgot"] = 1;

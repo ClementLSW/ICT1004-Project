@@ -71,6 +71,8 @@
                 if ($result->num_rows > 0) {
                     //session_start();               
                     $password_hash = $row["password"];
+                    
+                    //Verification of the password
                     if (password_verify($password, $password_hash)) {
                         $_SESSION["username"] = $username;
                         $firstname = $row["fname"];
@@ -97,9 +99,7 @@
                     header('location:/ICT1004-Project/userlogin');
                     $_SESSION["error"] = 1;
                 }
-//                if ($GLOBAL['localtesting']) {
-//                    $result->free_results();
-//                }
+//                
                 $conn->close();
             }
 
