@@ -56,9 +56,10 @@
     margin: 0px 1% 0px 1% !important; 
 }
 
+
 .direction_text{
     font-size: 30px;
-    margin: 0px; 
+    margin: 0px 0px 2% 0px; 
     padding: 0px;
 }
 
@@ -153,15 +154,17 @@
     font-size: 18px;
   }
 
-  #final_back, #final_open , #final_copy, #history_home, #history_open , #history_copy {
+  #final_back, #url_button , #final_copy, #history_home, #history_open , #history_copy {
       margin:0.5% auto 0.5% auto;
       color:white;
   }
 
   #header{
-      font-weight: bold;;
+      font-weight: bold;
   }
-  
+  #header > * {
+      font-size: 3em;
+  }
   .thisa {
     text-decoration: none;
     font-size: 0.9em;
@@ -173,6 +176,10 @@
   .dark_highlight {
       color: #3d6ba0;
   }
+  
+  
+  
+
 @media only screen and (max-width: 768px) {
 
 }

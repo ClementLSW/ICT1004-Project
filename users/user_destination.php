@@ -12,11 +12,8 @@ error_reporting(1);
             echo '<h3 class="direction_text extra-bold">Hey there <span class="highlight">guest</span>, Where would you like to go? <br></h3>';
         }
         ?>
-    </section>
-    <form action="user_process.php" method="POST">
+        <form id="user_form" class="w-100 container1 justify-content-center row user_form" action="user_process.php" method="POST">
         <?php if($GLOBALS['debug']) {print('line 16');}?>
-        <section class="w-100 container1 justify-content-center row">
-            <div id="user_form" class="form-group ">
                 <?php if($GLOBALS['debug']) {print('user_destination.php');} ?>
                 <select class="user_input js-example-basic-single" id="destinationInput">
                     <?php
@@ -30,12 +27,10 @@ error_reporting(1);
                     }
                     ?>
                 </select>
-            </div>
-        </section>
-        <section class="w-100 container1 justify-content-center row">
             <button type="button" id="destination_submit" name="destination_submit" value="next" class="next_button btn btn-primary">Next</button>
+        </form>
         </section>
-    </form>
+
 <?php else : ?>
     <?php include '../views/404.php' ?>
 <?php endif; ?>

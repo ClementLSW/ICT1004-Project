@@ -1,7 +1,7 @@
 <nav id="navBar" style="display:none" class="nav navheight">
     <div class="w-100">
         <div class="logo">
-            <a class ="navbar-brand" href="/ICT1004-Project/home" ><img id="logo" style="max-height: 60px; max-width: 60px" src="resources/img/android-chrome-192x192.png"></a>
+            <a class ="navbar-brand" href="/ICT1004-Project/home" ><img id="logo" alt="logo" style="max-height: 60px; max-width: 60px" src="resources/img/android-chrome-192x192.png"></a>
         </div>
         <div id="mainListDiv" class="main_list">
             <ul class="navlinks">
@@ -15,7 +15,7 @@
                         } else { 
                             echo "<li><a href='manage'>manage</a></li>";
                         }
-                        echo "<li><a href='/ICT10   04-Project/login/logout.php' aria-label='Log Out'><i class='fas fa-sign-out-alt'></i></a></li>";
+                        echo "<li><a href='/ICT1004-Project/login/logout.php' aria-label='Log Out'><i class='fas fa-sign-out-alt'></i></a></li>";
                     } else {
                         echo "<li><a href='/ICT1004-Project/history'>History</a></li>";
                         echo "<li><a>" . $_SESSION['username'] . "</a></li>";
