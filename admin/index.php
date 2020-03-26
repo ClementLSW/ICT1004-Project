@@ -73,6 +73,6 @@ if (isset($GLOBALS['valid'])&& $GLOBALS['valid'] && isset($_SESSION["permissions
         <?php include "../views/404.php"; ?>
     <?php endif; ?>
 <?php else : ?>
-    <?php require '../header.inc.php';?>
-    <?php include "../views/404.php"; ?>
+    <?php require $GLOBALS['root'] . '/header.inc.php';?>
+    <?php include $GLOBALS['root'] . "/views/404.php"; ?>
 <?php endif; ?>

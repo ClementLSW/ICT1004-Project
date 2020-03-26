@@ -1,4 +1,4 @@
-<?php if (isset($GLOBALS['valid'])  && $GLOBALS['valid'] && isset($_SESSION['username'])) :     ?>
+<?php if (isset($GLOBALS['valid']) && $GLOBALS['valid'] && isset($_SESSION['username'])) : ?>
     <title>ParkNow</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <?php require $GLOBALS['root'] . '/admin/header.inc.php'; ?>
@@ -15,8 +15,8 @@
     <body id="mainbody" class="bg">
         <div class="overlay">
             <?php require $GLOBALS['root'] . '/navigation.php'; ?>
-             <section id="container2" style="margin-top: 80px;width: 100%; margin-left: 2%; margin-right: 2%;">
-                 <h1 style="color:white; text-align: center ">Your History</h1>
+            <section id="container2" style="margin-top: 80px;width: 100%; margin-left: 2%; margin-right: 2%;">
+                <h1 style="color:white; text-align: center ">Your History</h1>
                 <?php
                 if ($GLOBALS['localtesting'] == true) {
                     $conn = new mysqli('localhost', 'root', '', 'carpark');
@@ -51,7 +51,7 @@
                                 <td><?php echo $row['date_time']; ?></td>
                                 <td><?php echo $row['startingName']; ?></td>
                                 <td><?php echo $row['destinationName']; ?></td>
-                                <td><a style="margin: auto" id=<?php echo $row['user_id'] ?> class="goToButton btn btn-primary">Go to</a></td>
+                                <td><a style="margin: auto" id="<?php echo $row['user_id'] ?>" class="goToButton btn btn-primary">Go to</a></td>
                             </tr>
                         <?php } ?>
                     </tbody>
@@ -210,10 +210,10 @@
                     });
 
                 </script>
-                          </section>
+            </section>
 
         </div>
     </body>
 <?php else : ?>
-    <?php header( "Location: /ICT1004-Project/error" );?>
+    <?php header("Location: /ICT1004-Project/error"); ?>
 <?php endif; ?>
