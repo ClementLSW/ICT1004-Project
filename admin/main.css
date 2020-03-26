@@ -28,3 +28,8 @@ body {
     color: #333;
     background-color: #fff;
 }
+
+.pagination > .disabled > a,
+.pagination > .disabled > a:hover{
+    color:#23527c !important;
+}
