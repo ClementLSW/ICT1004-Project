@@ -8,7 +8,7 @@ error_reporting(1);
         <p id="occupancy_placeholder">Loading . . .</p>
         <p class="title" id="starting_placeholder">Loading . . .</p> 
         <p class="title" id="destination_placeholder">Loading . . .</p>
-        <button  type="button" id="final_copy" name="final_copy" value="copy" class="next_button btn btn-primary"><i class="fas fa-copy"></i>Copy Google URL</button>
+        <button  type="button" id="final_copy" name="final_copy" value="copy" class="next_button btn btn-primary"><i class="fas fa-copy"></i> Copy Google URL</button>
         <a href="#"  id="url_button" class="next_button btn btn-primary"><i class="fas fa-map-marked"></i>   Get Directions</a>
         <button  type="button" id="final_back" name="final_back" value="back" class="next_button btn btn-primary">Back</button>
     </section>

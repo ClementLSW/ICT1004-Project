@@ -9,7 +9,7 @@
                 <p id="occupancy_placeholder">Carpark is <?php echo $_POST['occupancy'] ?> % full</p>
                 <p class="title" id="starting_placeholder">From : <?php echo $_POST['startingName']?></p> 
                 <p class="title" id="destination_placeholder">To : <?php echo $_POST['destinationName'] ?> , <?php echo $_POST['shopName']?></p>
-                <button  type="button" id="history_copy" name="history_copy" value="copy" class="next_button btn btn-primary"><i class="fas fa-copy"></i>   Copy Google URL</button>
+                <button  type="button" id="history_copy" name="history_copy" value="copy" class="next_button btn btn-primary"><i class="fas fa-copy"></i> Copy Google URL</button>
                 <a  id="history_url_button" href="<?php echo $_POST['url'] ?>" target="_blank" class="next_button btn btn-primary"><i class="fas fa-map-marked"></i>   Get Directions</a>
                 <a  id="history_home" href="/ICT1004-Project/home" class="next_button btn btn-primary">Home</a>
             </section>

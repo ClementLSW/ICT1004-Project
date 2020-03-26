@@ -116,7 +116,9 @@ if (isset($_POST['currentDestination']) && isset($_POST['currentShop']) && isset
     $currentShop = $_POST['currentShop'];
     $validDestination = filter_var($_POST['currentDestination'], FILTER_VALIDATE_INT);
     $validShop = filter_var($_POST['currentShop'], FILTER_VALIDATE_INT);
-    if (!$validShop === false && !$validDestination === false){
+    $validuserlat = filter_var($_POST['userlat'] , FILTER_SANITIZE_NUMBER_FLOAT);
+    $validuserlng = filter_var($_POST['userlat'] , FILTER_SANITIZE_NUMBER_FLOAT);
+    if (!$validShop === false && !$validDestination === false && $validuserlat != NULL && $validuserlng != NULL){
         $destinationValue = trim(strval($_POST['currentDestination']));
         $shopValue = trim(strval($_POST['currentShop']));
         $destinationValue = htmlspecialchars($destinationValue);
@@ -146,6 +148,7 @@ if (isset($_POST['currentDestination']) && isset($_POST['currentShop']) && isset
         $area = $connection->retrieve_data_where_multiple_equals("area", $colArray , $valArray, $length , $typeArray , $operators);
         $userlatitude = $_POST['userlat'];
         $userlongitude = $_POST['userlng'];
+
         $usercombined = $userlatitude . ",".  $userlongitude;
         list($destlat,  $destlng) = getCoordinatesFromArea($area);
         $destcombined = $destlat . "," . $destlng;
@@ -158,11 +161,14 @@ if (isset($_POST['currentDestination']) && isset($_POST['currentShop']) && isset
             $destination_address = $destlat . "," . $destlng;
             $connection->saveUserHistory("history" , $_POST['username'] , $_POST['dateTime'] , $starting_address, "test", $_POST['startingName'] , $fullDestinationName);
         }
-        $arr = array('destinationName' => $getDestinationName[0]['location_name'] , 'carparkName' => $area[0]['name'], 'destlat' => $destlat, 'destlng' => $destlng, 'url' => $url, 'userlat' => $userlatitude , 'userlng' => $userlongitude , 'areaName' => $getAreaName[0]['name'] , 'occupancy' => $occupancy);
+        $arr = array('error' => 0 , 'destinationName' => $getDestinationName[0]['location_name'] , 'carparkName' => $area[0]['name'], 'destlat' => $destlat, 'destlng' => $destlng, 'url' => $url, 'userlat' => $userlatitude , 'userlng' => $userlongitude , 'areaName' => $getAreaName[0]['name'] , 'occupancy' => $occupancy);
         echo json_encode($arr);
         
        
         // echo '<a href="'. $url . '"target="_blank">Direct</a>';
+    }else{
+        $arr = array('error' => 1);
+        echo json_encode($arr);
     }
 }
 

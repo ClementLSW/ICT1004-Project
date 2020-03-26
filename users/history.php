@@ -51,7 +51,7 @@
                                 <td><?php echo $row['date_time']; ?></td>
                                 <td><?php echo $row['startingName']; ?></td>
                                 <td><?php echo $row['destinationName']; ?></td>
-                                <td><a style="margin: auto" id="<?php echo $row['user_id'] ?>" class="goToButton btn btn-primary">Go to</a></td>
+                                <td><a style="margin: auto" id="<?php echo $row['user_id'] ?>" class="goToButton btn btn-primary">Search</a></td>
                             </tr>
                         <?php } ?>
                     </tbody>

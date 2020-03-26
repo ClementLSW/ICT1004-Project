@@ -320,20 +320,21 @@ function processInput(currentDestination, currentShop, userlat, userlng, startin
         dateTime = new Date().toLocaleString();
 
     }
-    console.log(userlat);
-    console.log(userlng);
+    
     $.ajax({
     data: { currentDestination: currentDestination, currentShop: currentShop , userlat: userlat, userlng: userlng , isLogin: isLogin, username: username , dateTime: dateTime , startingName: startingName},
     url: 'users/user_input_process.php',
     async: false,
     method: 'POST', // or GET
     success: function (msg) {
+      var obj = JSON.parse(msg);
+      console.log(obj['error']);
+      var error = parseInt(obj['error']);
+      console.log(error);
+      if(error == 0){
       currentlyChoosen = 3;
       toggleView(currentlyChoosen);      
       console.log(msg);
-
-      
-      var obj = JSON.parse(msg);
       destinationName = obj['destinationName'];
       carparkName = obj['carparkName'];
       destlat = obj['destlat'];
@@ -365,8 +366,9 @@ function processInput(currentDestination, currentShop, userlat, userlng, startin
         document.body.removeChild(textarea);
         /* Alert the copied text */
       })
-
-    
+    }else{
+        alert("Invalid Input");
+    }
       // window.open(msg, '_blank');
     }
   });
@@ -464,8 +466,11 @@ $(document).ready(function () {
 
     $('#location_submit').click(function () {
         if ($('#my-input-searchbox').val() != "" && $('#my-input-searchbox').val() != "Loading . . .") {
-            if (choosenLat != undefined && choosenLat != undefined) {
+            if (choosenLat != undefined && choosenLng != undefined) {
                 processInput(currentDestination, currentShop, choosenLat, choosenLng, $('#my-input-searchbox').val());
+            }
+            else{
+                alert("Input value is invalid");
             }
         } else {
             alert("Please input a value first");
@@ -475,6 +480,8 @@ $(document).ready(function () {
 
 
     $('#location_back').click(function () {
+        choosenLng = undefined; 
+        choosenLng = undefined;
         currentlyChoosen = 1;
         toggleView(currentlyChoosen);
         $('#comboSection').remove();
@@ -482,6 +489,8 @@ $(document).ready(function () {
     })
 
     $('#final_back').click(function () {
+        choosenLng = undefined; 
+        choosenLng = undefined;
         currentlyChoosen = 2;
         $('#header_text_final').remove();
         toggleView(currentlyChoosen);
