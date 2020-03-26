@@ -7,7 +7,7 @@ if (isset($GLOBALS['valid'])&& $GLOBALS['valid'] && isset($_SESSION["permissions
         require $GLOBALS['root'] . '/navigation.php';
         require_once "debug.php";
         ?>        
-        <section id="container2" style="margin-top: 120px;width: 100%; margin-left: 2%; margin-right: 2%;">
+        <section id="container2" style="margin-top: 120px;width: 100%; margin-left: 2%; margin-right: 2%;" role="main">
             <?php if (isset($_SESSION['message'])) { ?>
                 <div id="success-message" class="alert alert-<?php echo $_SESSION['msg_type'] ?>">
                     <?php
@@ -68,11 +68,9 @@ if (isset($GLOBALS['valid'])&& $GLOBALS['valid'] && isset($_SESSION["permissions
                 });
             </script>  
         </section>
-    <?php else : ?>
-        <?php require '../header.inc.php';?>
-        <?php include "../views/404.php"; ?>
+    <?php else : 
+        header("location:/ICT1004-Project/error");?>     
     <?php endif; ?>
-<?php else : ?>
-    <?php require $GLOBALS['root'] . '/header.inc.php';?>
-    <?php include $GLOBALS['root'] . "/views/404.php"; ?>
+<?php else : 
+    header("location:/ICT1004-Project/error");?>
 <?php endif; ?>
