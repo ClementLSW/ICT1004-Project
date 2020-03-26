@@ -18,14 +18,7 @@
     </article>
 </section>
  <?php else : ?>
-            <!doctype html>
-            <html lang="en">
-            <head>
-                <title>ParkNow</title>
-                <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-            </head>
-            <?php include '../views/404.php' ?>
-            </html>
+    <?php header( "Location: /ICT1004-Project/error" );?>
  <?php endif; ?>
         
       

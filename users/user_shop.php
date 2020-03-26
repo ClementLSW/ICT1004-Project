@@ -17,5 +17,5 @@ error_reporting(0);
      </section>
 
 <?php else : ?>
-    <?php include '../views/404.php' ?>
+    <?php header( "Location: /ICT1004-Project/error" );?>
 <?php endif; ?>

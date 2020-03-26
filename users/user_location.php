@@ -14,7 +14,7 @@ error_reporting(1);
             </form>
     </section>
 <?php else : ?>
-    <?php include '../views/404.php' ?>
+    <?php header( "Location: /ICT1004-Project/error" );?>
 <?php endif; ?>
 <?php 
     if($GLOBALS['localtesting']){

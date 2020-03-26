@@ -7,6 +7,7 @@
         // include "header.inc.php";
         // include 'connections.php';
         //URL Routing
+        
         require_once "router.php";
         require "initialize.php";
         if ($GLOBALS['debug']) {

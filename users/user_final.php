@@ -13,5 +13,5 @@ error_reporting(1);
         <button  type="button" id="final_back" name="final_back" value="back" class="next_button btn btn-primary">Back</button>
     </section>
 <?php else : ?>
-    <?php include '../views/404.php' ?>
+    <?php header( "Location: /ICT1004-Project/error" );?>
 <?php endif; ?>

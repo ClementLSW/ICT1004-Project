@@ -215,6 +215,5 @@
         </div>
     </body>
 <?php else : ?>
-    <?php require $GLOBALS['root'] . '/header.inc.php' ?>
-    <?php include $GLOBALS['root'] . '/views/404.php' ?>
+    <?php header( "Location: /ICT1004-Project/error" );?>
 <?php endif; ?>
