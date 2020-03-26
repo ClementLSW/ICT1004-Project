@@ -14,28 +14,9 @@
     </body>-->
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-    </head>
-    <body>
-     
-
-        <div class="login-box">
-            <h1 style="color:white;">Password Recovery</h1>
-            <p style="color:white;"> To recover your password, enter your email associated with the account</p>
-            <form action="/ICT1004-Project/login/process_forgot.php" method="post">
-                <div class="textbox">
-                    <i class="fas fa-user"></i>
-                    <input type="email" placeholder="Enter Email" required id="email" name="email">
-                </div>
-                <div class="form-group"><button class="btn btn-primary" name="submit_email" type="submit">Recover</button></div></form>
-            <div>
-            </div>
-        </div>
-    </body>
-
-
-
+    <head>     
+        
+        <title>Forgot Password</title>
     <style>
 
 
@@ -50,11 +31,6 @@
         .btn-primary{
             background-color: #33ccff !important;
             border: 2px solid  #03fcec !important;
-        }
-        
-        
-        .resetheader{
-            font-color:"white"
         }
 
         .login-box{
@@ -129,5 +105,21 @@
 
         }
     </style>
+    </head>
+    <body>
+     
 
+        <div class="login-box">
+            <h1 style="color:white;">Password Recovery</h1>
+            <p style="color:white;"> To recover your password, enter your email associated with the account</p>
+            <form action="/ICT1004-Project/login/process_forgot.php" method="post">
+                <div class="textbox">
+                    <i class="fas fa-user"></i>
+                    <input type="email" placeholder="Enter Email" required id="email" name="email">
+                </div>
+                <div class="form-group"><button class="btn btn-primary" name="submit_email" type="submit">Recover</button></div></form>
+            <div>
+            </div>
+        </div>
+    </body>
 </html>
