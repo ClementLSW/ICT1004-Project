@@ -1,8 +1,7 @@
 <?php
 
 //turn off error reporting
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+
 class connections {
 
     function retrieve_data_where_multiple_equals(String $tableName, Array $colname , Array $colval , int $argCount , Array $types , Array $operators){
@@ -72,32 +71,17 @@ class connections {
             }
             if ($conn->connect_error) {
                 die("Connection error: " . $conn->connect_error);
-            }                        
+            }   
+
             $sql = "SELECT * FROM " . $tableName . " WHERE " . $argValue;      
 //            print_r($valArr);
-
             $result = $conn->prepare($sql);
 //            echo $parameter;
 //            print_r($valArr);
 //            print_r(implode(",", $valArr));
-//            echo $sql;        
-         
+//            echo $sql;    
             $result->bind_param($parameter, ...$valArr);
-//            if($argCount == 1){
-//                $result->bind_param($parameter, $valArr1);
-//            }
-//            if($argCount == 2){
-//                $result->bind_param($parameter, $valArr1, $valArr2);
-//            }
-//            if($argCount == 3){
-//                $result->bind_param($parameter, $valArr1, $valArr2, $valArr3);
-//            }
-//            if($argCount == 4){
-//                $result->bind_param($parameter, $valArr1, $valArr2, $valArr3, $valArr4);
-//            }
-//            if($argCount == 5){
-//                $result->bind_param($parameter, $valArr1, $valArr2, $valArr3, $valArr5);
-//            }
+//          
             $result->execute();
             $rows = $result->get_result();
             $data = [];
