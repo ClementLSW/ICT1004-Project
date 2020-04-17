@@ -69,7 +69,7 @@ if ($result->num_rows > 0) {
     $mail->addAddress($email, $firstname);
     $mail->Subject = 'Password Recovery';
     $mail->Body = "Password Recovery, Click on the link to recover your password:
-                    <p>http://52.54.127.185/ICT1004-Project/login/reset.php</p>"
+                    <p>https://www.parknow.codes/ICT1004-Project/login/reset.php</p>"
             . "If this is not you, send a reply to this email and we will contact you shortly";
     $mail->send();
     if (!$mail->send()) {
