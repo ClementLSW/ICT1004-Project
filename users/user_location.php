@@ -22,7 +22,7 @@ error_reporting(1);
         $key = $param['googlekey'];
         echo '<script src="https://maps.googleapis.com/maps/api/js?key=' . $key . '&libraries=places"></script>';
     }else{
-        echo '<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmiOGqCQ_5z0FeMbuelO3H3kFPQC7JDPw&libraries=places"></script>';        
+        echo '<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCncGfZT6_0wHA-b8bnAt1tcsyhgjE38m4&libraries=places"></script>';        
     }
 
    

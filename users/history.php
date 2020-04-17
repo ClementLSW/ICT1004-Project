@@ -29,8 +29,7 @@
                 }
 
 //        $result = $conn->query("SELECT * FROM history WHERE username='" . $_SESSION['username'] . "'");
-                $result = $conn->query("SELECT * FROM history WHERE username='" . "test" . "'");
-
+                $result = $conn->query("SELECT * FROM history WHERE username='" . $_SESSION['username'] . "'");
                 $conn->close();
                 ?>
                 <table id="table" class="table table-bordered dt-responsive nowrap"  style="border-collapse: collapse; border-spacing: 0; background-color: #fff">
@@ -73,18 +72,7 @@
                     function processInput(currentDestination, currentShop, userlat, userlng, startingName, username) {
                         var dateTime = "";
                         isLogin = true;
-                        console.log(currentDestination);
-                        console.log(currentShop);
-                        console.log(userlat);
-
-                        console.log(userlng);
-
-                        console.log(startingName);
-                        console.log(username);
-
                         dateTime = new Date().toLocaleString();
-                        console.log(dateTime);
-
                         $.ajax({
                             data: {
                                 currentDestination: currentDestination,
@@ -163,15 +151,14 @@
 
                     $(document).ready(function () {
                         $('#table').DataTable();
-
-
                         $("#success-message").fadeTo(2000, 500).slideUp(500, function () {
                             $("#success-message").slideUp(500);
                         });
                     });
-
-                    $('.goToButton').click(async function (e) {
+                    
+                    $('#table').on('click' , '.goToButton',  async function (e) {
                         console.log("is thishappenign");
+                        console.log(e);
                         historyID = e.target.id;
                         await $.ajax({
                             data: {
@@ -180,6 +167,7 @@
                             url: 'users/user_input_process.php',
                             method: 'POST', // or GET
                             success: async function (msg) {
+                                console.log(msg)
                                 data = JSON.parse(msg);
                                 console.log(data);
                                 destinationNameCombined = data[0]['destinationName'];

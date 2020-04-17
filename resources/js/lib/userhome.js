@@ -327,6 +327,7 @@ function processInput(currentDestination, currentShop, userlat, userlng, startin
     async: false,
     method: 'POST', // or GET
     success: function (msg) {
+      console.log(msg);
       var obj = JSON.parse(msg);
       var error = parseInt(obj['error']);
       if(error === 0){
@@ -388,7 +389,6 @@ function showShops(destination) {
         url: 'users/user_input_process.php',
         method: 'POST',
         success: function (msg) {
-            // console.log(msg);
             var obj = JSON.parse(msg);
             if (obj.length != 0) {
                 for (var i = 0; i < obj.length; i++) {

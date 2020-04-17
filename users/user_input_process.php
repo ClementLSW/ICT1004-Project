@@ -21,6 +21,7 @@ if (isset($_POST['destination'])) {
             $typeArray = ['int' , 'string'];
             $operators = ["=","!="];
             $area = $connection->retrieve_data_where_multiple_equals("area", $colArray , $valArray, $length , $typeArray , $operators);
+            
             echo json_encode($area); 
             
             // $area = $connection->retrieve_data_where("area", "location_id",$value);
@@ -52,7 +53,7 @@ if(isset($_POST['getKey'])){
         echo $key;
 
     }else{
-        echo "AIzaSyCmiOGqCQ_5z0FeMbuelO3H3kFPQC7JDPw";   
+        echo "AIzaSyCncGfZT6_0wHA-b8bnAt1tcsyhgjE38m4";   
     }
 }
 
@@ -63,7 +64,7 @@ if(isset($_POST['getServerKey'])){
         echo $key;
 
     }else{
-        echo "AIzaSyDo4fLUAb1snqCHGfOI8xMsT8dECiI_mc8";   
+        echo "AIzaSyCncGfZT6_0wHA-b8bnAt1tcsyhgjE38m4";   
     }
 }
 
@@ -123,7 +124,7 @@ if (isset($_POST['currentDestination']) && isset($_POST['currentShop']) && isset
         $shopValue = trim(strval($_POST['currentShop']));
         $destinationValue = htmlspecialchars($destinationValue);
         $shopValue = htmlspecialchars($shopValue);
-
+         
         $connection = new connections();
         $colArray = ["area_id" ];
         $valArray = [$currentShop];
@@ -131,7 +132,6 @@ if (isset($_POST['currentDestination']) && isset($_POST['currentShop']) && isset
         $typeArray = ["int" ];
         $operators = ["="];
         $getAreaName = $connection->retrieve_data_where_multiple_equals("area", $colArray , $valArray, $length , $typeArray , $operators);
-        
         $getDestinationName = $connection->retrieve_data_where("location", "location_id", $currentDestination);
         //Use Clement Method 
         include  '../calculate_route.php';
@@ -139,7 +139,7 @@ if (isset($_POST['currentDestination']) && isset($_POST['currentShop']) && isset
     //    $area_id = 20;
         // Retrieve the area data based on area id
         // $area = $connection->retrieve_data_where_multiple_equals("area", ["location_id" ] , [$destinationValue ] , 1 , ['int']);
-
+       
         $colArray = ["location_id" , "type" , "area_id"];
         $valArray = [$destinationValue , "carpark" , $area_id];
         $length = count($valArray);
@@ -161,6 +161,7 @@ if (isset($_POST['currentDestination']) && isset($_POST['currentShop']) && isset
             $destination_address = $destlat . "," . $destlng;
             $connection->saveUserHistory("history" , $_POST['username'] , $_POST['dateTime'] , $starting_address, "test", $_POST['startingName'] , $fullDestinationName);
         }
+        
         $arr = array('error' => 0 , 'destinationName' => $getDestinationName[0]['location_name'] , 'carparkName' => $area[0]['name'], 'destlat' => $destlat, 'destlng' => $destlng, 'url' => $url, 'userlat' => $userlatitude , 'userlng' => $userlongitude , 'areaName' => $getAreaName[0]['name'] , 'occupancy' => $occupancy);
         echo json_encode($arr);
         
