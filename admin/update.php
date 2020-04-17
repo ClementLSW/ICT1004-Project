@@ -15,7 +15,7 @@
                 if ($GLOBALS['local'] == true) {
                     $conn = new mysqli('localhost', 'root', '', 'carpark');
                 } else {
-                    $conn = new mysqli('localhost', 'sqldev', 'P@ssw0rd', 'carpark');
+                    $conn = new mysqli('localhost', 'sqldev', 'P0ti@nak', 'carpark');
                 }
 
                 if (isset($_GET['user'])) {
